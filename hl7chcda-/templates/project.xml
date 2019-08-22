@@ -1,0 +1,319 @@
+<return prefix="hl7chcda-" versionDate="" versionLabel="">
+    <project prefix="hl7chcda-" versionDate="2018-05-07T16:06:13" language="*" versionLabel="2.0.2 (07.05.2018)"></project>
+    <project prefix="hl7chcda-" versionDate="2018-05-07T16:06:13" language="en-US" versionLabel="2.0.2 (07.05.2018)"></project>
+    <dataset id="2.16.756.5.30.1.127.77.2.1.1" name="CDA-CH V2" displayName="CDA-CH V2" statusCode="draft" effectiveDate="2009-01-27T00:00:00" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="de-CH"></desc>
+        <desc language="fr-CH"></desc>
+        <desc language="it-CH"></desc>
+        <desc language="en-US"></desc>
+    </dataset>
+    <transaction id="2.16.756.5.30.1.127.77.2.4.2" name="CDA-CH - StructuredBody" displayName="CDA-CH - StructuredBody" statusCode="draft" effectiveDate="2017-11-10T09:35:28" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></transaction>
+    <transaction id="2.16.756.5.30.1.127.77.2.4.3" name="CDA-CH - NonXMLBody" displayName="CDA-CH - NonXMLBody" statusCode="draft" effectiveDate="2017-11-10T09:44:03" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></transaction>
+    <transaction id="2.16.756.5.30.1.127.77.2.4.4" name="CDA-CH - StructuredBody Enhanced" displayName="CDA-CH - StructuredBody Enhanced" statusCode="draft" effectiveDate="2018-02-12T17:54:58" versionLabel="2018" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></transaction>
+    <valueSet ref="2.16.840.1.113883.1.11.13955" name="ActEncounterCode" displayName="ActEncounterCode" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.20309" name="ActStatusAbortedCancelledCompleted" displayName="ActStatusAbortedCancelledCompleted" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="1.3.6.1.4.1.19376.1.3.11.2" name="ActStatusAbortedCompleted" displayName="ActStatusAbortedCompleted" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.20025" name="ActStatusCompleted" displayName="ActStatusCompleted" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="1.3.6.1.4.1.19376.1.3.11.3" name="ActStatusCompletedNullified" displayName="ActStatusCompletedNullified" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.1" name="AdministrativeGender" displayName="AdministrativeGender" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.14832" name="ApplicationMediaType" displayName="ApplicationMediaType" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.14835" name="AudioMediaType" displayName="AudioMediaType" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet id="2.16.756.5.30.2.1.1.12" name="EmploymentStatus" displayName="Employment Status" statusCode="draft" effectiveDate="2019-01-02T20:31:21" versionLabel="2013" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.16040" name="EntityCode" displayName="EntityCode" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.756.5.30.1.127.3.10.1.1.3" name="EprAuthorRole" displayName="EprAuthorRole" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.756.5.30.1.127.3.10.1.2" name="EprDocumentAvailabilityStatus" displayName="EprDocumentAvailabilityStatus" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.756.5.30.1.127.3.10.1.3" name="EprDocumentClassCode" displayName="EprDocumentClassCode" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.756.5.30.1.127.3.10.1.5" name="EprDocumentConfidentialityCode" displayName="EprDocumentConfidentialityCode" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.756.5.30.1.127.3.10.1.9" name="EprDocumentFormatCode" displayName="EprDocumentFormatCode" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.756.5.30.1.127.3.10.1.13" name="EprDocumentLanguage" displayName="EprDocumentLanguage" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.756.5.30.1.127.3.10.1.16" name="EprDocumentMimeType" displayName="EprDocumentMimeType" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.756.5.30.1.127.3.10.1.18" name="EprDocumentPracticeSettingCode" displayName="EprDocumentPracticeSettingCode" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.756.5.30.1.127.3.10.1.27" name="EprDocumentTypeCode" displayName="EprDocumentTypeCode" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.756.5.30.1.127.3.10.1.25" name="EprGender" displayName="EprGender" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.756.5.30.1.127.3.10.1.11" name="EprHealthcareFacilityTypeCode" displayName="EprHealthcareFacilityTypeCode" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.11526" name="HumanLanguage" displayName="HumanLanguage" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.756.5.30.1.1.11.77" name="IHERoleCodeEmployerAndSchoolContacts" displayName="IHERoleCode Employer and School Contacts " url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.14839" name="ImageMediaType" displayName="ImageMediaType" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="1.3.6.1.4.1.19376.1.3.11.1" name="LaboratorySpecialties" displayName="Laboratory Specialties" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.12249" name="LanguageAbilityMode" displayName="LanguageAbilityMode" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.12199" name="LanguageAbilityProficiency" displayName="LanguageAbilityProficiency" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.12212" name="MaritalStatus" displayName="MaritalStatus" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.14824" name="MediaType" displayName="MediaType" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.14848" name="ModelMediaType" displayName="ModelMediaType" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="1.3.6.1.4.1.19376.1.3.11.6" name="IHEMultidisciplinaryLaboratoryReport" displayName="Multi-disciplinary Laboratory Report" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="1.3.6.1.4.1.19376.1.3.11.5" name="MultimediaEmbeddedMediaTypes" displayName="Multimedia Embedded Media Types" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.14850" name="MultipartMediaType" displayName="MultipartMediaType" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.10609" name="NullFlavor" displayName="NullFlavor" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.78" name="ObservationInterpretation" displayName="ObservationInterpretation" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.14079" name="ObservationMethod" displayName="ObservationMethod" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.16226" name="ObservationType" displayName="ObservationType" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.10267" name="ParticipationFunction" displayName="ParticipationFunction" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.10282" name="ParticipationSignature" displayName="ParticipationSignature" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.10901" name="ParticipationType" displayName="ParticipationType" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.19563" name="PersonalRelationshipRoleType" displayName="PersonalRelationshipRoleType" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.19185" name="ReligiousAffiliation" displayName="ReligiousAffiliation" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.19313" name="RoleClassAssociative" displayName="RoleClassAssociative" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.17660" name="ServiceDeliveryLocationRoleType" displayName="ServiceDeliveryLocationRoleType" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet id="2.16.756.5.30.1.1.11.1" name="StandardCDABodySelektion" displayName="Standard CDA Body Selection" statusCode="draft" effectiveDate="2018-09-16T20:28:03" versionLabel="2018" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.14825" name="TextMediaType" displayName="TextMediaType" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.14845" name="VideoMediaType" displayName="VideoMediaType" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.756.5.30.1.1.11.5" name="VitalSignsObservation" displayName="Vital Signs Observation" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="1.3.6.1.4.1.12559.11.10.1.3.1.42.1" name="epSOSHealthcareProfessionalRoles" displayName="epSOSHealthcareProfessionalRoles" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.11610" name="x_ActRelationshipDocument" displayName="x_ActRelationshipDocument" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.16926" name="x_BasicConfidentialityKind" displayName="x_BasicConfidentialityKind" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.19600" name="x_EncounterParticipant" displayName="x_EncounterParticipant" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.19366" name="x_InformationRecipient" displayName="x_InformationRecipient" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <valueSet ref="2.16.840.1.113883.1.11.19601" name="x_ServiceEventPerformer" displayName="x_ServiceEventPerformer" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></valueSet>
+    <template id="2.16.756.5.30.1.1.10.3.1" name="cdach_section_AbilityToWorkPlainText" displayName="Ability To Work Section - plain text" statusCode="pending" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">This section contains ability to work findings.</desc>
+        <classification type="cdasectionlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.9.35" name="cdach_other_AddressInformationCompilation-eCH-0010" displayName="Address Information Compilation - eCH-0010" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" isClosed="false" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US"> Address information according to the eCH-0010 V7.0 addressInformation data type. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.<br /> See https://www.ech.ch/vechweb/page?p=dossier&amp;documentNumber=eCH-0010&amp;documentVersion=7.0 for more information. </desc>
+        <classification type="notype"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.9.51" name="cdach_other_AssignedEntityCompilationGlnName" displayName="Assigned Entity Compilation with GLN and name" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Reusable template wherever an assigned entity with a required GLN is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.</desc>
+        <classification type="notype"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.9.50" name="cdach_other_AssignedEntityCompilationGlnNameAddrTelecomPersonOrganization" displayName="Assigned Entity Compilation with GLN, name, addr, telecom, person and organization" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Reusable template wherever an assigned entity with required GLN, name, addr, telecom, person and organization (also with GLN) are used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.</desc>
+        <classification type="notype"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.9.12" name="cdach_other_AssignedEntityCompilationId" displayName="Assigned Entity Compilation with id" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Reusable template wherever an assigned entity with a required id is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.</desc>
+        <classification type="notype"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.9.32" name="cdach_other_AssignedEntityCompilationIdNameAddrTelecomPersonOrganization" displayName="Assigned Entity Compilation with id, name, addr, telecom, person and organization" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Reusable template wherever an assigned entity with required id, name, addr, telecom, person and organization are used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.</desc>
+        <classification type="notype"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.9.17" name="cdach_other_AssignedEntityCompilationNameAddrTelecom" displayName="Assigned Entity Compilation with name, addr and telecom" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Reusable template wherever an assigned entity with required name, addr and telecom is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.</desc>
+        <classification type="notype"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.2.6" name="cdach_header_Authenticator" displayName="Authenticator" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" isClosed="false" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Information about an authenticator of a CDA document. An authenticator MUST be a person. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST use this template by either reference or specialisation.</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.2.6" name="cdach_header_Authenticator" displayName="Authenticator" statusCode="draft" effectiveDate="2019-01-01T20:20:44" versionLabel="2019" isClosed="false" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Information about an authenticator of a CDA document. An authenticator MUST be a person. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST use this template by either reference or specialisation.</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.9.23" name="cdach_other_Author" displayName="Author" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" isClosed="false" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Information about the author of a CDA document, section or entry. An author MAY be a person or a device. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST use this template at least in the CDA Header by either reference or specialisation.</desc>
+        <classification type="notype"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.9.48" name="cdach_other_AuthorCompilationWithName" displayName="Author Compilation with name" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Reusable template wherever an author with required name is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.</desc>
+        <classification type="notype"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.9.16" name="cdach_other_AuthorCompilationWithNameAddrTelecom" displayName="Author Compilation with name, addr and telecom" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Reusable template wherever an author with required name, addr and telecom is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.</desc>
+        <classification type="notype"></classification>
+    </template>
+    <template ref="2.16.840.1.113883.10.12.114" name="CDAauthorization" displayName="CDA Authorization" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></template>
+    <template ref="2.16.840.1.113883.10.12.154" name="CDAinformant" displayName="CDA Informant" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></template>
+    <template ref="2.16.840.1.113883.10.12.201" name="CDASection" displayName="CDA Section" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></template>
+    <template ref="2.16.840.1.113883.10.12.113" name="CDAcomponentOf" displayName="CDA componentOf" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></template>
+    <template id="2.16.756.5.30.1.1.10.1.12" name="CDA-CHv2.0-nonXMLBody" displayName="CDA-CH v2.0 - nonXMLBody" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US"> This document template MAY be referenced or specialized for specific, not further described use cases. CDA-CH V2 derivatives, i.e. Swiss exchange formats SHOULDN'T use this template, as they better refer to the document level template requiring a structured body. It only specifies the usage of CDA header templates. It requires a non XML CDA body, but does not define any CDA body rules. For CDA body rules, see the derived exchange formats. </desc>
+        <classification type="cdadocumentlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.1.9" name="CDA-CHv2.0-structuredBody" displayName="CDA-CH v2.0 - structuredBody" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US"> This document template is used as the primary base for CDA-CH exchange formats. All CDA-CH V2 derivatives, i.e. Swiss exchange formats SHALL use this template by specialisation.<br /> It only specifies the usage of CDA header templates. It requires a structured CDA body, but does not define any CDA body rules. For CDA body rules, see the derived exchange formats. </desc>
+        <classification type="cdadocumentlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.1.14" name="CDA-CHv2.0-structuredBodyEnhanced" displayName="CDA-CH v2.0 - structuredBody enhanced" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2018" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US"> This document template is used as the primary base for CDA-CH exchange formats. All CDA-CH V2 derivatives, i.e. Swiss exchange formats SHALL use this template by specialisation.<br /> It only specifies the usage of CDA header templates. It requires a structured CDA body, but does not define any CDA body rules. For CDA body rules, see the derived exchange formats. </desc>
+        <classification type="cdadocumentlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.9.36" name="cdach_other_HeaderTemplateCompilation" displayName="CDA-CH v2.0 Header Template Compilation" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US"> CDA-CH V2 bases on HL7 CDA R2 (2005) and requires either a nonXMLBody or a StructuredBody. This circumstance is modeled in two separate templates but both MUST contain the same header templates. Therefore this template contains all header templates that are equal for all relevant document level templates. CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST use this template by either reference or specialisation. </desc>
+        <classification type="notype"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.2.3" name="cdach_header_Custodian" displayName="Custodian" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" isClosed="false" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">The organization in whose name this CDA document has been created (corresponds to the sender of a letter). All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST use this template by either reference or specialisation.</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.2.7" name="cdach_header_DataEnterer" displayName="Data Enterer" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" isClosed="false" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Information about the person that entered information in this CDA document. It SHALL be declared, when data recorded in this document has been entered by a person other than the author but only when this is relevant for some reason. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST reference this template.</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.9.21" name="cdach_other_DeviceCompilationWithName" displayName="Device Compilation with name" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US"> Reusable template wherever a device with required name is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.<br /> A device is either a physical device (e.g. analyzer with which laboratory results are determined) or a software (e.g. laboratory information system, in which laboratory results are documented). </desc>
+        <classification type="notype"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.2.44" name="cdach_header_DocumentCode" displayName="Document Code" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">A LOINC based document type of a CDA document instance including a translation to the Swiss EPR XDS.b metadata. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST specialise this template by precising the exact value of @code and its translation to the Swiss EPR XDS.b metadata.</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.2.19" name="cdach_header_DocumentConfidentialityCode" displayName="Document Confidentiality Code" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" isClosed="false" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US"> A confidentiality level of a CDA document instance according to the Swiss EPR regulation. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST reference this template.<br /><br /> Language dependent references to the Swiss EPR regulation: <ul>
+                <li>en: Federal Act on the Electronic Patient Record (EPRA), FDHA Ordinance on the Electronic Patient Record (EPRO-FDHA), Appendix 3 (Metadata)</li>
+                <li>de: Bundesgesetz über das elektronische Patientendossier (EPDG), Verordnung des EDI über das elektronische Patientendossier (EPDV-EDI), Anhang 3 (Metadaten)</li>
+                <li>fr: Loi fédérale sur le dossier électronique du patient (LDEP), Ordonnance du DFI sur le dossier électronique du patient (ODEP-DFI), Annexe 3 (Métadonnées)</li>
+                <li>it: Legge federale sulla cartella informatizzata del paziente (LCIP), Ordinanza del DFI sulla cartella informatizzata del paziente (OCIP-DFI), Allegato 3 (Metadati)</li>
+            </ul>
+        </desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.2.23" name="cdach_header_DocumentId" displayName="Document Id" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" isClosed="false" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">A unique identifier for each CDA document instance. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST reference this template.</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.2.22" name="cdach_header_DocumentLanguage" displayName="Document Language" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" isClosed="false" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">The RFC 1766 (ISO-639-1 and ISO 3166) based language in which the narrative texts in this CDA document instance are written. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST reference this template.</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.2.25" name="cdach_header_DocumentRealm" displayName="Document Realm" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" isClosed="false" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Swiss Realm (CHE) of HL7 CDA. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST reference this template.</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.2.13" name="cdach_header_DocumentReplacement" displayName="Document Replacement - relatedDocument" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" isClosed="false" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Relationship to another CDA-CH V2 based document that is replaced by the current one. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST reference this template.</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.2.13" name="cdach_header_DocumentReplacement" displayName="Document Replacement - relatedDocument" statusCode="draft" effectiveDate="2019-01-01T21:22:58" versionLabel="2019" isClosed="false" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Relationship to another CDA-CH V2 based document that is replaced by the current one. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST reference this template.</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.2.20" name="cdach_header_DocumentSetIdAndVersionNumber" displayName="Document Set Id and Version Number" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" isClosed="false" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Unity of document versions. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST reference this template.</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.2.47" name="cdach_header_DocumentTemplateIdsCdaChv2.0-nonXmlBody" displayName="Document Template Ids CDA-CH v2.0 - nonXMLBody" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" isClosed="false" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">CDA-CH V2 bases on HL7 CDA R2 (2005) and - by using this template - require a non XML body for specific, not further described use cases. CDA-CH V2 derivatives, i.e. Swiss exchange formats SHOULDN'T use this template, as they better refer to the document level template requiring a structured body. These SHALL define further template ids in their own separate templates.</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.2.18" name="cdach_header_DocumentTemplateIdsCdaChv2.0-structuredBody" displayName="Document Template Ids CDA-CH v2.0 - structuredBody" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" isClosed="false" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US"> CDA-CH V2 bases on HL7 CDA R2 (2005) and - by using this template - require a structured body. All CDA-CH V2 derivatives, i.e. Swiss exchange formats SHALL reference this template. These SHALL define further template ids in their own separate templates. </desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.2.40" name="cdach_header_Employer" displayName="Employer - participant" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Information on the patient's employer, school or other affiliated (e.g., volunteer) organization. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.2.40" name="cdach_header_Employer" displayName="Employer - participant" statusCode="draft" effectiveDate="2019-01-01T21:13:32" versionLabel="2019" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Information on the patient's employer, school or other affiliated (e.g., volunteer) organization. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.4.29" name="cdach_entry_ExternalDocument" displayName="External document" statusCode="pending" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US"> External documents can be included in a CDA document, either by means of references or by means of XML embedding.<br /> This template defines a reference to an external document, only.<br /> Embedded documents can be created with the template Observation Media (or derived templates). </desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.2.46" name="cdach_header_HealthService" displayName="Health Service - documentationOf" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Information about a health service describing the context of this CDA document. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST use this template by either reference or specialisation.</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.2.46" name="cdach_header_HealthService" displayName="Health Service - documentationOf" statusCode="draft" effectiveDate="2019-01-01T20:53:33" versionLabel="2019" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Information about a health service describing the context of this CDA document. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST use this template by either reference or specialisation.</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.4.70" name="cdach_entry_InabilityToWorkObservation" displayName="Inability To Work Observation" statusCode="draft" effectiveDate="2017-09-14T17:25:19" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Structured information about inability to work.</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.2.15" name="cdach_header_Insurance" displayName="Insurance - participant" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" isClosed="false" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Information on a patient's insurance. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.2.14" name="cdach_header_InsuranceCard" displayName="Insurance Card - participant" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" isClosed="false" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Information on a patient's insurance card. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.2.5" name="cdach_header_LegalAuthenticator" displayName="Legal Authenticator" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" isClosed="false" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Information about the legal authenticator of a CDA document. A legal authenticator MUST be a person. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST use this template by either reference or specialisation.</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.9.14" name="cdach_other_TextElementWithReferenceToNarrativeText" displayName="Narrative Text Reference" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" isClosed="false" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Reusable template wherever a text reference to the corresponding text in the human readable part (narrative text) is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.</desc>
+        <classification type="notype"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.4.83" name="cdach_entry_ObservationMedia" displayName="Observation Media" statusCode="pending" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">
+      Multimedia objects (e.g., PDF representations of the CDA document, pictures, Reiber diagrams, electrophoresis, etc.) MAY be integrated into a CDA document, either by reference to external multimedia objects or by means of XML embedding.<br />
+      This template defines only the embedding of multimedia objects in the CDA document. References to external documents can be created with the ExternalDocument template.<br />
+      For embedding in XML, the multimedia objects Base-64 must be encoded.<br />
+      Due to the amount of data, only light objects should be embedded.<br />
+      Heavy objects should be integrated using links to external documents.</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.2.16" name="cdach_header_OrderReference" displayName="Order Reference - inFulfillmentOf" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" isClosed="false" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Reference to one or more orders which led to the creation of this CDA document. It SHALL be declared, when the order reference is relevant for some reason. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST reference this template.</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.9.30" name="cdach_other_OrganizationCompilationGlnName" displayName="Organization Compilation with GLN and name" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Reusable template wherever an organization with required GLN as id and name is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.</desc>
+        <classification type="notype"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.9.26" name="cdach_other_OrganizationCompilationGlnNameAddrTelecom" displayName="Organization Compilation with GLN, name, addr and telecom" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Reusable template wherever an organization with required GLN as id, name, address and communication means is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.</desc>
+        <classification type="notype"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.9.33" name="cdach_other_OrganizationCompilationIdNameAddrTelecom" displayName="Organization Compilation with id, name, addr and telecom" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Reusable template wherever an organization with required id, name, address and communication means is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.</desc>
+        <classification type="notype"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.9.24" name="cdach_other_OrganizationCompilationWithName" displayName="Organization Compilation with name" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Reusable template wherever an organization with required name is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.</desc>
+        <classification type="notype"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.9.27" name="cdach_other_OrganizationCompilationWithNameAddrTelecom" displayName="Organization Compilation with name, addr, telecom" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Reusable template wherever an organization with required name, address and communication means is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.</desc>
+        <classification type="notype"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.3.45" name="cdach_section_OriginalRepresentationCoded" displayName="Original Representation Section - coded" statusCode="pending" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">
+            <p>This section MAY be used to provide the original representation of the current CDA document as it has been seen by the legal authenticator while signing.</p>
+            <p><b>Notes:</b>
+            </p>
+            <ul>
+                <li>This template doesn't require PDF/A but keep in mind that only PDF/A contains all necessary information that allows to identically display the PDF on different machines.</li>
+                <li>To ensure that digital data remains legible in the long term, PDF/A (but not PDF) is mentioned in the allowed list of archival formats for the Swiss Federal Archives.</li>
+                <li>The certification requirements according to the Swiss EPR (EPRA) require PDF/A-1 oder PDF/A-2.</li>
+                <li>Following the recommendations of CDA-CH V2 (2017), embedding the original representation in PDF/A-1a format is therefore strongly recommended.</li>
+            </ul>
+        </desc>
+        <classification type="cdasectionlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.9.49" name="cdach_other_OriginalTextElementWithReferenceToNarrativeText" displayName="Original Text Reference" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" isClosed="false" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Reusable template wherever a original text reference to the corresponding text in the human readable part (narrative text) is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.</desc>
+        <classification type="notype"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.2.1" name="cdach_header_Patient" displayName="Patient - recordTarget" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" isClosed="false" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">A human patient for whom this CDA document instance was created. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST use this template by either reference or specialisation.</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.2.43" name="cdach_header_PatientContact" displayName="Patient Contact - participant" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" isClosed="false" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="de-CH"></desc>
+        <desc language="en-US">Information on a patient contact. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.9.31" name="cdach_other_Performer" displayName="Performer" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Reusable template wherever a healthcare provider who was the primary performer of an act is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.</desc>
+        <classification type="notype"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.9.31" name="cdach_other_Performer" displayName="Performer" statusCode="draft" effectiveDate="2018-12-24T19:51:04" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Reusable template wherever a healthcare provider who was the primary performer of an act is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.</desc>
+        <classification type="notype"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.9.34" name="cdach_other_PersonNameInformationCompilation-eCH-0011" displayName="Person Name Information Compilation - eCH-0011" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" isClosed="false" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US"> Person name information (with required family and given name) according to the eCH-0011 V8.1 nameData data type. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.<br /> See https://www.ech.ch/vechweb/page?p=dossier&amp;documentNumber=eCH-0011&amp;documentVersion=8.1, section 3.3.2 nameData – Namensangaben for more information. </desc>
+        <classification type="notype"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.9.20" name="cdach_other_PlayingEntityCompilationWithName" displayName="PlayingEntity Compilation with name" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Reusable template wherever a playing entity with a required name is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.</desc>
+        <classification type="notype"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.2.4" name="cdach_header_InformationRecipient" displayName="Recipient - informationRecipient" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" isClosed="false" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">A recipient of this CDA document (corresponds to the addressee of a letter - person or organization). All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST use this template by either reference or specialisation.</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.3.2" name="cdach_section_RemarksCoded" displayName="Remarks Section - coded" statusCode="pending" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">This section MAY be used to provide comments, remarks or other information that cannot be declared in any of the other existing sections in the document.</desc>
+        <classification type="cdasectionlevel"></classification>
+    </template>
+    <template ref="2.16.756.5.30.1.1.10.4.20" name="cdach_entry_VitalSignsOrganizer" displayName="Vital Signs Organizer Entry" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></template>
+    <template ref="2.16.756.5.30.1.1.10.3.4" name="cdach_section_VitalSignsCoded" displayName="Vital Signs Section - coded" url="http://art-decor.org/decor/services/" ident="hl7chcda-"></template>
+</return>

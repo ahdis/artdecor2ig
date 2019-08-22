@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<project name="art-decor" basedir="." default="default">
+
+	<import file="../xslt/build.xml" />
+
+	<target name="init">
+		<mkdir dir="artdecor" />
+		<mkdir dir="resources" />
+    <mkdir dir="output" />
+		<property name="ig" value="cda-ch-v2" />
+		<property name="canonicalBase" value="http://fhir.ch/ig/${ig}" />
+		<property name="prefix" value="hl7chcda-" />
+	</target>
+
+	<target name="clean">
+		<delete dir="artdecor" />
+		<delete dir="resources" />
+		<delete dir="output" />
+	</target>
+
+	<target name="default" depends="init">
+		<!--		<antcall target="getArtDecorTemplateRecursive">
+			<param name="templateId" value="2.16.756.5.30.1.1.10.1.9" />
+			<param name="prefix" value="hl7chcda-" />
+		</antcall>
+		<antcall target="getArtDecorTemplateRecursive">
+			<param name="templateId" value="2.16.756.5.30.1.1.10.1.14" />
+			<param name="prefix" value="hl7chcda-" />
+		</antcall>
+-->
+		<!-- recordTarget 
+		<antcall target="getArtDecorTemplateRecursive">
+			<param name="templateId" value="2.16.756.5.30.1.1.10.2.1" />
+			<param name="prefix" value="hl7chcda-" />
+		</antcall>
+
+		<antcall target="getProjectIndex">
+			<param name="prefix" value="hl7chcda-" />
+		</antcall>
+
+		<antcall target="getTemplate">
+			<param name="templateId" value="2.16.756.5.30.1.1.10.9.36" />
+			<param name="prefix" value="hl7chcda-" />
+		</antcall>
+
+
+
+
+		<antcall target="getArtDecorTemplateRecursive">
+			<param name="templateId" value="2.16.756.5.30.1.1.10.1.14" />
+			<param name="prefix" value="hl7chcda-" />
+		</antcall>
+
+		<antcall target="transformTemplateToConstraintLogicalModel">
+			<param name="templateId" value="2.16.756.5.30.1.1.10.1.14" />
+			<param name="igConstrainedModelId" value="CDA-CHv20-structuredBodyEnhanced" />
+			<param name="canonicalBase" value="http://fhir.ch/ig/cda-ch-v2" />
+			<param name="projectUri" value="../cda-ch-v2/templates/project.xml" />
+		</antcall>
+	-->
+
+    <antcall target="getProjectIndex">
+      <param name="prefix" value="${prefix}" />
+    </antcall>
+
+		<antcall target="downloadProjectTemplates">
+			<param name="ig" value="${ig}" />
+			<param name="projectUri" value="../hl7chcda-/artdecor/project.xml" />
+      <param name="projectUriChEpr" value="../ch-epr-/artdecor/project.xml" />
+			<param name="projectUriSkip" value="../hl7chcda-/projectskip.xml" />
+			<param name="prefix" value="hl7chcda-" />
+			<param name="canonicalBase" value="http://fhir.ch/ig/${ig}" />
+			<param name="in" value="artdecor/project.xml" />
+			<param name="out" value="project.log" />
+		</antcall>
+		
+	</target>
+
+</project>

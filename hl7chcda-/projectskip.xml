@@ -1,0 +1,28 @@
+<return prefix="hl7chcda-" versionDate="" versionLabel="">
+    <template id="2.16.756.5.30.1.1.10.2.44" name="cdach_header_DocumentCode" displayName="Document Code" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">A LOINC based document type of a CDA document instance including a translation to the Swiss EPR XDS.b metadata. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST specialise this template by precising the exact value of @code and its translation to the Swiss EPR XDS.b metadata.</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.2.19" name="cdach_header_DocumentConfidentialityCode" displayName="Document Confidentiality Code" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" isClosed="false" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US"> A confidentiality level of a CDA document instance according to the Swiss EPR regulation. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST reference this template.<br /><br /> Language dependent references to the Swiss EPR regulation: <ul>
+                <li>en: Federal Act on the Electronic Patient Record (EPRA), FDHA Ordinance on the Electronic Patient Record (EPRO-FDHA), Appendix 3 (Metadata)</li>
+                <li>de: Bundesgesetz über das elektronische Patientendossier (EPDG), Verordnung des EDI über das elektronische Patientendossier (EPDV-EDI), Anhang 3 (Metadaten)</li>
+                <li>fr: Loi fédérale sur le dossier électronique du patient (LDEP), Ordonnance du DFI sur le dossier électronique du patient (ODEP-DFI), Annexe 3 (Métadonnées)</li>
+                <li>it: Legge federale sulla cartella informatizzata del paziente (LCIP), Ordinanza del DFI sulla cartella informatizzata del paziente (OCIP-DFI), Allegato 3 (Metadati)</li>
+            </ul>
+        </desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.2.23" name="cdach_header_DocumentId" displayName="Document Id" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" isClosed="false" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">A unique identifier for each CDA document instance. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST reference this template.</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.2.22" name="cdach_header_DocumentLanguage" displayName="Document Language" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" isClosed="false" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">The RFC 1766 (ISO-639-1 and ISO 3166) based language in which the narrative texts in this CDA document instance are written. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST reference this template.</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.756.5.30.1.1.10.2.25" name="cdach_header_DocumentRealm" displayName="Document Realm" statusCode="active" effectiveDate="2018-04-18T00:00:00" versionLabel="2017" isClosed="false" url="http://art-decor.org/decor/services/" ident="hl7chcda-">
+        <desc language="en-US">Swiss Realm (CHE) of HL7 CDA. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST reference this template.</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>>
+</return>
