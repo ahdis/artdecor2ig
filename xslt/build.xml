@@ -5,13 +5,20 @@
 	<target name="init">
 	</target>
 	
-  <target name="dist" depends="init">
-    <copy todir="../../${ig}/resources">
-      <fileset dir="resources">
-        <include name="**/*.xml" />
-      </fileset>
-    </copy>
+
+  <target name="clean">
+    <delete dir="artdecor" />
+    <delete dir="resources" />
+    <delete dir="output" />
   </target>
+
+	<target name="dist" depends="init">
+		<copy todir="../../${ig}/resources">
+			<fileset dir="resources">
+				<include name="**/*.xml" />
+			</fileset>
+		</copy>
+	</target>
 
 	<target name="getProjectIndex" depends="init">
 		<get src="http://art-decor.org/decor/services/ProjectIndex?format=xml&amp;prefix=${prefix}&amp;effectiveDate=dynamic" dest="artdecor/project.xml" />
@@ -21,11 +28,30 @@
 		<get src="http://art-decor.org/decor/services/RetrieveTemplate?format=xml&amp;prefix=${prefix}&amp;id=${templateId}&amp;effectiveDate=dynamic" dest="templates/${templateId}.xml" skipexisting="true" />
 	</target>
 
-	<target name="downloadProjectTemplates" depends="init">
+	<target name="artDecorProjectDownload" depends="init">
+		<delete dir="artdecor" failonerror="false" />
+		<delete dir="output" failonerror="false" />
+		<delete file="project.log" failonerror="false" />
+		<mkdir dir="artdecor" />
+		<mkdir dir="output" />
+
+		<antcall target="getProjectIndex">
+			<param name="prefix" value="${prefix}" />
+		</antcall>
+
+		<xslt style="../xslt/ArtDecorProjectDownload.xsl" in="artdecor/project.xml" out="project.log" basedir="${basedir}">
+			<classpath>
+				<pathelement location="../saxon9he.jar" />
+			</classpath>
+			<param name="prefix" expression="${prefix}" type="STRING" />
+		</xslt>
+	</target>
+
+	<target name="artDecorToIg" depends="init">
 		<delete file="${out}" failonerror="false" />
 		<delete dir="resources" />
 		<mkdir dir="resources" />
-		<xslt style="../xslt/DownloadProject.xsl" in="${in}" out="${out}" basedir="${basedir}">
+		<xslt style="../xslt/ArtDecorToIg.xsl" in="${in}" out="${out}" basedir="${basedir}">
 			<classpath>
 				<pathelement location="../saxon9he.jar" />
 			</classpath>
@@ -33,8 +59,7 @@
 			<param name="prefix" expression="${prefix}" type="STRING" />
 			<param name="projectUri" expression="${projectUri}" type="STRING" />
 			<param name="projectUriSkip" expression="${projectUriSkip}" type="STRING" />
-      <param name="projectUriChEpr" expression="${projectUriChEpr}" type="STRING" />
-			<param name="prefix" expression="${prefix}" type="STRING" />
+			<param name="projectUriChEpr" expression="${projectUriChEpr}" type="STRING" />
 			<param name="canonicalBase" expression="${canonicalBase}" type="STRING" />
 			<param name="language" expression="${canonicalBase}" type="STRING" />
 		</xslt>

@@ -1,4 +1,4 @@
-<xsl:stylesheet version="2.0" xmlns="" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xsl:stylesheet version="2.0" xmlns="" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ahdis="http://ahdis.ch">
 
   <xsl:output method="xml" indent="yes"/>
   <xsl:param name="prefix" required="yes"/>
@@ -22,7 +22,7 @@
     <element>
       <xsl:attribute name="ref"><xsl:value-of select="$ref"/></xsl:attribute>
       <xsl:if test="@name">
-        <xsl:attribute name="name"><xsl:value-of select="@name"/></xsl:attribute>
+        <xsl:attribute name="name"><xsl:value-of select="ahdis:skipxpath(@name)"/></xsl:attribute>
       </xsl:if>
       <xsl:if test="@datatype">
         <xsl:attribute name="datatype"><xsl:value-of select="@datatype"/></xsl:attribute>

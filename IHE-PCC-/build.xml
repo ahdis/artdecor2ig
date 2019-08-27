@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<project name="art-decor" basedir="." default="default">
+
+	<import file="../xslt/build.xml" />
+
+	<target name="init">
+		<mkdir dir="artdecor" />
+		<mkdir dir="resources" />
+		<mkdir dir="output" />
+		<property name="ig" value="cda-ihe-pcc" />
+		<property name="canonicalBase" value="http://fhir.ch/ig/${ig}" />
+		<property name="prefix" value="IHE-PCC-" />
+	</target>
+
+	<target name="clean">
+		<delete dir="artdecor" />
+		<delete dir="resources" />
+		<delete dir="output" />
+	</target>
+
+	<target name="getTemplate" depends="init">
+		<get src="https://art-decor.ihe-europe.net/decor/services/RetrieveTemplate?format=xml&amp;prefix=${prefix}&amp;id=${templateId}&amp;effectiveDate=dynamic" dest="templates/${templateId}.xml" skipexisting="true" />
+	</target>
+
+	<target name="getProjectIndex" depends="init">
+		<get src="https://art-decor.ihe-europe.net/decor/services/ProjectIndex?format=xml&amp;prefix=${prefix}&amp;effectiveDate=dynamic" dest="artdecor/project.xml" />
+	</target>
+
+	<target name="default" depends="init">
+
+		<antcall target="artDecorProjectDownload">
+			<param name="prefix" value="${prefix}" />
+		</antcall>
+
+	</target>
+
+</project>

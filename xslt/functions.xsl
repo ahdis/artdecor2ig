@@ -39,4 +39,13 @@
     <xsl:sequence select="if (string-length($shortedtopoint)>0) then (concat($shortedtopoint,'.')) else ($idnodot)"/>
   </xsl:function>
 
+  <xsl:function name="ahdis:skipxpath" as="xs:string">
+    <xsl:param name="input" as="xs:string"/>
+    <xsl:sequence select="if (string-length(substring-before($input,'['))>0) then (substring-before($input,'[')) else ($input)"/>
+  </xsl:function>
+
+  <xsl:function name="ahdis:skipns" as="xs:string">
+    <xsl:param name="input" as="xs:string"/>
+    <xsl:sequence select="substring-after($input, ':')"/>
+  </xsl:function>
 </xsl:stylesheet>

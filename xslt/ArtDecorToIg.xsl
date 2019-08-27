@@ -21,7 +21,7 @@
 
   <xsl:template match="//return">
   
-    <xsl:for-each-group select="template[@id and @name and classification[@type='cdaheaderlevel' or @type='cdasectionlevel' or @type='cdadocumentlevel']]" group-by="@id">
+    <xsl:for-each-group select="template[@id and @name and not(@statusCode='cancelled')]" group-by="@id">
 
       <xsl:message select="current-grouping-key(),' ',current-group()[1]/@name"/>
 
@@ -30,7 +30,7 @@
           <xsl:message select="'.. skippping because in projectskip.xml'"/>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:variable name="pathartdecor" select="concat('../',$prefix,'/artdecor/',current-grouping-key(),'.xml')" />
+        <!--           <xsl:variable name="pathartdecor" select="concat('../',$prefix,'/artdecor/',current-grouping-key(),'.xml')" />
           <xsl:message select="'.. download into ',$pathartdecor"/>
           <xsl:variable name="templateUri" select="concat('http://art-decor.org/decor/services/RetrieveTemplate?format=xml&amp;prefix=',$prefix,'&amp;id=',current-grouping-key(),'&amp;effectiveDate=dynamic')"/>
           <xsl:variable name="template" select="document($templateUri)"/>
@@ -47,6 +47,10 @@
           <xsl:result-document method="xml" href="{$pathoutput}">
             <xsl:copy-of select="$templateResolvedRecursive"/>
           </xsl:result-document>          
+          -->
+          <xsl:variable name="pathoutput" select="concat('../',$prefix,'/output/',current-grouping-key(),'.xml')" />
+          <xsl:variable name="templateResolvedRecursive" select="document($pathoutput)"/>
+          
           <xsl:choose>
             <xsl:when test="count($templateResolvedRecursive/return/template/template/element)=1">
               <xsl:variable name="pathresources" select="concat('../',$prefix,'/resources/',ahdis:idFromArtDecorTemplate(current-group()[1]/@name),'.xml')" />
@@ -67,7 +71,6 @@
           </xsl:choose>
         </xsl:otherwise>
       </xsl:choose>
-
 
     </xsl:for-each-group>
 

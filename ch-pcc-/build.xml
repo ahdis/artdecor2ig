@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<project name="art-decor" basedir="." default="default">
+
+	<import file="../xslt/build.xml" />
+
+	<target name="init">
+		<mkdir dir="artdecor" />
+		<mkdir dir="resources" />
+		<mkdir dir="output" />
+		<property name="ig" value="cda-ch-pcc" />
+		<property name="canonicalBase" value="http://fhir.ch/ig/${ig}" />
+		<property name="prefix" value="ch-pcc-" />
+	</target>
+
+	<target name="clean">
+		<delete dir="artdecor" />
+		<delete dir="resources" />
+		<delete dir="output" />
+	</target>
+
+	<target name="default" depends="init">
+
+		<antcall target="artDecorProjectDownload">
+			<param name="prefix" value="${prefix}" />
+		</antcall>
+
+	</target>
+
+</project>

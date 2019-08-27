@@ -11,11 +11,14 @@
   <xsl:variable name="project" select="document($projectUri)"/>
   <xsl:variable name="projectchepr" select="document($projectUriChEpr)"/>
 
+  <xsl:variable name="projectad1bbr" select="document(../ad1bbr-/artdecor/project.xml)"/>
+
   <xsl:import href="functions.xsl"/>
   
   
 <!-- 
 Open Issues
+- elementName to type is by convention with exception (manufacturedMaterial), not nice
 - multilanguage  support 
 - conformance
 - binding strength of valuesets
@@ -25,7 +28,10 @@ Open Issues
 - choice element conditions 
    - not considering yet min max when different elements
    - choice of hl7.compoent not yet supporting cardinality and only support for component/choice/section
- -->
+- text/title elements not supported
+- slicing for entry, substanceadministration, author, effectivetime needs to be setup/improved
+- slicing for relationship needs to be improved, generate profiles on entryRelationShip? otherwise it will not be possible to slice
+-->
  
  <!-- utility functions -->
 
@@ -54,7 +60,7 @@ Open Issues
           <xsl:value-of select="'http://fhir.ch/ig/ch-epr/ValueSet/DocumentEntry.typeCode'"/>
         </xsl:when>
         <xsl:when test="starts-with($oid,'2.16.756.5.30.1.127.3.10.1.') or starts-with($oid,'2.16.756.5.30.1.127.3.10.8.')">
-          <!-- current problem is that project.xml in hl7chcda- has an old name for the template and it also not clear that the valueset belongs to ch-epr- (indent is hl7) -->
+          <!-- current problem is that project.xml in hl7chcda- has an old name for the valueset and it also not clear that the valueset belongs to ch-epr- (indent is hl7) -->
           <xsl:variable name="valuesetname" select="$projectchepr//return/valueSet[@id=$oid and not(@statusCode='deprecated')][1]/@name"/>
           <xsl:value-of select="if (string-length($valuesetname)>0) then (concat('http://fhir.ch/ig/ch-epr-term/ValueSet/',$valuesetname)) else ('')"/>
         </xsl:when>
@@ -64,6 +70,25 @@ Open Issues
       </xsl:choose>
     </xsl:sequence>
   </xsl:function>
+
+  <xsl:function name="ahdis:typefortemplate" as="xs:string">
+
+    <!--  TODO: this is a hack, we should lookup oid for the gerneral template name, and derive type from there, now we go trough the elementName -->
+    <xsl:param name="oid" as="xs:string"/>
+    <xsl:param name="elementName" as="xs:string"/>
+
+    <xsl:sequence>
+      <xsl:choose>
+        <xsl:when test="$elementName='ManufacturedMaterial'">
+          <xsl:value-of select="'Material'"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$elementName"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:sequence>
+  </xsl:function>
+
 
   <xsl:function name="ahdis:profilefortemplate" as="xs:string">
     <xsl:param name="oid" as="xs:string"/>
@@ -82,7 +107,6 @@ Open Issues
     </xsl:variable>
     <xsl:sequence select="sum($length)>0"/>
   </xsl:function>
-
 
   <xsl:function name="ahdis:createslicename" as="xs:string">
     <xsl:param name="input" as="xs:string"/>
@@ -259,8 +283,8 @@ Open Issues
     <xsl:param name="parentpath" as="xs:string" required="yes"/>
     <xsl:param name="isSlice" as="xs:boolean" required="yes"/>
 
-    <xsl:variable name="differentialchildelement" as="xs:string" select="substring(@name, 5)"/>
-    <xsl:variable name="Differentialchildelement" as="xs:string" select="ahdis:firstLetterUpperCase($differentialchildelement)"/>
+    <xsl:variable name="differentialchildelement" as="xs:string" select="ahdis:skipns(@name)"/>
+    <xsl:variable name="Differentialchildelement" as="xs:string" select="ahdis:typefortemplate('todooid',ahdis:firstLetterUpperCase($differentialchildelement))"/>
 
     <xsl:variable name="isonlychoice" as="xs:boolean" select="count(element)=0 and count(choice/element)>0"/>
     <xsl:variable name="iscomponentchoiceslice" as="xs:boolean" select="$isonlychoice and @name='hl7:component'"/>
@@ -353,6 +377,19 @@ Open Issues
           </xsl:for-each>
         </fhir:type>
       </xsl:if>
+
+      <xsl:if test="@name='hl7:value' and string-length(@datatype)>0">
+        <fhir:type>
+          <fhir:code>
+            <xsl:attribute name="value"><xsl:value-of select="concat('http://hl7.org/fhir/cda/StructureDefinition/',@datatype)"/></xsl:attribute>
+          </fhir:code>
+          <fhir:profile>
+            <xsl:attribute name="value"><xsl:value-of select="concat('http://hl7.org/fhir/cda/StructureDefinition/',@datatype)"/></xsl:attribute>
+          </fhir:profile>
+        </fhir:type>
+      </xsl:if>
+      
+      
         
       <!--  <vocabulary valueSet="2.16.756.5.30.1.127.3.10.1.5"/>  -->
       <xsl:if test="vocabulary/@valueSet">
@@ -404,20 +441,36 @@ Open Issues
         <xsl:variable name="siblings" as="xs:integer" select="count(current-group())"/>
 <!--         <xsl:message select="'.. ',current-grouping-key(),' count ', $siblings"/>  -->
 
-        <xsl:for-each select="current-group()">
-          <xsl:if test="position()=1 and $siblings>1 and not($iscomponentchoiceslice)">
-            <xsl:apply-templates select="." mode="slicesetup">
-              <xsl:with-param name="parentid" select="$id"/>
-              <xsl:with-param name="parentpath" select="$path"/>
-              <xsl:with-param name="isSlice" select="false()"/>
-            </xsl:apply-templates>
-          </xsl:if>
-          <xsl:apply-templates select="." mode="its">
-            <xsl:with-param name="parentid" select="$id"/>
-            <xsl:with-param name="parentpath" select="$path"/>
-            <xsl:with-param name="isSlice" select="$siblings>1"/>
-          </xsl:apply-templates>
-        </xsl:for-each>
+
+        <xsl:choose>
+          <xsl:when test="(current-grouping-key()='hl7:author' or 
+                           current-grouping-key()='hl7:effectiveTime' or 
+                           current-grouping-key()='hl7:entry' or
+                           current-grouping-key()='hl7:substanceAdministration' or
+                           (current-grouping-key()='hl7:component' and not($iscomponentchoiceslice))) and 
+                           $prefix='ch-pharm-'">
+              <!-- Todo set min max instead of slice, we have nothing to slice -->
+            <xsl:message select="'.. WARNING: slice setup cannot be defined for ', current-grouping-key(), 'in ', $prefix, ' child elements ignored'"/>
+            <xsl:comment select="'.. WARNING: slice setup cannot be defined for ', current-grouping-key(), 'in ', $prefix, ' child elements ignored'"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:for-each select="current-group()">
+              <xsl:if test="position()=1 and $siblings>1 and not($iscomponentchoiceslice)">
+                <xsl:apply-templates select="." mode="slicesetup">
+                  <xsl:with-param name="parentid" select="$id"/>
+                  <xsl:with-param name="parentpath" select="$path"/>
+                  <xsl:with-param name="isSlice" select="false()"/>
+                </xsl:apply-templates>
+              </xsl:if>
+              <xsl:apply-templates select="." mode="its">
+                <xsl:with-param name="parentid" select="$id"/>
+                <xsl:with-param name="parentpath" select="$path"/>
+                <xsl:with-param name="isSlice" select="$siblings>1"/>
+              </xsl:apply-templates>
+            </xsl:for-each>
+          </xsl:otherwise>
+        </xsl:choose>
+
 
       </xsl:for-each-group>
 
@@ -435,7 +488,7 @@ Open Issues
     <xsl:param name="parentpath" as="xs:string" required="yes"/>
     <xsl:param name="isSlice" as="xs:boolean" required="yes"/>
 
-    <xsl:variable name="differentialchildelement" as="xs:string" select="substring(@name, 5)"/>
+    <xsl:variable name="differentialchildelement" as="xs:string" select="ahdis:skipns(@name)"/>
     <xsl:variable name="Differentialchildelement" as="xs:string" select="ahdis:firstLetterUpperCase($differentialchildelement)"/>
 
     <xsl:variable name="id" as="xs:string" select="ahdis:id($parentid,false(),'',
@@ -461,13 +514,85 @@ Open Issues
       </fhir:slicing>
     </fhir:element>
   </xsl:template>
+  
+  <!-- 
+  <xsl:template match="element[@name='hl7:substanceAdministration']" mode="slicesetup">
+    <xsl:param name="parentid" as="xs:string" required="yes"/>
+    <xsl:param name="parentpath" as="xs:string" required="yes"/>
+    <xsl:param name="isSlice" as="xs:boolean" required="yes"/>
+
+    <xsl:variable name="differentialchildelement" as="xs:string" select="ahdis:skipns(@name)"/>
+    <xsl:variable name="Differentialchildelement" as="xs:string" select="ahdis:firstLetterUpperCase($differentialchildelement)"/>
+
+    <xsl:variable name="id" as="xs:string" select="ahdis:id($parentid,false(),'',
+                                                         if (string-length($parentid)>0) 
+                                                         then ($differentialchildelement)
+                                                         else ($Differentialchildelement))"/>
+    <xsl:variable name="path" as="xs:string" select="ahdis:path($parentpath,if (string-length($parentid)>0) 
+                                                         then ($differentialchildelement)
+                                                         else ($Differentialchildelement))"/>
+    <fhir:element>
+      <xsl:call-template name="elementIdPathDescSlice">
+        <xsl:with-param name="itselement" select="."/>
+        <xsl:with-param name="id" select="$id"/>
+        <xsl:with-param name="sliceName" select="''"/>
+        <xsl:with-param name="path" select="$path"/>
+      </xsl:call-template>
+      <fhir:slicing>
+        <fhir:discriminator>
+          <fhir:type value="value"/>
+          <fhir:path value="templateId.root"/>
+        </fhir:discriminator>
+        <rules value="open"/>
+      </fhir:slicing>
+    </fhir:element>
+  </xsl:template>
+  -->
+
+  <xsl:template match="element[@name='hl7:entryRelationship']" mode="slicesetup">
+    <xsl:param name="parentid" as="xs:string" required="yes"/>
+    <xsl:param name="parentpath" as="xs:string" required="yes"/>
+    <xsl:param name="isSlice" as="xs:boolean" required="yes"/>
+
+    <xsl:variable name="differentialchildelement" as="xs:string" select="ahdis:skipns(@name)"/>
+    <xsl:variable name="Differentialchildelement" as="xs:string" select="ahdis:firstLetterUpperCase($differentialchildelement)"/>
+
+    <xsl:variable name="id" as="xs:string" select="ahdis:id($parentid,false(),'',
+                                                         if (string-length($parentid)>0) 
+                                                         then ($differentialchildelement)
+                                                         else ($Differentialchildelement))"/>
+    <xsl:variable name="path" as="xs:string" select="ahdis:path($parentpath,if (string-length($parentid)>0) 
+                                                         then ($differentialchildelement)
+                                                         else ($Differentialchildelement))"/>
+
+    <xsl:message select="' .. Warning: disrimination only on typecode, needs to be improved for ', @name"/>
+    <xsl:comment select="' .. Warning: disrimination only on typecode, needs to be improved for ', @name"/>
+
+    <fhir:element>
+
+
+      <xsl:call-template name="elementIdPathDescSlice">
+        <xsl:with-param name="itselement" select="."/>
+        <xsl:with-param name="id" select="$id"/>
+        <xsl:with-param name="sliceName" select="''"/>
+        <xsl:with-param name="path" select="$path"/>
+      </xsl:call-template>
+      <fhir:slicing>
+        <fhir:discriminator>
+          <fhir:type value="value"/>
+          <fhir:path value="typeCode"/>
+        </fhir:discriminator>
+        <rules value="open"/>
+      </fhir:slicing>
+    </fhir:element>
+  </xsl:template>
 
   <xsl:template match="element[@name='hl7:id']" mode="slicesetup">
     <xsl:param name="parentid" as="xs:string" required="yes"/>
     <xsl:param name="parentpath" as="xs:string" required="yes"/>
     <xsl:param name="isSlice" as="xs:boolean" required="yes"/>
 
-    <xsl:variable name="differentialchildelement" as="xs:string" select="substring(@name, 5)"/>
+    <xsl:variable name="differentialchildelement" as="xs:string" select="ahdis:skipns(@name)"/>
     <xsl:variable name="Differentialchildelement" as="xs:string" select="ahdis:firstLetterUpperCase($differentialchildelement)"/>
 
     <xsl:variable name="id" as="xs:string" select="ahdis:id($parentid,false(),'',
@@ -503,7 +628,7 @@ Open Issues
     <xsl:param name="parentpath" as="xs:string" required="yes"/>
     <xsl:param name="isSlice" as="xs:boolean" required="yes"/>
 
-    <xsl:variable name="differentialchildelement" as="xs:string" select="substring(@name, 5)"/>
+    <xsl:variable name="differentialchildelement" as="xs:string" select="ahdis:skipns(@name)"/>
     <xsl:variable name="Differentialchildelement" as="xs:string" select="ahdis:firstLetterUpperCase($differentialchildelement)"/>
 
     <xsl:variable name="id" as="xs:string" select="ahdis:id($parentid,false(),'',
@@ -544,9 +669,13 @@ Open Issues
   </xsl:template>
 
   <xsl:template match="//template/template" mode="logical">
+  
+     <!-- TODO: basedefinition from first profile it is constrained 
+                differentialtype has to be the same as in the basedefintion
+                we now when the too easy way for the firstw match :-(   -->
 
     <xsl:variable name="differentialchildelement" as="xs:string" select="replace(substring(element/@name, 5), '\.', '')"/>
-    <xsl:variable name="Differentialchildelement" as="xs:string" select="ahdis:firstLetterUpperCase($differentialchildelement)"/>
+    <xsl:variable name="Differentialchildelement" as="xs:string" select="ahdis:typefortemplate('todooid',ahdis:firstLetterUpperCase($differentialchildelement))"/>
 
     <xsl:variable name="logicalid" select="ahdis:idFromArtDecorTemplate(@name)"/> <!-- nees to in sync with filename for ig -->
     <xsl:variable name="type" select="$Differentialchildelement"/>

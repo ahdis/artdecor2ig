@@ -1,0 +1,6 @@
+<return prefix="hl7chcda-" versionDate="" versionLabel="">
+    <template id="2.16.756.5.30.1.1.10.4.36" name="DosageInstructionsEntryDosageChange" displayName="Dosage Instructions Dosage Change" statusCode="pending" effectiveDate="2017-01-23T16:30:55" versionLabel="2017" isClosed="true" url="http://art-decor.org/decor/services/" ident="ch-pharm-">
+        <desc language="en-US">Dosage Instructions are a set of data elements which together represent the dosage instructions to a medication such as duration of treatment, medication frequency, dose quantity, route of administration, etc. Dosage Instructions may be provided structured and/or narrative. This entry describes structured dosage instructions.</desc>
+        <classification type="notype"></classification>
+    </template>
+</return>

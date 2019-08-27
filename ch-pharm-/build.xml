@@ -7,15 +7,9 @@
 		<mkdir dir="artdecor" />
 		<mkdir dir="resources" />
 		<mkdir dir="output" />
-		<property name="ig" value="cda-ch-v2" />
+		<property name="ig" value="cda-ch-pharm" />
 		<property name="canonicalBase" value="http://fhir.ch/ig/${ig}" />
-		<property name="prefix" value="hl7chcda-" />
-	</target>
-
-	<target name="clean">
-		<delete dir="artdecor" />
-		<delete dir="resources" />
-		<delete dir="output" />
+		<property name="prefix" value="ch-pharm-" />
 	</target>
 
 	<target name="download" depends="init">
@@ -29,16 +23,14 @@
 
 		<antcall target="artDecorToIg">
 			<param name="ig" value="${ig}" />
-			<param name="projectUri" value="../hl7chcda-/artdecor/project.xml" />
+			<param name="projectUri" value="../${prefix}/artdecor/project.xml" />
 			<param name="projectUriChEpr" value="../ch-epr-/artdecor/project.xml" />
-			<param name="projectUriSkip" value="../hl7chcda-/projectskip.xml" />
-			<param name="prefix" value="hl7chcda-" />
+			<param name="projectUriSkip" value="../${prefix}/projectskip.xml" />
+			<param name="prefix" value="${prefix}" />
 			<param name="canonicalBase" value="http://fhir.ch/ig/${ig}" />
 			<param name="in" value="artdecor/project.xml" />
 			<param name="out" value="project.log" />
 		</antcall>
-
-
 	</target>
 
 </project>
