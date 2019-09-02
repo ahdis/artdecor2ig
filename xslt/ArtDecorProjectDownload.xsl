@@ -3,6 +3,7 @@
   <xsl:output method="text" indent="yes"/>
 
   <xsl:param name="prefix" required="yes"/> <!-- art-decor prefix for project -->
+  <xsl:param name="inContains" as="xs:boolean" />
 
   <xsl:import href="functions.xsl"/>
 
@@ -24,6 +25,7 @@
       <xsl:variable name="templateResolvedRecursive">
         <xsl:apply-templates select="$template" mode="include">
           <xsl:with-param name="ref" select="current-grouping-key()"/>
+          <xsl:with-param name="inContains" select="false()"/>
         </xsl:apply-templates>
       </xsl:variable>
       <xsl:result-document method="xml" href="{$pathoutput}">

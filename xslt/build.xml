@@ -4,13 +4,19 @@
 
 	<target name="init">
 	</target>
-	
 
-  <target name="clean">
-    <delete dir="artdecor" />
-    <delete dir="resources" />
-    <delete dir="output" />
-  </target>
+
+	<target name="clean">
+		<delete dir="artdecor" />
+		<delete dir="resources" />
+		<delete dir="output" />
+	</target>
+
+	<target name="download" depends="init">
+		<antcall target="artDecorProjectDownload">
+			<param name="prefix" value="${prefix}" />
+		</antcall>
+	</target>
 
 	<target name="dist" depends="init">
 		<copy todir="../../${ig}/resources">

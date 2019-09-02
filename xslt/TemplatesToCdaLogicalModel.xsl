@@ -30,7 +30,7 @@ Open Issues
    - choice of hl7.compoent not yet supporting cardinality and only support for component/choice/section
 - text/title elements not supported
 - slicing for entry, substanceadministration, author, effectivetime needs to be setup/improved
-- slicing for relationship needs to be improved, generate profiles on entryRelationShip? otherwise it will not be possible to slice
+- vocabulary issues
 -->
  
  <!-- utility functions -->
@@ -42,7 +42,7 @@ Open Issues
       <xsl:choose>
         <xsl:when test="starts-with($oid,'2.16.840.1.113883.1.11')">
           <xsl:variable name="v3name">
-            <xsl:value-of select="$project//return/valueSet[@id=$oid][1]/@name"/>
+            <xsl:value-of select="$project//return/valueSet[@id=$oid or @ref=$oid][1]/@name"/>
           </xsl:variable>
           <xsl:choose>
             <xsl:when test="string-length($v3name)>0">
@@ -90,28 +90,10 @@ Open Issues
   </xsl:function>
 
 
-  <xsl:function name="ahdis:profilefortemplate" as="xs:string">
-    <xsl:param name="oid" as="xs:string"/>
-    <xsl:variable name="templates" select="$project//return/template[@id=$oid or @ref=$oid][1]/@name"/>
-    <xsl:sequence>
-      <xsl:value-of select="if ($templates) then (ahdis:idFromArtDecorTemplate($templates)) else ('')"/>
-    </xsl:sequence>
-  </xsl:function>
-
-  <xsl:function name="ahdis:hasoneprofilefortemplate" as="xs:boolean">
-    <xsl:param name="oids" as="xs:string*"/>
-    <xsl:variable name="length" as="xs:integer*">
-      <xsl:for-each select="$oids">
-        <xsl:value-of select="string-length(ahdis:profilefortemplate(.))"/>
-      </xsl:for-each>
-    </xsl:variable>
-    <xsl:sequence select="sum($length)>0"/>
-  </xsl:function>
-
   <xsl:function name="ahdis:createslicename" as="xs:string">
     <xsl:param name="input" as="xs:string"/>
     <xsl:variable name="profile">
-      <xsl:value-of select="ahdis:profilefortemplate($input)"/>
+      <xsl:value-of select="ahdis:profilefortemplate($input,$project)"/>
     </xsl:variable>
     <xsl:variable name="idnodot">
       <xsl:value-of select="replace($input, '\.', '')"/>
@@ -286,6 +268,7 @@ Open Issues
     <xsl:variable name="differentialchildelement" as="xs:string" select="ahdis:skipns(@name)"/>
     <xsl:variable name="Differentialchildelement" as="xs:string" select="ahdis:typefortemplate('todooid',ahdis:firstLetterUpperCase($differentialchildelement))"/>
 
+    <xsl:variable name="this" select="."/>
     <xsl:variable name="isonlychoice" as="xs:boolean" select="count(element)=0 and count(choice/element)>0"/>
     <xsl:variable name="iscomponentchoiceslice" as="xs:boolean" select="$isonlychoice and @name='hl7:component'"/>
     <xsl:variable name="iscomponentchoiceelement" as="xs:boolean" select="@name='hl7:section' and count(../../element)=0 and count(../../choice/element)>0 and ../../@name='hl7:component'"/>
@@ -298,7 +281,7 @@ Open Issues
         </xsl:when>
         <xsl:when test="@name='hl7:templateId' and attribute[@name='root']/@value">
           <xsl:choose>
-            <xsl:when test="ahdis:profilefortemplate(attribute[@name='root']/@value)">
+            <xsl:when test="ahdis:profilefortemplate(attribute[@name='root']/@value,$project)">
               <xsl:value-of select="ahdis:createslicename(attribute[@name='root']/@value)"/>
             </xsl:when>
             <xsl:otherwise>
@@ -320,7 +303,10 @@ Open Issues
                                                          then ($differentialchildelement)
                                                          else ($Differentialchildelement))"/>
     <xsl:variable name="oids" select="element[@name='hl7:templateId']/attribute[@name='root']/@value"/>
-    <xsl:variable name="referstotemplate" select="string-length($parentid)>0 and $oids and ahdis:hasoneprofilefortemplate($oids)"/>
+    <xsl:variable name="containedoids" select="contains/element/element[@name='hl7:templateId']/attribute[@name='root']/@value"/>
+
+    <xsl:variable name="referstotemplate" select="string-length($parentid)>0 and $oids and ahdis:hasoneprofilefortemplate($oids,$project)"/>
+    <xsl:variable name="referstocontainedtemplate" select="string-length($parentid)>0 and @contains and $containedoids and ahdis:hasoneprofilefortemplate($containedoids,$project)"/>
 
 
     <xsl:if test="$iscomponentchoiceelement">
@@ -336,7 +322,8 @@ Open Issues
     </xsl:if>
 
     <fhir:element>
-      <!-- <xsl:message select="'.. element ',$id"/> -->
+
+      <xsl:message select="'.. element ',$id, 'contained', $referstocontainedtemplate"/>
 
       <xsl:call-template name="elementIdPathDescSlice">
         <xsl:with-param name="itselement" select="."/>
@@ -369,9 +356,25 @@ Open Issues
             <xsl:attribute name="value"><xsl:value-of select="concat('http://hl7.org/fhir/cda/StructureDefinition/',$Differentialchildelement)"/></xsl:attribute>
           </fhir:code>
           <xsl:for-each select="$oids">
-            <xsl:if test="string-length(ahdis:profilefortemplate(.))>0">
+            <xsl:if test="string-length(ahdis:profilefortemplate(.,$project))>0">
               <fhir:profile>
-                <xsl:attribute name="value"><xsl:value-of select="$canonicalBase"/>/StructureDefinition/<xsl:value-of select="ahdis:profilefortemplate(.)"/></xsl:attribute>
+                <xsl:attribute name="value"><xsl:value-of select="$canonicalBase"/>/StructureDefinition/<xsl:value-of select="ahdis:profilefortemplate(.,$project)"/></xsl:attribute>
+              </fhir:profile>
+            </xsl:if>
+          </xsl:for-each>
+        </fhir:type>
+      </xsl:if>
+
+      <xsl:if test="@name='hl7:entryRelationship' and $referstocontainedtemplate">
+        <fhir:type>
+          <fhir:code>
+            <xsl:attribute name="value"><xsl:value-of select="concat('http://hl7.org/fhir/cda/StructureDefinition/',$Differentialchildelement)"/></xsl:attribute>
+          </fhir:code>
+          <xsl:for-each select="$containedoids">
+            <xsl:if test="string-length(ahdis:profilefortemplate(.,$project))>0">
+              <xsl:variable name="profile" select="concat('ER',ahdis:profilefortemplate(.,$project))"/>
+              <fhir:profile>
+                <xsl:attribute name="value"><xsl:value-of select="$canonicalBase"/>/StructureDefinition/<xsl:value-of select="$profile"/></xsl:attribute>
               </fhir:profile>
             </xsl:if>
           </xsl:for-each>
@@ -388,15 +391,13 @@ Open Issues
           </fhir:profile>
         </fhir:type>
       </xsl:if>
-      
-      
         
       <!--  <vocabulary valueSet="2.16.756.5.30.1.127.3.10.1.5"/>  -->
-      <xsl:if test="vocabulary/@valueSet">
+      <xsl:if test="count(vocabulary/@valueSet)=1">
         <xsl:choose>
           <xsl:when test="string-length(ahdis:valuesetoidtouri(vocabulary/@valueSet))>0">
             <fhir:binding>
-              <fhir:strength value="extensible"/> <!-- TODO: can we specific somehow which binding strenght? -->
+              <fhir:strength value="required"/> <!-- TODO: can we specific somehow which binding strenght? -->
               <fhir:valueSet>
                 <xsl:attribute name="value"><xsl:value-of select="ahdis:valuesetoidtouri(vocabulary/@valueSet)"/></xsl:attribute>
               </fhir:valueSet>
@@ -406,10 +407,13 @@ Open Issues
             <xsl:message select="' .. Warning: No corresponding FHIR ValueSet found for ', vocabulary/@valueSet"/>
             <xsl:comment select="' .. Warning: No corresponding FHIR ValueSet found for ', vocabulary/@valueSet"/>
           </xsl:otherwise>
-
         </xsl:choose>
-
       </xsl:if>
+      <xsl:if test="count(vocabulary/@valueSet)>1">
+        <xsl:message select="' .. Warning: No support yet for multiple ValueSets ', vocabulary/@valueSet"/>
+        <xsl:comment select="' .. Warning: No support yet for multiple ValueSets ', vocabulary/@valueSet"/>
+      </xsl:if>
+
     </fhir:element>
 
     <xsl:if test="not($referstotemplate)">
@@ -421,7 +425,7 @@ Open Issues
         <xsl:with-param name="slicename" select="''"/>
       </xsl:apply-templates>
 
-      <xsl:if test="vocabulary/@code">
+      <xsl:if test="count(vocabulary/@code)=1">
         <fhir:element>
           <xsl:call-template name="elementIdPath">
             <xsl:with-param name="id" select="ahdis:id($id,false(),'','code')"/>
@@ -434,7 +438,9 @@ Open Issues
           </fhir:fixedString>
         </fhir:element>
       </xsl:if>
-
+      <xsl:if test="count(vocabulary/@code)>1">
+        <xsl:message select="' .. Warning: No support yet for multiple codes ', vocabulary/@code"/>
+      </xsl:if>
 
       <xsl:for-each-group select="element | choice/element" group-adjacent="@name">
 
@@ -446,9 +452,9 @@ Open Issues
           <xsl:when test="(current-grouping-key()='hl7:author' or 
                            current-grouping-key()='hl7:effectiveTime' or 
                            current-grouping-key()='hl7:entry' or
+                           current-grouping-key()='hl7:code' or
                            current-grouping-key()='hl7:substanceAdministration' or
-                           (current-grouping-key()='hl7:component' and not($iscomponentchoiceslice))) and 
-                           $prefix='ch-pharm-'">
+                           (current-grouping-key()='hl7:component' and not($iscomponentchoiceslice)))">
               <!-- Todo set min max instead of slice, we have nothing to slice -->
             <xsl:message select="'.. WARNING: slice setup cannot be defined for ', current-grouping-key(), 'in ', $prefix, ' child elements ignored'"/>
             <xsl:comment select="'.. WARNING: slice setup cannot be defined for ', current-grouping-key(), 'in ', $prefix, ' child elements ignored'"/>
@@ -565,12 +571,7 @@ Open Issues
                                                          then ($differentialchildelement)
                                                          else ($Differentialchildelement))"/>
 
-    <xsl:message select="' .. Warning: disrimination only on typecode, needs to be improved for ', @name"/>
-    <xsl:comment select="' .. Warning: disrimination only on typecode, needs to be improved for ', @name"/>
-
     <fhir:element>
-
-
       <xsl:call-template name="elementIdPathDescSlice">
         <xsl:with-param name="itselement" select="."/>
         <xsl:with-param name="id" select="$id"/>
@@ -579,8 +580,8 @@ Open Issues
       </xsl:call-template>
       <fhir:slicing>
         <fhir:discriminator>
-          <fhir:type value="value"/>
-          <fhir:path value="typeCode"/>
+          <fhir:type value="profile"/>
+          <fhir:path value="$this"/>
         </fhir:discriminator>
         <rules value="open"/>
       </fhir:slicing>
@@ -739,5 +740,92 @@ Open Issues
       </fhir:differential>
     </fhir:StructureDefinition>
   </xsl:template>
+
+
+  <!-- A profile is generated it for specialised contained elements -->
+  <xsl:template match="." mode="containsprofile">
+
+    <xsl:variable name="containedtype" as="xs:string" select="ahdis:firstLetterUpperCase(ahdis:skipns(contains/element/@name))"/>
+    <xsl:variable name="containedoids" select="contains/element/element[@name='hl7:templateId']/attribute[@name='root']/@value"/>
+    <xsl:variable name="containedprofile" select="ahdis:profilefortemplate($containedoids[1],$project)"/>
+
+    <xsl:variable name="logicalid" as="xs:string" select="concat('ER',$containedprofile)"/>
+
+    <xsl:variable name="differentialchildelement" as="xs:string" select="ahdis:skipns(@name)"/>
+    <xsl:variable name="Differentialchildelement" as="xs:string" select="ahdis:typefortemplate('todooid',ahdis:firstLetterUpperCase($differentialchildelement))"/>
+
+    <xsl:message select="'containsprofile called for ', $logicalid"/>
+
+    <fhir:StructureDefinition>
+      <fhir:id>
+        <xsl:attribute name="value"><xsl:value-of select="$logicalid"/>
+        </xsl:attribute>
+      </fhir:id>
+      <fhir:extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-namespace">
+        <fhir:valueUri value="urn:hl7-org:v3"/>
+      </fhir:extension>
+      <fhir:url>
+        <xsl:attribute name="value"><xsl:value-of select="$canonicalBase"/>/StructureDefinition/<xsl:value-of select="$logicalid"/>
+        </xsl:attribute>
+      </fhir:url>
+      <fhir:name>
+        <xsl:attribute name="value"><xsl:value-of select="$logicalid"/>
+        </xsl:attribute>
+      </fhir:name>
+      <fhir:title>
+        <xsl:attribute name="value"><xsl:value-of select="concat('entryRelationShip profile wich referes to ',$containedprofile)"/>
+        </xsl:attribute>
+      </fhir:title>
+      <fhir:status value="active"/>
+      <fhir:experimental value="false"/>
+      <fhir:publisher value="autogenerated by artdecor2ig"/>
+      <fhir:kind value="logical"/>
+      <fhir:abstract value="false"/>
+      <fhir:type>
+        <xsl:attribute name="value"><xsl:value-of select="$logicalid"/>
+        </xsl:attribute>
+      </fhir:type>
+      <fhir:baseDefinition>
+        <xsl:attribute name="value"><xsl:value-of select="concat('http://hl7.org/fhir/cda/StructureDefinition/',$Differentialchildelement)"/></xsl:attribute>
+      </fhir:baseDefinition>
+      <fhir:derivation value="constraint"/>
+      <fhir:differential>
+
+        <xsl:apply-templates select="." mode="its">
+          <xsl:with-param name="parentid" select="''"/>
+          <xsl:with-param name="parentpath" select="''"/>
+          <xsl:with-param name="isSlice" select="false()"/>
+          <xsl:with-param name="slicename" select="''"/>
+        </xsl:apply-templates>
+
+
+        <xsl:variable name="element" as="xs:string" select="ahdis:skipns(contains/element/@name)"/>
+        <xsl:variable name="Element" as="xs:string" select="ahdis:typefortemplate('todooid',ahdis:firstLetterUpperCase($element))"/>
+
+        <fhir:element>
+          <xsl:attribute name="id"><xsl:value-of select="concat('EntryRelationship.',$element)"/></xsl:attribute>
+
+          <fhir:path>
+            <xsl:attribute name="value"><xsl:value-of select="concat('EntryRelationship.',$element)"/></xsl:attribute>
+          </fhir:path>
+
+          <fhir:min value="1"/>
+          <fhir:max value="1"/>
+          <fhir:type>
+            <fhir:code>
+              <xsl:attribute name="value"><xsl:value-of select="concat('http://hl7.org/fhir/cda/StructureDefinition/',$Element)"/></xsl:attribute>
+            </fhir:code>
+            <fhir:profile>
+              <xsl:attribute name="value"><xsl:value-of select="$canonicalBase"/>/StructureDefinition/<xsl:value-of select="$containedprofile"/>
+               </xsl:attribute>
+            </fhir:profile>
+          </fhir:type>
+        </fhir:element>
+
+      </fhir:differential>
+    </fhir:StructureDefinition>
+
+  </xsl:template>
+
 
 </xsl:stylesheet>

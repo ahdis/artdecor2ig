@@ -1,4 +1,5 @@
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://hl7.org/fhir" xmlns:fhir="http://hl7.org/fhir" xmlns:ahdis="http://ahdis.ch" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://hl7.org/fhir" xmlns:fhir="http://hl7.org/fhir" xmlns:ahdis="http://ahdis.ch" xmlns:xs="http://www.w3.org/2001/XMLSchema"   xmlns:java-file="java:java.io.File"
+  xmlns:java-uri="java:java.net.URI">
 
   <xsl:output method="xml" indent="yes"/>
 
@@ -48,4 +49,25 @@
     <xsl:param name="input" as="xs:string"/>
     <xsl:sequence select="substring-after($input, ':')"/>
   </xsl:function>
+  
+    <xsl:function name="ahdis:profilefortemplate" as="xs:string">
+    <xsl:param name="oid" as="xs:string"/>
+    <xsl:param name="project" />
+    <xsl:variable name="templates" select="$project//return/template[@id=$oid or @ref=$oid][1]/@name"/>
+    <xsl:sequence>
+      <xsl:value-of select="if ($templates) then (ahdis:idFromArtDecorTemplate($templates)) else ('')"/>
+    </xsl:sequence>
+  </xsl:function>
+
+  <xsl:function name="ahdis:hasoneprofilefortemplate" as="xs:boolean">
+    <xsl:param name="oids" as="xs:string*"/>
+    <xsl:param name="project" />
+    <xsl:variable name="length" as="xs:integer*">
+      <xsl:for-each select="$oids">
+        <xsl:value-of select="string-length(ahdis:profilefortemplate(.,$project))"/>
+      </xsl:for-each>
+    </xsl:variable>
+    <xsl:sequence select="sum($length)>0"/>
+  </xsl:function>
+    
 </xsl:stylesheet>

@@ -10,27 +10,7 @@
 		<property name="ig" value="cda-ch-pharm" />
 		<property name="canonicalBase" value="http://fhir.ch/ig/${ig}" />
 		<property name="prefix" value="ch-pharm-" />
-	</target>
-
-	<target name="download" depends="init">
-		<antcall target="artDecorProjectDownload">
-			<param name="prefix" value="${prefix}" />
-		</antcall>
-	</target>
-
-
-	<target name="default" depends="init">
-
-		<antcall target="artDecorToIg">
-			<param name="ig" value="${ig}" />
-			<param name="projectUri" value="../${prefix}/artdecor/project.xml" />
-			<param name="projectUriChEpr" value="../ch-epr-/artdecor/project.xml" />
-			<param name="projectUriSkip" value="../${prefix}/projectskip.xml" />
-			<param name="prefix" value="${prefix}" />
-			<param name="canonicalBase" value="http://fhir.ch/ig/${ig}" />
-			<param name="in" value="artdecor/project.xml" />
-			<param name="out" value="project.log" />
-		</antcall>
+    <property name="in" value="artdecor/project.xml" />
 	</target>
 
 </project>

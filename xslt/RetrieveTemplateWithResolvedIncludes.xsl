@@ -2,22 +2,27 @@
 
   <xsl:output method="xml" indent="yes"/>
   <xsl:param name="prefix" required="yes"/>
+  <xsl:param name="inContains" as="xs:boolean" required="yes"/>
 
   <xsl:import href="functions.xsl"/>
 
 
   <xsl:template match="include" mode="include">
     <xsl:param name="ref" as="xs:string" required="yes"/>
+    <xsl:param name="inContains" as="xs:boolean" required="yes"/>
 <!--     <xsl:message select="'.. include catched ', @ref"/> -->
     <xsl:variable name="file" select="concat('http://art-decor.org/decor/services/RetrieveTemplate?format=xml&amp;prefix=',$prefix,'&amp;id=',@ref,'&amp;effectiveDate=dynamic')"/>
     <xsl:variable name="incltemplate" select="document($file)/return/template/template/element|document($file)/return/template/template/include"/>
     <xsl:apply-templates select="$incltemplate" mode="include">
       <xsl:with-param name="ref" select="@ref"/>
+      <xsl:with-param name="inContains" select="$inContains"/>
+
     </xsl:apply-templates>
   </xsl:template>
 
   <xsl:template match="element" mode="include">
     <xsl:param name="ref" as="xs:string" required="yes"/>
+    <xsl:param name="inContains" as="xs:boolean" required="yes"/>
 <!--     <xsl:message select="'.. element catched in mode include ', $ref"/> -->
     <element>
       <xsl:attribute name="ref"><xsl:value-of select="$ref"/></xsl:attribute>
@@ -42,14 +47,31 @@
       <xsl:if test="@id">
         <xsl:attribute name="id"><xsl:value-of select="@id"/></xsl:attribute>
       </xsl:if>
+      <xsl:if test="@contains">
+        <xsl:attribute name="contains"><xsl:value-of select="@contains"/></xsl:attribute>
+      </xsl:if>
       <xsl:apply-templates mode="include">
         <xsl:with-param name="ref" select="$ref"/>
+        <xsl:with-param name="inContains" select="$inContains"/>
+
       </xsl:apply-templates>
+      <xsl:if test="string-length(@contains)>0 and $inContains=false()">
+        <xsl:message select="'.. attribute @contains catched in mode include ', @contains"/>
+        <contains>
+          <xsl:variable name="file" select="concat('http://art-decor.org/decor/services/RetrieveTemplate?format=xml&amp;prefix=',$prefix,'&amp;id=',@contains,'&amp;effectiveDate=dynamic')"/>
+          <xsl:variable name="incltemplate" select="document($file)/return/template/template/element|document($file)/return/template/template/include"/>
+          <xsl:apply-templates select="$incltemplate" mode="include">
+            <xsl:with-param name="ref" select="@contains"/>
+            <xsl:with-param name="inContains" select="true()"/>
+          </xsl:apply-templates>
+        </contains>
+      </xsl:if>
     </element>
   </xsl:template>
 
   <xsl:template match="example" mode="include">
     <xsl:param name="ref" as="xs:string" required="yes"/>
+    <xsl:param name="inContains" as="xs:boolean" required="yes"/>
   </xsl:template>
 
 
@@ -65,9 +87,11 @@
 
   <xsl:template match="node()|@*" mode="include">
     <xsl:param name="ref" as="xs:string" required="yes"/>
+    <xsl:param name="inContains" as="xs:boolean" required="yes"/>
     <xsl:copy>
       <xsl:apply-templates select="node()|@*" mode="include">
         <xsl:with-param name="ref" select="$ref"/>
+        <xsl:with-param name="inContains" select="$inContains"/>
       </xsl:apply-templates>
     </xsl:copy>
   </xsl:template>
