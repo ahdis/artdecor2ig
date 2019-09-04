@@ -10,20 +10,16 @@
 		<property name="ig" value="cda-r2" />
 		<property name="canonicalBase" value="http://fhir.ch/ig/${ig}" />
 		<property name="prefix" value="ad1bbr-" />
+    <property name="projectUri" value="../${prefix}/artdecor/project.xml" />
+    <property name="projectUriSkip" value="../${prefix}/projectskip.xml" />
+    <property name="decorservice" value="http://art-decor.org/decor/services" />
+    <property name="canonicalCda" value="http://fhir.ch/ig/${ig}" />
+    <property name="in" value="artdecor/project.xml" />
+    <property name="out" value="project.log" />
+    <property name="removePrefix" value="CDA" />
 	</target>
 
-	<target name="clean">
-		<delete dir="artdecor" />
-		<delete dir="resources" />
-		<delete dir="output" />
-	</target>
-
-	<target name="default" depends="init">
-
-		<antcall target="artDecorProjectDownload">
-			<param name="prefix" value="${prefix}" />
-		</antcall>
-
-	</target>
+  <target name="default" depends="init,download,artDecorToIg">
+    </target>
 
 </project>

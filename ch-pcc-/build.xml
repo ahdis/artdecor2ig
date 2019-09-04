@@ -14,6 +14,7 @@
 		<property name="projectUriChEpr" value="../ch-epr-/artdecor/project.xml" />
     <property name="in" value="artdecor/project.xml" />
     <property name="out" value="project.log" />
+		<property name="decorservice" value="http://art-decor.org/decor/services" />
 
 	</target>
 

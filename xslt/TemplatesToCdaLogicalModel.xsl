@@ -4,14 +4,18 @@
   <xsl:param name="canonicalBase" required="yes"/>
   <xsl:param name="projectUri" required="yes"/>
   <xsl:param name="projectUriChEpr" required="yes"/>
+  <xsl:param name="decorservice" as="xs:string"/>
+  <xsl:param name="canonicalCda" as="xs:string"/>
+  <xsl:param name="removePrefix" as="xs:string"/>
 
   <xsl:param name="language" required="yes"/>
 
 
+  <xsl:variable name="debug" as="xs:boolean" select="false()"/>
+
   <xsl:variable name="project" select="document($projectUri)"/>
   <xsl:variable name="projectchepr" select="document($projectUriChEpr)"/>
 
-  <xsl:variable name="projectad1bbr" select="document(../ad1bbr-/artdecor/project.xml)"/>
 
   <xsl:import href="functions.xsl"/>
   
@@ -34,6 +38,10 @@ Open Issues
 -->
  
  <!-- utility functions -->
+
+  <xsl:function name="ahdis:isBaseModel" as="xs:boolean">
+    <xsl:sequence select="$canonicalCda=$canonicalBase"/>
+  </xsl:function>
 
     <!-- TODO: can be this done via a conceptmap? should be project specifc -->
   <xsl:function name="ahdis:valuesetoidtouri" as="xs:string">
@@ -73,17 +81,24 @@ Open Issues
 
   <xsl:function name="ahdis:typefortemplate" as="xs:string">
 
-    <!--  TODO: this is a hack, we should lookup oid for the gerneral template name, and derive type from there, now we go trough the elementName -->
     <xsl:param name="oid" as="xs:string"/>
     <xsl:param name="elementName" as="xs:string"/>
 
     <xsl:sequence>
       <xsl:choose>
-        <xsl:when test="$elementName='ManufacturedMaterial'">
-          <xsl:value-of select="'Material'"/>
+        <xsl:when test="string-length($oid)>0">
+          <xsl:value-of select="ahdis:idFromArtDecorTemplate($oid,$removePrefix)"/>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:value-of select="$elementName"/>
+          <xsl:choose>
+    <!--  TODO: this is a hack, we should lookup oid for the gerneral template name, and derive type from there, now we go trough the elementName -->
+            <xsl:when test="$elementName='ManufacturedMaterial'">
+              <xsl:value-of select="'Material'"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="$elementName"/>
+            </xsl:otherwise>
+          </xsl:choose>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:sequence>
@@ -232,6 +247,9 @@ Open Issues
         <xsl:with-param name="id" select="ahdis:id($parentid,false(),'',@name)"/>
         <xsl:with-param name="path" select="ahdis:path($parentpath,@name)"/>
       </xsl:call-template>
+      <xsl:if test="ahdis:isBaseModel()">
+        <fhir:representation value="xmlAttr"/>
+      </xsl:if>
       <xsl:if test="desc[@language=$language] and string-length(desc[@language=$language])>0">
         <fhir:short>
           <xsl:attribute name="value"><xsl:value-of select="ahdis:cleanwhitespaceshort(desc[@language=$language])"/></xsl:attribute>
@@ -246,10 +264,15 @@ Open Issues
           <fhir:max value="0"/>
         </xsl:when>
         <xsl:otherwise>
-          <fhir:min value="1"/>
+          <fhir:min value="0"/>
           <fhir:max value="1"/>
         </xsl:otherwise>
       </xsl:choose>
+      <xsl:if test="ahdis:isBaseModel()">
+        <fhir:type>
+          <fhir:code value="code"/>
+        </fhir:type>
+      </xsl:if>
       <xsl:if test="@value and string-length(@value)>0">
         <fhir:fixedString>
           <xsl:attribute name="value"><xsl:value-of select="@value"/></xsl:attribute>
@@ -266,7 +289,7 @@ Open Issues
     <xsl:param name="isSlice" as="xs:boolean" required="yes"/>
 
     <xsl:variable name="differentialchildelement" as="xs:string" select="ahdis:skipns(@name)"/>
-    <xsl:variable name="Differentialchildelement" as="xs:string" select="ahdis:typefortemplate('todooid',ahdis:firstLetterUpperCase($differentialchildelement))"/>
+    <xsl:variable name="Differentialchildelement" as="xs:string" select="ahdis:typefortemplate('',ahdis:firstLetterUpperCase($differentialchildelement))"/>
 
     <xsl:variable name="this" select="."/>
     <xsl:variable name="isonlychoice" as="xs:boolean" select="count(element)=0 and count(choice/element)>0"/>
@@ -285,12 +308,12 @@ Open Issues
               <xsl:value-of select="ahdis:createslicename(attribute[@name='root']/@value)"/>
             </xsl:when>
             <xsl:otherwise>
-              <xsl:value-of select="ahdis:idFromArtDecorTemplate(attribute[@name='root']/@value)"/>
+              <xsl:value-of select="ahdis:idFromArtDecorTemplate(attribute[@name='root']/@value,'')"/>
             </xsl:otherwise>
           </xsl:choose>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:value-of select="ahdis:idFromArtDecorTemplate(@id)"/>
+          <xsl:value-of select="ahdis:idFromArtDecorTemplate(@id,'')"/>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
@@ -302,12 +325,21 @@ Open Issues
     <xsl:variable name="path" as="xs:string" select="ahdis:path($parentpath,if (string-length($parentid)>0) 
                                                          then ($differentialchildelement)
                                                          else ($Differentialchildelement))"/>
+
+    <xsl:variable name="ref" select="@ref"/>
+    <xsl:variable name="referstoelement" select="string-length($parentid)>0 and $ref and ahdis:hasoneprofilefortemplate($ref,$project)"/>
+
+    <xsl:variable name="contains" select="@contains"/>
+
     <xsl:variable name="oids" select="element[@name='hl7:templateId']/attribute[@name='root']/@value"/>
     <xsl:variable name="containedoids" select="contains/element/element[@name='hl7:templateId']/attribute[@name='root']/@value"/>
 
     <xsl:variable name="referstotemplate" select="string-length($parentid)>0 and $oids and ahdis:hasoneprofilefortemplate($oids,$project)"/>
     <xsl:variable name="referstocontainedtemplate" select="string-length($parentid)>0 and @contains and $containedoids and ahdis:hasoneprofilefortemplate($containedoids,$project)"/>
 
+    <xsl:if test="$debug">
+      <xsl:message select="'.. element: ',$id,' ref: ',$ref,' referstoelement:',$referstoelement,' contains: ',$contains, ' oids: ',$oids, ' referstotemplate:',$referstotemplate,' containedoids: ',$containedoids, ' referstocontainedtemplate:', $referstocontainedtemplate"/>
+    </xsl:if>
 
     <xsl:if test="$iscomponentchoiceelement">
       <!-- <xsl:message select="'.. iscompomentchoiceelement'"/> -->
@@ -323,8 +355,6 @@ Open Issues
 
     <fhir:element>
 
-      <xsl:message select="'.. element ',$id, 'contained', $referstocontainedtemplate"/>
-
       <xsl:call-template name="elementIdPathDescSlice">
         <xsl:with-param name="itselement" select="."/>
         <xsl:with-param name="id" select="$id"/>
@@ -335,7 +365,7 @@ Open Issues
         <xsl:with-param name="itselement" select="."/>
       </xsl:call-template>
 
-      <xsl:if test="$iscomponentchoiceslice">
+      <xsl:if test="$iscomponentchoiceslice and not(ahdis:isBaseModel())">
         <fhir:slicing>
           <fhir:discriminator>
             <fhir:type value="value"/>
@@ -344,16 +374,67 @@ Open Issues
           <rules value="open"/>
         </fhir:slicing>
       </xsl:if>
-<!--       
-      <type>
-        <code value="http://hl7.org/fhir/cda/StructureDefinition/RecordTarget"/>
-        <profile value="http://hl7.org/fhir/cda/StructureDefinition/RecordTarget"/>
-      </type>
--->
+
+      <xsl:if test="ahdis:isBaseModel()">
+        <xsl:if test="@datatype">
+          <xsl:variable name="type">
+            <xsl:choose>
+              <xsl:when test="@datatype='CE' or @datatype='CO' or @datatype='CR' or @datatype='CS' or @datatype='CV' or @datatype='PQR' ">
+                <xsl:value-of select="'CD'"/>
+              </xsl:when>
+              <xsl:when test="@datatype='SXCM_TS' or @datatype='PIVL_TS' or @datatype='EIVL_TS' or @datatype='IVL_TS'">
+                <xsl:value-of select="'TS'"/>
+              </xsl:when>
+              <xsl:when test="@datatype='MO' or @datatype='PQ' or @datatype='REAL' or @datatype='RTO_PQ_PQ'">
+                <xsl:value-of select="'QTY'"/>
+              </xsl:when>
+              <xsl:when test="@datatype='ST'">
+                <xsl:value-of select="'ED'"/>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:value-of select="@datatype"/>
+              </xsl:otherwise>
+            </xsl:choose>
+          </xsl:variable>
+          <fhir:type>
+            <fhir:code>
+              <xsl:attribute name="value"><xsl:value-of select="concat($canonicalCda,'/StructureDefinition/',$type)"/></xsl:attribute>
+            </fhir:code>
+            <fhir:profile>
+              <xsl:attribute name="value"><xsl:value-of select="concat($canonicalCda,'/StructureDefinition/',@datatype)"/></xsl:attribute>
+            </fhir:profile>
+          </fhir:type>
+        </xsl:if>
+
+        <xsl:if test="$referstoelement">
+          <fhir:type>
+            <fhir:code>
+              <xsl:attribute name="value"><xsl:value-of select="concat($canonicalCda,'/StructureDefinition/',$Differentialchildelement)"/></xsl:attribute>
+            </fhir:code>
+            <fhir:profile>
+              <xsl:attribute name="value"><xsl:value-of select="concat($canonicalCda,'/StructureDefinition/',$Differentialchildelement)"/></xsl:attribute>
+            </fhir:profile>
+          </fhir:type>
+        </xsl:if>
+
+
+        <xsl:if test="$contains">
+          <fhir:type>
+            <fhir:code>
+              <xsl:attribute name="value"><xsl:value-of select="concat($canonicalCda,'/StructureDefinition/', ahdis:profilefortemplate($contains,$project))"/></xsl:attribute>
+            </fhir:code>
+            <fhir:profile>
+              <xsl:attribute name="value"><xsl:value-of select="concat($canonicalCda,'/StructureDefinition/', ahdis:profilefortemplate($contains,$project))"/></xsl:attribute>
+            </fhir:profile>
+          </fhir:type>
+        </xsl:if>
+
+      </xsl:if>
+
       <xsl:if test="$referstotemplate">
         <fhir:type>
           <fhir:code>
-            <xsl:attribute name="value"><xsl:value-of select="concat('http://hl7.org/fhir/cda/StructureDefinition/',$Differentialchildelement)"/></xsl:attribute>
+            <xsl:attribute name="value"><xsl:value-of select="concat($canonicalCda,'/StructureDefinition/',$Differentialchildelement)"/></xsl:attribute>
           </fhir:code>
           <xsl:for-each select="$oids">
             <xsl:if test="string-length(ahdis:profilefortemplate(.,$project))>0">
@@ -368,7 +449,7 @@ Open Issues
       <xsl:if test="@name='hl7:entryRelationship' and $referstocontainedtemplate">
         <fhir:type>
           <fhir:code>
-            <xsl:attribute name="value"><xsl:value-of select="concat('http://hl7.org/fhir/cda/StructureDefinition/',$Differentialchildelement)"/></xsl:attribute>
+            <xsl:attribute name="value"><xsl:value-of select="concat($canonicalCda,'/StructureDefinition/',$Differentialchildelement)"/></xsl:attribute>
           </fhir:code>
           <xsl:for-each select="$containedoids">
             <xsl:if test="string-length(ahdis:profilefortemplate(.,$project))>0">
@@ -381,13 +462,14 @@ Open Issues
         </fhir:type>
       </xsl:if>
 
-      <xsl:if test="@name='hl7:value' and string-length(@datatype)>0">
+
+      <xsl:if test="not(ahdis:isBaseModel()) and @name='hl7:value' and string-length(@datatype)>0">
         <fhir:type>
           <fhir:code>
-            <xsl:attribute name="value"><xsl:value-of select="concat('http://hl7.org/fhir/cda/StructureDefinition/',@datatype)"/></xsl:attribute>
+            <xsl:attribute name="value"><xsl:value-of select="concat($canonicalCda,'/StructureDefinition/',@datatype)"/></xsl:attribute>
           </fhir:code>
           <fhir:profile>
-            <xsl:attribute name="value"><xsl:value-of select="concat('http://hl7.org/fhir/cda/StructureDefinition/',@datatype)"/></xsl:attribute>
+            <xsl:attribute name="value"><xsl:value-of select="concat($canonicalCda,'/StructureDefinition/',@datatype)"/></xsl:attribute>
           </fhir:profile>
         </fhir:type>
       </xsl:if>
@@ -416,7 +498,7 @@ Open Issues
 
     </fhir:element>
 
-    <xsl:if test="not($referstotemplate)">
+    <xsl:if test="not($referstotemplate) and not($referstoelement) and not($contains)">
 
       <xsl:apply-templates select="attribute" mode="its">
         <xsl:with-param name="parentid" select="$id"/>
@@ -445,14 +527,16 @@ Open Issues
       <xsl:for-each-group select="element | choice/element" group-adjacent="@name">
 
         <xsl:variable name="siblings" as="xs:integer" select="count(current-group())"/>
-<!--         <xsl:message select="'.. ',current-grouping-key(),' count ', $siblings"/>  -->
+        <xsl:message select="'.. ',current-grouping-key(),' count ', $siblings"/>  
 
 
         <xsl:choose>
-          <xsl:when test="(current-grouping-key()='hl7:author' or 
+          <xsl:when test="$siblings>1 and (current-grouping-key()='hl7:author' or 
                            current-grouping-key()='hl7:effectiveTime' or 
                            current-grouping-key()='hl7:entry' or
                            current-grouping-key()='hl7:code' or
+                           current-grouping-key()='hl7:qualifier' or
+                           current-grouping-key()='hl7:representedOrganization' or
                            current-grouping-key()='hl7:substanceAdministration' or
                            (current-grouping-key()='hl7:component' and not($iscomponentchoiceslice)))">
               <!-- Todo set min max instead of slice, we have nothing to slice -->
@@ -675,10 +759,12 @@ Open Issues
                 differentialtype has to be the same as in the basedefintion
                 we now when the too easy way for the firstw match :-(   -->
 
-    <xsl:variable name="differentialchildelement" as="xs:string" select="replace(substring(element/@name, 5), '\.', '')"/>
-    <xsl:variable name="Differentialchildelement" as="xs:string" select="ahdis:typefortemplate('todooid',ahdis:firstLetterUpperCase($differentialchildelement))"/>
+    <xsl:variable name="isHeader" as="xs:boolean" select="count(element)>1 or count(choice)>0"/>
 
-    <xsl:variable name="logicalid" select="ahdis:idFromArtDecorTemplate(@name)"/> <!-- nees to in sync with filename for ig -->
+    <xsl:variable name="differentialchildelement" as="xs:string" select="if ($isHeader) then (ahdis:idFromArtDecorTemplate(@name,$removePrefix)) else (replace(substring(element/@name, 5), '\.', ''))"/>
+    <xsl:variable name="Differentialchildelement" as="xs:string" select="ahdis:typefortemplate('',ahdis:firstLetterUpperCase($differentialchildelement))"/>
+
+    <xsl:variable name="logicalid" select="ahdis:idFromArtDecorTemplate(@name,$removePrefix)"/> <!-- nees to in sync with filename for ig -->
     <xsl:variable name="type" select="$Differentialchildelement"/>
 
     <xsl:variable name="itstemplate" select="."/>
@@ -686,7 +772,7 @@ Open Issues
 
       <fhir:meta>
         <fhir:source>
-          <xsl:attribute name="value"><xsl:value-of select="concat('http://art-decor.org/decor/services/RetrieveTemplate?format=xml&amp;prefix=',../@indent,'&amp;id=',../@id,'&amp;effectiveDate=dynamic')"/></xsl:attribute>
+          <xsl:attribute name="value"><xsl:value-of select="concat($decorservice,'/RetrieveTemplate?format=xml&amp;prefix=',../@indent,'&amp;id=',../@id,'&amp;effectiveDate=dynamic')"/></xsl:attribute>
         </fhir:source>
       </fhir:meta>
 
@@ -723,19 +809,54 @@ Open Issues
         <xsl:attribute name="value"><xsl:value-of select="$type"/>
         </xsl:attribute>
       </fhir:type>
-      <fhir:baseDefinition>
-        <xsl:attribute name="value"><xsl:value-of select="concat('http://hl7.org/fhir/cda/StructureDefinition/',$Differentialchildelement)"/></xsl:attribute>
-      </fhir:baseDefinition>
-      <fhir:derivation value="constraint"/>
+
+      <xsl:if test="ahdis:isBaseModel()">
+        <fhir:baseDefinition>
+          <xsl:attribute name="value"><xsl:value-of select="'http://fhir.ch/ig/cda-r2/StructureDefinition/LogicalElement'"/></xsl:attribute>
+        </fhir:baseDefinition>
+        <fhir:derivation value="specialization"/>
+      </xsl:if>
+      <xsl:if test="not(ahdis:isBaseModel())">
+        <fhir:baseDefinition>
+          <xsl:attribute name="value"><xsl:value-of select="concat($canonicalCda,'/StructureDefinition/',$Differentialchildelement)"/></xsl:attribute>
+        </fhir:baseDefinition>
+        <fhir:derivation value="constraint"/>
+      </xsl:if>
 
       <fhir:differential>
 
-        <xsl:apply-templates select="element" mode="its">
-          <xsl:with-param name="parentid" select="''"/>
-          <xsl:with-param name="parentpath" select="''"/>
-          <xsl:with-param name="isSlice" select="false()"/>
-          <xsl:with-param name="slicename" select="''"/>
-        </xsl:apply-templates>
+        <xsl:choose>
+          <xsl:when test="$isHeader">
+            <fhir:element>
+              <xsl:call-template name="elementIdPathDescSlice">
+                <xsl:with-param name="itselement" select="."/>
+                <xsl:with-param name="id" select="$Differentialchildelement"/>
+                <xsl:with-param name="sliceName" select="''"/>
+                <xsl:with-param name="path" select="$Differentialchildelement"/>
+              </xsl:call-template>
+            </fhir:element>
+            <xsl:apply-templates select="attribute" mode="its">
+              <xsl:with-param name="parentid" select="$Differentialchildelement"/>
+              <xsl:with-param name="parentpath" select="$Differentialchildelement"/>
+              <xsl:with-param name="isSlice" select="false()"/>
+              <xsl:with-param name="slicename" select="''"/>
+            </xsl:apply-templates>
+            <xsl:apply-templates select="element | choice/element" mode="its">
+              <xsl:with-param name="parentid" select="$Differentialchildelement"/>
+              <xsl:with-param name="parentpath" select="$Differentialchildelement"/>
+              <xsl:with-param name="isSlice" select="false()"/>
+              <xsl:with-param name="slicename" select="''"/>
+            </xsl:apply-templates>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:apply-templates select="element" mode="its">
+              <xsl:with-param name="parentid" select="''"/>
+              <xsl:with-param name="parentpath" select="''"/>
+              <xsl:with-param name="isSlice" select="false()"/>
+              <xsl:with-param name="slicename" select="''"/>
+            </xsl:apply-templates>
+          </xsl:otherwise>
+        </xsl:choose>
 
       </fhir:differential>
     </fhir:StructureDefinition>
@@ -752,7 +873,7 @@ Open Issues
     <xsl:variable name="logicalid" as="xs:string" select="concat('ER',$containedprofile)"/>
 
     <xsl:variable name="differentialchildelement" as="xs:string" select="ahdis:skipns(@name)"/>
-    <xsl:variable name="Differentialchildelement" as="xs:string" select="ahdis:typefortemplate('todooid',ahdis:firstLetterUpperCase($differentialchildelement))"/>
+    <xsl:variable name="Differentialchildelement" as="xs:string" select="ahdis:typefortemplate('',ahdis:firstLetterUpperCase($differentialchildelement))"/>
 
     <xsl:message select="'containsprofile called for ', $logicalid"/>
 
@@ -786,7 +907,7 @@ Open Issues
         </xsl:attribute>
       </fhir:type>
       <fhir:baseDefinition>
-        <xsl:attribute name="value"><xsl:value-of select="concat('http://hl7.org/fhir/cda/StructureDefinition/',$Differentialchildelement)"/></xsl:attribute>
+        <xsl:attribute name="value"><xsl:value-of select="concat($canonicalCda,'/StructureDefinition/',$Differentialchildelement)"/></xsl:attribute>
       </fhir:baseDefinition>
       <fhir:derivation value="constraint"/>
       <fhir:differential>
@@ -800,7 +921,7 @@ Open Issues
 
 
         <xsl:variable name="element" as="xs:string" select="ahdis:skipns(contains/element/@name)"/>
-        <xsl:variable name="Element" as="xs:string" select="ahdis:typefortemplate('todooid',ahdis:firstLetterUpperCase($element))"/>
+        <xsl:variable name="Element" as="xs:string" select="ahdis:typefortemplate('',ahdis:firstLetterUpperCase($element))"/>
 
         <fhir:element>
           <xsl:attribute name="id"><xsl:value-of select="concat('EntryRelationship.',$element)"/></xsl:attribute>
@@ -813,7 +934,7 @@ Open Issues
           <fhir:max value="1"/>
           <fhir:type>
             <fhir:code>
-              <xsl:attribute name="value"><xsl:value-of select="concat('http://hl7.org/fhir/cda/StructureDefinition/',$Element)"/></xsl:attribute>
+              <xsl:attribute name="value"><xsl:value-of select="concat($canonicalCda,'/StructureDefinition/',$Element)"/></xsl:attribute>
             </fhir:code>
             <fhir:profile>
               <xsl:attribute name="value"><xsl:value-of select="$canonicalBase"/>/StructureDefinition/<xsl:value-of select="$containedprofile"/>

@@ -1,0 +1,13 @@
+<return prefix="hl7chcda-" versionDate="" versionLabel="">
+  <template id="1.3.6.1.4.1.19376.9999.10.9.1" name="TextElementWithReferenceToNarrativeText" displayName="Narrative text reference" statusCode="active" effectiveDate="2016-06-24T17:07:52" isClosed="false" url="https://art-decor.ihe-europe.net/decor/services/" ident="IHE-PCC-">
+    <desc language="en-US">
+      <p>General template for multiple use (see ART-DECOR 'Used by Template id' for current usings)</p>
+      <p>The &lt;text&gt; element provides a way to represent the &lt;reference&gt; to the text of the comment in the narrative portion of the document.</p>
+    </desc>
+    <classification type="notype"></classification>
+  </template>
+  <template id="1.3.6.1.4.1.19376.1.5.3.1.2.4" name="IHEPatientContacts" displayName="IHE Patient Contacts" statusCode="active" effectiveDate="2017-03-21T14:48:53" versionLabel="2016" isClosed="false" url="https://art-decor.ihe-europe.net/decor/services/" ident="IHE-PCC-">
+    <desc language="en-US">Patient contacts are recorded as described in HL7 CCD: 3.3</desc>
+    <classification type="cdaheaderlevel"></classification>
+  </template>
+</return>

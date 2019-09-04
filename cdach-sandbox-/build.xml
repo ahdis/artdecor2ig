@@ -11,11 +11,8 @@
 		<property name="canonicalBase" value="http://fhir.ch/ig/${ig}" />
 		<property name="prefix" value="cdach-sandbox-" />
 
-    <property name="projectUriChEpr" value="../ch-epr-/artdecor/project.xml" />
 		<property name="projectUri" value="../${prefix}/artdecor/project.xml" />
 		<property name="projectUriSkip" value="../${prefix}/projectskip.xml" />
-		<property name="in" value="artdecor/project.xml" />
-		<property name="out" value="project.log" />
 
 	</target>
 

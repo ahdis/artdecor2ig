@@ -1,0 +1,346 @@
+<return prefix="ad1bbr-" versionDate="" versionLabel="">
+    <template id="2.16.840.1.113883.10.12.801" name="CDAActSDTC" displayName="CDA Act SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA Act (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA Act (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA Act (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.653" name="CDAAssignedEntitySDTC" displayName="CDA AssignedEntity SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA AssignedEntity (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA AssignedEntity (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA AssignedEntity (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.818" name="CDAAuthorBodySDTC" displayName="CDA Author (Body) SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA Author (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA Author (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA Author (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.814" name="CDAAuthoringDeviceSDTC" displayName="CDA AuthoringDevice SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA AuthoringDevice (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA AuthoringDevice (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA AuthoringDevice (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.614" name="CDAauthorizationSDTC" displayName="CDA Authorization SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA Authorization (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA Authorization (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA Authorization (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.800" name="CDAClinicalStatementSDTC" displayName="CDA Clinical Statement SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA Clinical Statement (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA Clinical Statement (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA Clinical Statement (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.502" name="CDAClinicalDocumentStructuredBodySDTC" displayName="CDA ClinicalDocument (with StructuredBody) SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA ClinicalDocument (prototype, contains ClinicalDocument.component as StructuredBody)</desc>
+        <desc language="nl-NL">Template CDA ClinicalDocument (prototype, contains ClinicalDocument.component as StructuredBody)</desc>
+        <desc language="de-DE">Template CDA ClinicalDocument (prototype, contains ClinicalDocument.component as StructuredBody) + SDTC Extensions</desc>
+        <classification type="cdadocumentlevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.503" name="CDAClinicalDocumentnonXMLBodySDTC" displayName="CDA ClinicalDocument (with nonXMLBody) SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA ClinicalDocument (prototype, contains ClinicalDocument.component as nonXMLBody)</desc>
+        <desc language="nl-NL">Template CDA ClinicalDocument (prototype, contains ClinicalDocument.component as nonXMLBody)</desc>
+        <desc language="de-DE">Template CDA ClinicalDocument (prototype, contains ClinicalDocument.component as nonXMLBody) + SDTC Extensions</desc>
+        <classification type="cdadocumentlevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.501" name="CDAClinicalDocumentSDTC" displayName="CDA ClinicalDocument SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA ClinicalDocument (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA ClinicalDocument (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA ClinicalDocument (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdadocumentlevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.815" name="CDADeviceSDTC" displayName="CDA Device SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA Device (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA Device (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA Device (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.802" name="CDAEncounterSDTC" displayName="CDA Encounter SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA Encounter (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA Encounter (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA Encounter (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.825" name="CDAExternalActSDTC" displayName="CDA ExternalAct SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA ExternalAct (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA ExternalAct (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA ExternalAct (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.828" name="CDAExternalDocumentSDTC" displayName="CDA ExternalDocument SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA ExternalDocument (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA ExternalDocument (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA ExternalDocument (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.826" name="CDAExternalObservationSDTC" displayName="CDA ExternalObservation SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA ExternalObservation (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA ExternalObservation (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA ExternalObservation (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.827" name="CDAExternalProcedureSDTC" displayName="CDA ExternalProcedure SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA ExternalProcedure (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA ExternalProcedure (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA ExternalProcedure (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.819" name="CDAinformantBodySDTC" displayName="CDA Informant (Body) SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA Informant Body (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA Informant Body (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA Informant Body (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.654" name="CDAinformantSDTC" displayName="CDA Informant SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA Informant (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA Informant (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA Informant (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdasectionlevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.810" name="CDALabeledDrugSDTC" displayName="CDA LabeledDrug SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA LabeledDrug (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA LabeledDrug (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA LabeledDrug (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.812" name="CDAManufacturedProductSDTC" displayName="CDA ManufacturedProduct SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA ManufacturedProduct (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA ManufacturedProduct (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA ManufacturedProduct (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.811" name="CDAMaterialSDTC" displayName="CDA Material SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA Material (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA Material (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA Material (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.703" name="CDANonXMLBodySDTC" displayName="CDA NonXMLBody SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA NonXMLBody (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA NonXMLBody (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA NonXMLBody (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdasectionlevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.803" name="CDAObservationSDTC" displayName="CDA Observation SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA Observation (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA Observation (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA Observation (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.804" name="CDAObservationMediaSDTC" displayName="CDA ObservationMedia SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA ObservationMedia (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA ObservationMedia (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA ObservationMedia (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.651" name="CDAOrganizationSDTC" displayName="CDA Organization SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA Organization (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA Organization (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA Organization (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.805" name="CDAOrganizerSDTC" displayName="CDA Organizer SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA Organizer (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA Organizer (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA Organizer (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.821" name="CDAParticipantBodySDTC" displayName="CDA Participant (Body) SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA Participant (Body) (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA Participant (Body) (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA Participant (Body) (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.823" name="CDAPerformerBodySDTC" displayName="CDA Performer (Body) SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA Performer (Body) (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA Performer (Body) (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA Performer (Body) (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.652" name="CDAPersonSDTC" displayName="CDA Person SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA Person (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA Person (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA Person (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.817" name="CDAPlaceSDTC" displayName="CDA Place SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA Place (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA Place (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA Place (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.813" name="CDAPlayingEntitySDTC" displayName="CDA PlayingEntity SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA PlayingEntity (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA PlayingEntity (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA PlayingEntity (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.829" name="CDAPreconditionSDTC" displayName="CDA Precondition SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA Precondition (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA Precondition (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA Precondition (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.806" name="CDAProcedureSDTC" displayName="CDA Procedure SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA Procedure (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA Procedure (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA Procedure (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.824" name="CDAReferenceSDTC" displayName="CDA Reference SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA Reference (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA Reference (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA Reference (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.807" name="CDARegionOfInterestSDTC" displayName="CDA RegionOfInterest SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA RegionOfInterest (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA RegionOfInterest (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA RegionOfInterest (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.816" name="CDARelatedEntitySDTC" displayName="CDA RelatedEntity SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA RelatedEntity (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA RelatedEntity (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA RelatedEntity (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.701" name="CDASectionSDTC" displayName="CDA Section SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA Section (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA Section (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA Section (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdasectionlevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.822" name="CDASpecimenSDTC" displayName="CDA Specimen SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA Specimen (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA Specimen (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA Specimen (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.702" name="CDAStructuredBodySDTC" displayName="CDA StructuredBody SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA StructuredBody (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA StructuredBody (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA StructuredBody (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdasectionlevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.820" name="CDASubjectBodySDTC" displayName="CDA Subject (Body) SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA Subject Body (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA Subject Body (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA Subject Body (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.808" name="CDASubstanceAdministrationSDTC" displayName="CDA SubstanceAdministration SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA SubstanceAdministration (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA SubstanceAdministration (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA SubstanceAdministration (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.809" name="CDASupplySDTC" displayName="CDA Supply SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA Supply (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA Supply (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA Supply (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaentrylevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.400" name="CDAXtraElement" displayName="CDA Xtra Element" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA Prototype for extra elements, e.g. in foreign namespace, please change namespace and element name accordingly</desc>
+        <desc language="nl-NL">Template CDA Prototype voor extra elementen, bijvoorbeeld in foreign namespace, graag namespace en elementnaam wijzigingen</desc>
+        <desc language="de-DE">Template CDA Prototype für Extra Elemente, z. B. in foreign namespace, bitte den Namespace und Elementnamen ändern</desc>
+    </template>
+    <template id="2.16.840.1.113883.10.12.607" name="CDAauthenticatorSDTC" displayName="CDA authenticator SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA authenticator (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA authenticator (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA authenticator (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.602" name="CDAauthorSDTC" displayName="CDA author SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA author (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA author (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA author (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.612" name="CDAcomponentSDTC" displayName="CDA component SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA component (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA component (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA component (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.613" name="CDAcomponentOfSDTC" displayName="CDA componentOf SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA componentOf (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA componentOf (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA componentOf (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.604" name="CDAcustodianSDTC" displayName="CDA custodian SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA custodian (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA custodian (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA custodian (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.603" name="CDAdataEntererSDTC" displayName="CDA dataEnterer SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA dataEnterer (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA dataEnterer (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA dataEnterer (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.610" name="CDAdocumentationOfSDTC" displayName="CDA documentationOf SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA documentationOf (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA documentationOf (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA documentationOf (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.609" name="CDAinFulfillmentOfSDTC" displayName="CDA inFulfillmentOf SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA inFulfillmentOf (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA inFulfillmentOf (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA inFulfillmentOf (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.605" name="CDAinformationRecipientSDTC" displayName="CDA informationRecipient SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA informationRecipient (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA informationRecipient (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA informationRecipient (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.606" name="CDAlegalAuthenticatorSDTC" displayName="CDA legalAuthenticator SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA legalAuthenticator (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA legalAuthenticator (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA legalAuthenticator (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.608" name="CDAparticipantSDTC" displayName="CDA participant SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA participant (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA participant (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA participant (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.601" name="CDArecordTargetSDTC" displayName="CDA recordTarget SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA recordTarget (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA recordTarget (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA recordTarget (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.611" name="CDArelatedDocumentSDTC" displayName="CDA relatedDocument SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA relatedDocument (prototype, directly derived from POCD_RM000040 MIF) + SDTC extensions</desc>
+        <desc language="nl-NL">Template CDA relatedDocument (prototype, direct afgeleid uit POCD_RM000040 MIF) + SDTC extensies</desc>
+        <desc language="de-DE">Template CDA relatedDocument (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
+        <classification type="cdaheaderlevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.1000" name="HL7CDAR2BasicRequirements" displayName="HL7 CDA R2 Basic Requirements" statusCode="draft" effectiveDate="2014-04-14T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Additional co-constraints for HL7 CDA R2 based on a paper by Abderrazek Boufahja from the Gazelle team/IHE-Europe on April 14, 2014</desc>
+        <desc language="nl-NL">Aanvullende co-constraints voor HL7 CDA R2 gebaseerd op een paper door Abderrazek Boufahja van het Gazelle team/IHE-Europe dd. 14 april 2014</desc>
+        <desc language="de-DE">Additional co-constraints for HL7 CDA R2 based on a paper by Abderrazek Boufahja from the Gazelle team/IHE-Europe on April 14, 2014</desc>
+    </template>
+    <template id="2.16.840.1.113883.10.12.901" name="SDTCinFulfillmentOf1" displayName="SDTC inFulfillmentOf1" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template SDTC Prototype for inFulfillmentOf1 from the SDTC.xsd schema</desc>
+        <desc language="nl-NL">Template SDTC Prototype voor inFulfillmentOf1 uit het SDTC.xsd schema</desc>
+        <desc language="de-DE">Template SDTC Prototype für inFulfillmentOf1 von das SDTC.xsd Schema</desc>
+    </template>
+    <template id="2.16.840.1.113883.10.12.902" name="SDTCpatient" displayName="SDTCpatient" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template SDTC Prototype for patient from the SDTC.xsd schema</desc>
+        <desc language="nl-NL">Template SDTC Prototype voor patient uit het SDTC.xsd schema</desc>
+        <desc language="de-DE">Template SDTC Prototype für patient von das SDTC.xsd Schema</desc>
+    </template>
+</return>

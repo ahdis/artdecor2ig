@@ -9,6 +9,9 @@
   <xsl:param name="projectUriChEpr" required="yes"/>
   <xsl:param name="canonicalBase" required="yes"/>  <!-- location of project.xml (actually also as input to this xml ...) -->
   <xsl:param name="language" required="yes"/>  <!-- e.g en_US ...) -->
+  <xsl:param name="decorservice" as="xs:string" />
+  <xsl:param name="canonicalCda" as="xs:string" />
+  <xsl:param name="removePrefix" as="xs:string"  />
 
   <xsl:import href="functions.xsl"/>
 
@@ -23,6 +26,7 @@
 
       <xsl:message select="current-grouping-key(),' ',current-group()[1]/@name"/>
 
+
       <xsl:choose>
         <xsl:when test="$skipId/return/template[@id=current-grouping-key()]">
           <xsl:message select="'.. skippping because in projectskip.xml'"/>
@@ -32,8 +36,8 @@
           <xsl:variable name="templateResolvedRecursive" select="document($pathoutput)"/>
 
           <xsl:choose>
-            <xsl:when test="count($templateResolvedRecursive/return/template/template/element)=1">
-              <xsl:variable name="pathresources" select="concat('../',$prefix,'/resources/',ahdis:idFromArtDecorTemplate(current-group()[1]/@name),'.xml')"/>
+            <xsl:when test="$templateResolvedRecursive/return/template/template">
+              <xsl:variable name="pathresources" select="concat('../',$prefix,'/resources/',ahdis:idFromArtDecorTemplate(current-group()[1]/@name,$removePrefix),'.xml')"/>
               <xsl:message select="'.. generate logical model with name in ',$pathresources"/>
               <xsl:value-of select="$ig"/>
               <xsl:value-of select="current-group()[1]/@name"/>

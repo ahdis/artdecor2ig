@@ -3,6 +3,8 @@
   <xsl:output method="xml" indent="yes"/>
   <xsl:param name="prefix" required="yes"/>
   <xsl:param name="inContains" as="xs:boolean" required="yes"/>
+  <xsl:param name="decorservice" as="xs:string"/>
+  <xsl:param name="removePrefix" as="xs:string"/>
 
   <xsl:import href="functions.xsl"/>
 
@@ -11,12 +13,11 @@
     <xsl:param name="ref" as="xs:string" required="yes"/>
     <xsl:param name="inContains" as="xs:boolean" required="yes"/>
 <!--     <xsl:message select="'.. include catched ', @ref"/> -->
-    <xsl:variable name="file" select="concat('http://art-decor.org/decor/services/RetrieveTemplate?format=xml&amp;prefix=',$prefix,'&amp;id=',@ref,'&amp;effectiveDate=dynamic')"/>
+    <xsl:variable name="file" select="concat($decorservice,'/RetrieveTemplate?format=xml&amp;prefix=',$prefix,'&amp;id=',@ref,'&amp;effectiveDate=dynamic')"/>
     <xsl:variable name="incltemplate" select="document($file)/return/template/template/element|document($file)/return/template/template/include"/>
     <xsl:apply-templates select="$incltemplate" mode="include">
       <xsl:with-param name="ref" select="@ref"/>
       <xsl:with-param name="inContains" select="$inContains"/>
-
     </xsl:apply-templates>
   </xsl:template>
 
@@ -25,19 +26,29 @@
     <xsl:param name="inContains" as="xs:boolean" required="yes"/>
 <!--     <xsl:message select="'.. element catched in mode include ', $ref"/> -->
     <element>
-      <xsl:attribute name="ref"><xsl:value-of select="$ref"/></xsl:attribute>
+      <xsl:if test="string-length($ref)>0">
+        <xsl:attribute name="ref"><xsl:value-of select="$ref"/></xsl:attribute>
+      </xsl:if>
+      <xsl:if test="$removePrefix='CDA' and @name='hl7:assignedEntity' and count(include)=1">
+        <xsl:attribute name="ref"><xsl:value-of select="include/@ref"/></xsl:attribute>
+      </xsl:if>
       <xsl:if test="@name">
         <xsl:attribute name="name"><xsl:value-of select="ahdis:skipxpath(@name)"/></xsl:attribute>
       </xsl:if>
       <xsl:if test="@datatype">
         <xsl:attribute name="datatype"><xsl:value-of select="@datatype"/></xsl:attribute>
+        <!-- fix artdecor addbr1 template definition-->
       </xsl:if>
-      <xsl:if test="@minimumMultiplicity">
-        <xsl:attribute name="minimumMultiplicity"><xsl:value-of select="@minimumMultiplicity"/></xsl:attribute>
-      </xsl:if>
-      <xsl:if test="@maximumMultiplicity">
-        <xsl:attribute name="maximumMultiplicity"><xsl:value-of select="@maximumMultiplicity"/></xsl:attribute>
-      </xsl:if>
+      <xsl:choose>
+        <xsl:when test="starts-with(@name,'hl7:templateId') and $removePrefix='CDA'">
+          <xsl:attribute name="minimumMultiplicity"><xsl:value-of select="'0'"/></xsl:attribute>
+          <xsl:attribute name="maximumMultiplicity"><xsl:value-of select="'*'"/></xsl:attribute>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:attribute name="minimumMultiplicity"><xsl:value-of select="if (@minimumMultiplicity) then (@minimumMultiplicity) else ('0')"/></xsl:attribute>
+          <xsl:attribute name="maximumMultiplicity"><xsl:value-of select="if (@maximumMultiplicity) then (@maximumMultiplicity) else ('1')"/></xsl:attribute>
+        </xsl:otherwise>
+      </xsl:choose>
       <xsl:if test="@conformance">
         <xsl:attribute name="conformance"><xsl:value-of select="@conformance"/></xsl:attribute>
       </xsl:if>
@@ -50,15 +61,16 @@
       <xsl:if test="@contains">
         <xsl:attribute name="contains"><xsl:value-of select="@contains"/></xsl:attribute>
       </xsl:if>
-      <xsl:apply-templates mode="include">
-        <xsl:with-param name="ref" select="$ref"/>
-        <xsl:with-param name="inContains" select="$inContains"/>
-
-      </xsl:apply-templates>
+      <xsl:if test="not(starts-with(@name,'hl7:templateId') and $removePrefix='CDA') and not($removePrefix='CDA' and @name='hl7:assignedEntity' and count(include)=1)">
+        <xsl:apply-templates mode="include">
+          <xsl:with-param name="ref" select="''"/>
+          <xsl:with-param name="inContains" select="$inContains"/>
+        </xsl:apply-templates>
+      </xsl:if>
       <xsl:if test="string-length(@contains)>0 and $inContains=false()">
         <xsl:message select="'.. attribute @contains catched in mode include ', @contains"/>
         <contains>
-          <xsl:variable name="file" select="concat('http://art-decor.org/decor/services/RetrieveTemplate?format=xml&amp;prefix=',$prefix,'&amp;id=',@contains,'&amp;effectiveDate=dynamic')"/>
+          <xsl:variable name="file" select="concat($decorservice,'/RetrieveTemplate?format=xml&amp;prefix=',$prefix,'&amp;id=',@contains,'&amp;effectiveDate=dynamic')"/>
           <xsl:variable name="incltemplate" select="document($file)/return/template/template/element|document($file)/return/template/template/include"/>
           <xsl:apply-templates select="$incltemplate" mode="include">
             <xsl:with-param name="ref" select="@contains"/>

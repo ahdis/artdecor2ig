@@ -24,7 +24,9 @@
 
   <xsl:function name="ahdis:idFromArtDecorTemplate" as="xs:string">
     <xsl:param name="input" as="xs:string"/>
-    <xsl:sequence select="ahdis:camelCaseSpaces(replace($input,'\s+|\.|-|_',' '))"/>
+    <xsl:param name="removePrefix" as="xs:string"/>
+    <xsl:variable name="name" select="if (string-length($removePrefix)>0 and starts-with($input,$removePrefix)) then (ahdis:firstLetterUpperCase(substring-after($input, $removePrefix))) else ($input)"/>    
+    <xsl:sequence select="ahdis:camelCaseSpaces(replace($name,'\s+|\.|-|_',' '))"/>
   </xsl:function>
 
   <xsl:function name="ahdis:cleanwhitespaceshort" as="xs:string">
@@ -55,7 +57,7 @@
     <xsl:param name="project" />
     <xsl:variable name="templates" select="$project//return/template[@id=$oid or @ref=$oid][1]/@name"/>
     <xsl:sequence>
-      <xsl:value-of select="if ($templates) then (ahdis:idFromArtDecorTemplate($templates)) else ('')"/>
+      <xsl:value-of select="if ($templates) then (ahdis:idFromArtDecorTemplate($templates,$removePrefix)) else ('')"/>
     </xsl:sequence>
   </xsl:function>
 
