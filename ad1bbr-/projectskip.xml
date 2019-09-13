@@ -35,10 +35,22 @@
         <desc language="de-DE">Template CDA Clinical Statement (Prototyp, direkt abgeleitet aus POCD_RM000040 MIF) + SDTC Extensions</desc>
         <classification type="cdaentrylevel"></classification>
     </template>
+    <template id="2.16.840.1.113883.10.12.2" name="CDAClinicalDocumentStructuredBody" displayName="CDA ClinicalDocument (with StructuredBody)" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA ClinicalDocument (prototype, contains ClinicalDocument.component as StructuredBody)</desc>
+        <desc language="nl-NL">Template CDA ClinicalDocument (prototype, contains ClinicalDocument.component as StructuredBody)</desc>
+        <desc language="de-DE">Template CDA ClinicalDocument (prototype, contains ClinicalDocument.component as StructuredBody)</desc>
+        <classification type="cdadocumentlevel"></classification>
+    </template>
     <template id="2.16.840.1.113883.10.12.502" name="CDAClinicalDocumentStructuredBodySDTC" displayName="CDA ClinicalDocument (with StructuredBody) SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
         <desc language="en-US">Template CDA ClinicalDocument (prototype, contains ClinicalDocument.component as StructuredBody)</desc>
         <desc language="nl-NL">Template CDA ClinicalDocument (prototype, contains ClinicalDocument.component as StructuredBody)</desc>
         <desc language="de-DE">Template CDA ClinicalDocument (prototype, contains ClinicalDocument.component as StructuredBody) + SDTC Extensions</desc>
+        <classification type="cdadocumentlevel"></classification>
+    </template>
+    <template id="2.16.840.1.113883.10.12.3" name="CDAClinicalDocumentnonXMLBody" displayName="CDA ClinicalDocument (with nonXMLBody)" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">
+        <desc language="en-US">Template CDA ClinicalDocument (prototype, contains ClinicalDocument.component as nonXMLBody)</desc>
+        <desc language="nl-NL">Template CDA ClinicalDocument (prototype, contains ClinicalDocument.component as nonXMLBody)</desc>
+        <desc language="de-DE">Template CDA ClinicalDocument (prototype, contains ClinicalDocument.component as nonXMLBody)</desc>
         <classification type="cdadocumentlevel"></classification>
     </template>
     <template id="2.16.840.1.113883.10.12.503" name="CDAClinicalDocumentnonXMLBodySDTC" displayName="CDA ClinicalDocument (with nonXMLBody) SDTC" statusCode="active" effectiveDate="2005-09-07T00:00:00" url="http://art-decor.org/decor/services/" ident="ad1bbr-">

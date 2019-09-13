@@ -25,6 +25,11 @@
     <xsl:param name="ref" as="xs:string" required="yes"/>
     <xsl:param name="inContains" as="xs:boolean" required="yes"/>
 <!--     <xsl:message select="'.. element catched in mode include ', $ref"/> -->
+
+    <xsl:if test="$removePrefix='CDA' and @name='hl7:patientRole'">
+      <!-- recordTarget has no tempateId -->
+    </xsl:if>
+
     <element>
       <xsl:if test="string-length($ref)>0">
         <xsl:attribute name="ref"><xsl:value-of select="$ref"/></xsl:attribute>
@@ -67,11 +72,11 @@
           <xsl:with-param name="inContains" select="$inContains"/>
         </xsl:apply-templates>
       </xsl:if>
-      <xsl:if test="string-length(@contains)>0 and $inContains=false()">
+      <xsl:if test="string-length(@contains)>0 and ($inContains=false())">
         <xsl:message select="'.. attribute @contains catched in mode include ', @contains"/>
         <contains>
           <xsl:variable name="file" select="concat($decorservice,'/RetrieveTemplate?format=xml&amp;prefix=',$prefix,'&amp;id=',@contains,'&amp;effectiveDate=dynamic')"/>
-          <xsl:variable name="incltemplate" select="document($file)/return/template/template/element|document($file)/return/template/template/include"/>
+          <xsl:variable name="incltemplate" select="document($file)/return/template/template/element|document($file)/return/template/template/include|document($file)/return/template/template/choice"/>
           <xsl:apply-templates select="$incltemplate" mode="include">
             <xsl:with-param name="ref" select="@contains"/>
             <xsl:with-param name="inContains" select="true()"/>
