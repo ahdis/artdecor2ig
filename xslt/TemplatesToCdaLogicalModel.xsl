@@ -239,45 +239,51 @@ Open Issues
     <xsl:param name="parentid" as="xs:string" required="yes"/>
     <xsl:param name="isSlice" as="xs:boolean" required="yes"/>
     <xsl:param name="parentpath" as="xs:string" required="yes"/>
+    <xsl:param name="isHeader" as="xs:boolean" required="yes"/>
+    <xsl:param name="force" as="xs:boolean" required="yes"/>
 
+    <xsl:if test="$debug">
+      <xsl:message select="'.. attribute parendid ',$parentid,' isSlice ',$isSlice,' parentpath',$parentpath,' isHeader: ',$isHeader"/>
+      <xsl:comment select="'.. attribute parendid ',$parentid,' isSlice ',$isSlice,' parentpath',$parentpath,' isHeader: ',$isHeader"/>
+    </xsl:if>
 
-    <fhir:element>
-      <xsl:call-template name="elementIdPath">
-        <xsl:with-param name="id" select="ahdis:id($parentid,false(),'',@name)"/>
-        <xsl:with-param name="path" select="ahdis:path($parentpath,@name)"/>
-      </xsl:call-template>
-      <xsl:if test="ahdis:isBaseModel()">
+<!--     <xsl:if test="$isHeader">  -->
+
+    <xsl:if test="$force or not(exists(../../template))">
+      <fhir:element>
+        <xsl:call-template name="elementIdPath">
+          <xsl:with-param name="id" select="ahdis:id($parentid,false(),'',@name)"/>
+          <xsl:with-param name="path" select="ahdis:path($parentpath,@name)"/>
+        </xsl:call-template>
         <fhir:representation value="xmlAttr"/>
-      </xsl:if>
-      <xsl:if test="desc[@language=$language] and string-length(desc[@language=$language])>0">
-        <fhir:short>
-          <xsl:attribute name="value"><xsl:value-of select="ahdis:cleanwhitespaceshort(desc[@language=$language])"/></xsl:attribute>
-        </fhir:short>
-        <fhir:definition>
-          <xsl:attribute name="value"><xsl:value-of select="ahdis:cleanwhitespace(desc[@language=$language])"/></xsl:attribute>
-        </fhir:definition>
-      </xsl:if>
-      <xsl:choose>
-        <xsl:when test="@prohibited='true'">
-          <fhir:min value="0"/>
-          <fhir:max value="0"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <fhir:min value="0"/>
-          <fhir:max value="1"/>
-        </xsl:otherwise>
-      </xsl:choose>
-      <xsl:if test="ahdis:isBaseModel()">
+        <xsl:if test="desc[@language=$language] and string-length(desc[@language=$language])>0">
+          <fhir:short>
+            <xsl:attribute name="value"><xsl:value-of select="ahdis:cleanwhitespaceshort(desc[@language=$language])"/></xsl:attribute>
+          </fhir:short>
+          <fhir:definition>
+            <xsl:attribute name="value"><xsl:value-of select="ahdis:cleanwhitespace(desc[@language=$language])"/></xsl:attribute>
+          </fhir:definition>
+        </xsl:if>
+        <xsl:choose>
+          <xsl:when test="@prohibited='true'">
+            <fhir:min value="0"/>
+            <fhir:max value="0"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <fhir:min value="0"/>
+            <fhir:max value="1"/>
+          </xsl:otherwise>
+        </xsl:choose>
         <fhir:type>
           <fhir:code value="code"/>
         </fhir:type>
-      </xsl:if>
-      <xsl:if test="@value and string-length(@value)>0">
-        <fhir:fixedString>
-          <xsl:attribute name="value"><xsl:value-of select="@value"/></xsl:attribute>
-        </fhir:fixedString>
-      </xsl:if>
-    </fhir:element>
+        <xsl:if test="@value and string-length(@value)>0">
+          <fhir:fixedString>
+            <xsl:attribute name="value"><xsl:value-of select="@value"/></xsl:attribute>
+          </fhir:fixedString>
+        </xsl:if>
+      </fhir:element>
+    </xsl:if>
   </xsl:template>
 
   <xsl:template match="element" mode="its">
@@ -286,6 +292,8 @@ Open Issues
     <xsl:param name="parentid" as="xs:string" required="yes"/>
     <xsl:param name="parentpath" as="xs:string" required="yes"/>
     <xsl:param name="isSlice" as="xs:boolean" required="yes"/>
+    <xsl:param name="isHeader" as="xs:boolean" required="yes"/>
+    <xsl:param name="force" as="xs:boolean" required="yes"/>
 
     <xsl:variable name="differentialchildelement" as="xs:string" select="ahdis:skipns(@name)"/>
     <xsl:variable name="Differentialchildelement" as="xs:string" select="ahdis:typefortemplate('',ahdis:firstLetterUpperCase($differentialchildelement))"/>
@@ -339,51 +347,55 @@ Open Issues
     <xsl:variable name="referstocontainedtemplate" select="string-length($parentid)>0 and @contains and $containedoids and ahdis:hasoneprofilefortemplate($containedoids,$project)"/>
 
     <xsl:if test="$debug">
-      <xsl:message select="'.. element: ',$id,' ref: ',$ref,' referstoelement:',$referstoelement,' contains: ',$contains, ' oids: ',$oids, ' referstotemplate:',$referstotemplate,' containedoids: ',$containedoids, ' referstocontainedtemplate:', $referstocontainedtemplate"/>
+      <xsl:message select="'.. element: ',$id,' ref: ',$ref,' referstoelement:',$referstoelement,' contains: ',$contains, ' oids: ',$oids, ' referstotemplate:',$referstotemplate,' containedoids: ',$containedoids, ' referstocontainedtemplate:', $referstocontainedtemplate, ' isHeader ',$isHeader, ' attributes ', count(attribute)"/>
+      <xsl:comment select="'.. element: ',$id,' ref: ',$ref,' referstoelement:',$referstoelement,' contains: ',$contains, ' oids: ',$oids, ' referstotemplate:',$referstotemplate,' containedoids: ',$containedoids, ' referstocontainedtemplate:', $referstocontainedtemplate, ' isHeader ',$isHeader, ' attributes ', count(attribute)"/>
     </xsl:if>
 
-    <xsl:if test="$iscomponentchoiceelement">
+    <xsl:if test="$isHeader">
+
+
+
+      <xsl:if test="$iscomponentchoiceelement">
       <!-- <xsl:message select="'.. iscompomentchoiceelement'"/> -->
+        <fhir:element>
+          <xsl:call-template name="elementIdPathDescSlice">
+            <xsl:with-param name="itselement" select="."/>
+            <xsl:with-param name="id" select="ahdis:id($parentid,$isSlice,$slicename,'')"/>
+            <xsl:with-param name="path" select="$parentpath"/>
+            <xsl:with-param name="sliceName" select="if ($isSlice) then ($slicename) else ('')"/>
+          </xsl:call-template>
+        </fhir:element>
+      </xsl:if>
+
+
+
       <fhir:element>
+
         <xsl:call-template name="elementIdPathDescSlice">
           <xsl:with-param name="itselement" select="."/>
-          <xsl:with-param name="id" select="ahdis:id($parentid,$isSlice,$slicename,'')"/>
-          <xsl:with-param name="path" select="$parentpath"/>
-          <xsl:with-param name="sliceName" select="if ($isSlice) then ($slicename) else ('')"/>
+          <xsl:with-param name="id" select="$id"/>
+          <xsl:with-param name="path" select="$path"/>
+          <xsl:with-param name="sliceName" select="if ($isSlice and not($iscomponentchoiceelement)) then ($slicename) else ('')"/>
         </xsl:call-template>
-      </fhir:element>
-    </xsl:if>
 
+        <xsl:if test="@datatype='SD.TEXT'">
+          <fhir:representation value="cdaText"/>
+        </xsl:if>
 
+        <xsl:call-template name="elementMinMax">
+          <xsl:with-param name="itselement" select="."/>
+        </xsl:call-template>
 
-    <fhir:element>
+        <xsl:if test="$iscomponentchoiceslice and not(ahdis:isBaseModel())">
+          <fhir:slicing>
+            <fhir:discriminator>
+              <fhir:type value="value"/>
+              <fhir:path value="section.code.code"/>
+            </fhir:discriminator>
+            <rules value="open"/>
+          </fhir:slicing>
+        </xsl:if>
 
-      <xsl:call-template name="elementIdPathDescSlice">
-        <xsl:with-param name="itselement" select="."/>
-        <xsl:with-param name="id" select="$id"/>
-        <xsl:with-param name="path" select="$path"/>
-        <xsl:with-param name="sliceName" select="if ($isSlice and not($iscomponentchoiceelement)) then ($slicename) else ('')"/>
-      </xsl:call-template>
-
-      <xsl:if test="ahdis:isBaseModel() and @datatype='SD.TEXT'">
-        <fhir:representation value="cdaText"/>
-      </xsl:if>
-
-      <xsl:call-template name="elementMinMax">
-        <xsl:with-param name="itselement" select="."/>
-      </xsl:call-template>
-
-      <xsl:if test="$iscomponentchoiceslice and not(ahdis:isBaseModel())">
-        <fhir:slicing>
-          <fhir:discriminator>
-            <fhir:type value="value"/>
-            <fhir:path value="section.code.code"/>
-          </fhir:discriminator>
-          <rules value="open"/>
-        </fhir:slicing>
-      </xsl:if>
-
-      <xsl:if test="ahdis:isBaseModel()">
         <xsl:if test="@datatype">
 
           <xsl:choose>
@@ -423,6 +435,7 @@ Open Issues
               </fhir:type>
             </xsl:otherwise>
           </xsl:choose>
+
         </xsl:if>
 
         <xsl:if test="$referstoelement and string-length(@datatype)=0 and not($contains and count(attribute)=0)">
@@ -436,6 +449,8 @@ Open Issues
           </fhir:type>
         </xsl:if>
 
+        <xsl:message select="'$contains and count(attribute)=0',$contains and count(attribute)=0"/>
+
         <xsl:if test="$contains and count(attribute)=0">
           <fhir:type>
             <fhir:code>
@@ -447,40 +462,39 @@ Open Issues
           </fhir:type>
         </xsl:if>
 
-      </xsl:if>
 
-      <xsl:if test="$referstotemplate">
-        <fhir:type>
-          <fhir:code>
-            <xsl:attribute name="value"><xsl:value-of select="concat($canonicalCda,'/StructureDefinition/',$Differentialchildelement)"/></xsl:attribute>
-          </fhir:code>
-          <xsl:for-each select="$oids">
-            <xsl:if test="string-length(ahdis:profilefortemplate(.,$project))>0">
-              <fhir:profile>
-                <xsl:attribute name="value"><xsl:value-of select="$canonicalBase"/>/StructureDefinition/<xsl:value-of select="ahdis:profilefortemplate(.,$project)"/></xsl:attribute>
-              </fhir:profile>
-            </xsl:if>
-          </xsl:for-each>
-        </fhir:type>
-      </xsl:if>
+        <xsl:if test="$referstotemplate">
+          <fhir:type>
+            <fhir:code>
+              <xsl:attribute name="value"><xsl:value-of select="concat($canonicalCda,'/StructureDefinition/',$Differentialchildelement)"/></xsl:attribute>
+            </fhir:code>
+            <xsl:for-each select="$oids">
+              <xsl:if test="string-length(ahdis:profilefortemplate(.,$project))>0">
+                <fhir:profile>
+                  <xsl:attribute name="value"><xsl:value-of select="$canonicalBase"/>/StructureDefinition/<xsl:value-of select="ahdis:profilefortemplate(.,$project)"/></xsl:attribute>
+                </fhir:profile>
+              </xsl:if>
+            </xsl:for-each>
+          </fhir:type>
+        </xsl:if>
 
-      <xsl:if test="@name='hl7:entryRelationship' and $referstocontainedtemplate">
-        <fhir:type>
-          <fhir:code>
-            <xsl:attribute name="value"><xsl:value-of select="concat($canonicalCda,'/StructureDefinition/',$Differentialchildelement)"/></xsl:attribute>
-          </fhir:code>
-          <xsl:for-each select="$containedoids">
-            <xsl:if test="string-length(ahdis:profilefortemplate(.,$project))>0">
-              <xsl:variable name="profile" select="concat('ER',ahdis:profilefortemplate(.,$project))"/>
-              <fhir:profile>
-                <xsl:attribute name="value"><xsl:value-of select="$canonicalBase"/>/StructureDefinition/<xsl:value-of select="$profile"/></xsl:attribute>
-              </fhir:profile>
-            </xsl:if>
-          </xsl:for-each>
-        </fhir:type>
-      </xsl:if>
+        <xsl:if test="@name='hl7:entryRelationship' and $referstocontainedtemplate">
+          <fhir:type>
+            <fhir:code>
+              <xsl:attribute name="value"><xsl:value-of select="concat($canonicalCda,'/StructureDefinition/',$Differentialchildelement)"/></xsl:attribute>
+            </fhir:code>
+            <xsl:for-each select="$containedoids">
+              <xsl:if test="string-length(ahdis:profilefortemplate(.,$project))>0">
+                <xsl:variable name="profile" select="concat('ER',ahdis:profilefortemplate(.,$project))"/>
+                <fhir:profile>
+                  <xsl:attribute name="value"><xsl:value-of select="$canonicalBase"/>/StructureDefinition/<xsl:value-of select="$profile"/></xsl:attribute>
+                </fhir:profile>
+              </xsl:if>
+            </xsl:for-each>
+          </fhir:type>
+        </xsl:if>
 
-
+<!-- 
       <xsl:if test="not(ahdis:isBaseModel()) and @name='hl7:value' and string-length(@datatype)>0">
         <fhir:type>
           <fhir:code>
@@ -491,66 +505,77 @@ Open Issues
           </fhir:profile>
         </fhir:type>
       </xsl:if>
-      
-      <xsl:if test="count(choice)>0">
-        <xsl:apply-templates select="." mode="choice"/>
-      </xsl:if>
+ -->
 
-      <xsl:if test="count(contains/choice)>0">
-        <xsl:apply-templates select="contains" mode="choice"/>
-      </xsl:if>
+        <xsl:if test="count(choice)>0">
+          <xsl:apply-templates select="." mode="choice"/>
+        </xsl:if>
+
+        <xsl:if test="count(contains/choice)>0">
+          <xsl:apply-templates select="contains" mode="choice"/>
+        </xsl:if>
         
       <!--  <vocabulary valueSet="2.16.756.5.30.1.127.3.10.1.5"/>  -->
-      <xsl:if test="count(vocabulary/@valueSet)=1">
-        <xsl:choose>
-          <xsl:when test="string-length(ahdis:valuesetoidtouri(vocabulary/@valueSet))>0">
-            <fhir:binding>
-              <fhir:strength value="preferred"/> <!-- TODO: can we specific somehow which binding strenght? -->
-              <fhir:valueSet>
-                <xsl:attribute name="value"><xsl:value-of select="ahdis:valuesetoidtouri(vocabulary/@valueSet)"/></xsl:attribute>
-              </fhir:valueSet>
-            </fhir:binding>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:message select="' .. Warning: No corresponding FHIR ValueSet found for ', vocabulary/@valueSet"/>
-            <xsl:comment select="' .. Warning: No corresponding FHIR ValueSet found for ', vocabulary/@valueSet"/>
-          </xsl:otherwise>
-        </xsl:choose>
-      </xsl:if>
-      <xsl:if test="count(vocabulary/@valueSet)>1">
-        <xsl:message select="' .. Warning: No support yet for multiple ValueSets ', vocabulary/@valueSet"/>
-        <xsl:comment select="' .. Warning: No support yet for multiple ValueSets ', vocabulary/@valueSet"/>
-      </xsl:if>
+        <xsl:if test="count(vocabulary/@valueSet)=1">
+          <xsl:choose>
+            <xsl:when test="string-length(ahdis:valuesetoidtouri(vocabulary/@valueSet))>0">
+              <fhir:binding>
+                <fhir:strength value="preferred"/> <!-- TODO: can we specific somehow which binding strenght? -->
+                <fhir:valueSet>
+                  <xsl:attribute name="value"><xsl:value-of select="ahdis:valuesetoidtouri(vocabulary/@valueSet)"/></xsl:attribute>
+                </fhir:valueSet>
+              </fhir:binding>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:message select="' .. Warning: No corresponding FHIR ValueSet found for ', vocabulary/@valueSet"/>
+              <xsl:comment select="' .. Warning: No corresponding FHIR ValueSet found for ', vocabulary/@valueSet"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:if>
+        <xsl:if test="count(vocabulary/@valueSet)>1">
+          <xsl:message select="' .. Warning: No support yet for multiple ValueSets ', vocabulary/@valueSet"/>
+          <xsl:comment select="' .. Warning: No support yet for multiple ValueSets ', vocabulary/@valueSet"/>
+        </xsl:if>
 
-    </fhir:element>
+      </fhir:element>
 
 <!--    <xsl:if test="not($referstotemplate) and not($referstoelement) and not($contains)"> -->
-    <xsl:if test="not($referstotemplate) and not($referstoelement)">
+      <xsl:if test="not($referstotemplate) and not($referstoelement)">
 
-      <xsl:apply-templates select="attribute" mode="its">
-        <xsl:with-param name="parentid" select="$id"/>
-        <xsl:with-param name="parentpath" select="$path"/>
-        <xsl:with-param name="isSlice" select="false()"/>
-        <xsl:with-param name="slicename" select="''"/>
-      </xsl:apply-templates>
+        <xsl:if test="$isHeader">
+          <xsl:apply-templates select="attribute" mode="its">
+            <xsl:with-param name="parentid" select="$id"/>
+            <xsl:with-param name="parentpath" select="$path"/>
+            <xsl:with-param name="isSlice" select="false()"/>
+            <xsl:with-param name="slicename" select="''"/>
+            <xsl:with-param name="isHeader" select="false()"/>
+            <xsl:with-param name="force" select="false()"/>
+          </xsl:apply-templates>
 
-
-      <xsl:if test="count(vocabulary/@code)=1">
-        <fhir:element>
-          <xsl:call-template name="elementIdPath">
-            <xsl:with-param name="id" select="ahdis:id($id,false(),'','code')"/>
-            <xsl:with-param name="path" select="ahdis:path($path,'code')"/>
-          </xsl:call-template>
-          <fhir:min value="1"/>
-          <fhir:max value="1"/>
-          <fhir:fixedString>
-            <xsl:attribute name="value"><xsl:value-of select="vocabulary/@code"/></xsl:attribute>
-          </fhir:fixedString>
-        </fhir:element>
+          <xsl:if test="count(vocabulary/@code)=1">
+            <fhir:element>
+              <xsl:call-template name="elementIdPath">
+                <xsl:with-param name="id" select="ahdis:id($id,false(),'','code')"/>
+                <xsl:with-param name="path" select="ahdis:path($path,'code')"/>
+              </xsl:call-template>
+              <fhir:min value="1"/>
+              <fhir:max value="1"/>
+              <fhir:fixedString>
+                <xsl:attribute name="value"><xsl:value-of select="vocabulary/@code"/></xsl:attribute>
+              </fhir:fixedString>
+            </fhir:element>
+          </xsl:if>
+          <xsl:if test="count(vocabulary/@code)>1">
+            <xsl:message select="' .. Warning: No support yet for multiple codes ', vocabulary/@code"/>
+          </xsl:if>
+        </xsl:if>
       </xsl:if>
-      <xsl:if test="count(vocabulary/@code)>1">
-        <xsl:message select="' .. Warning: No support yet for multiple codes ', vocabulary/@code"/>
-      </xsl:if>
+
+    </xsl:if>
+
+
+    <xsl:if test="not($referstoelement)">
+
 
       <xsl:for-each-group select="element | choice/element | contains/element | contains/choice/element" group-adjacent="@name">
 
@@ -578,12 +603,16 @@ Open Issues
                   <xsl:with-param name="parentid" select="$id"/>
                   <xsl:with-param name="parentpath" select="$path"/>
                   <xsl:with-param name="isSlice" select="false()"/>
+                  <xsl:with-param name="isHeader" select="true()"/>
+                  <xsl:with-param name="force" select="false"/>
                 </xsl:apply-templates>
               </xsl:if>
               <xsl:apply-templates select="." mode="its">
                 <xsl:with-param name="parentid" select="$id"/>
                 <xsl:with-param name="parentpath" select="$path"/>
                 <xsl:with-param name="isSlice" select="$siblings>1"/>
+                <xsl:with-param name="isHeader" select="true()"/>
+                <xsl:with-param name="force" select="false()"/>
               </xsl:apply-templates>
             </xsl:for-each>
           </xsl:otherwise>
@@ -591,11 +620,10 @@ Open Issues
 
 
       </xsl:for-each-group>
+    </xsl:if>
 
 
-    </xsl:if> 
-      
-      <!--  end of complex -->
+
 
   </xsl:template>
   
@@ -795,7 +823,9 @@ Open Issues
         <xsl:variable name="fhirpathinner">
           <xsl:for-each select="element">
             <xsl:value-of select="ahdis:skipns(@name)"/>
-            <xsl:if test="position() != last()"><xsl:value-of select="' | '"/></xsl:if>
+            <xsl:if test="position() != last()">
+              <xsl:value-of select="' | '"/>
+            </xsl:if>
           </xsl:for-each>
         </xsl:variable>
         <fhir:expression>
@@ -814,6 +844,8 @@ Open Issues
                 we now when the too easy way for the firstw match :-(   -->
 
     <xsl:variable name="isHeader" as="xs:boolean" select="count(attribute)>0 or count(element)>1 or count(choice)>0"/>
+    
+    <!-- isHeader means a template with attributes, element or choice not a toplevel element -->
 
     <xsl:variable name="head" select="if ($isHeader) then (.) else (element)"/>
 
@@ -894,11 +926,14 @@ Open Issues
           </xsl:if>
         </fhir:element>
 
+
         <xsl:apply-templates select="$head/attribute" mode="its">
           <xsl:with-param name="parentid" select="$Differentialchildelement"/>
           <xsl:with-param name="parentpath" select="$Differentialchildelement"/>
           <xsl:with-param name="isSlice" select="false()"/>
           <xsl:with-param name="slicename" select="''"/>
+          <xsl:with-param name="isHeader" select="$isHeader"/>
+          <xsl:with-param name="force" select="true()"/>
         </xsl:apply-templates>
             
             
@@ -971,16 +1006,22 @@ Open Issues
                 <fhir:profile>
                   <xsl:attribute name="value"><xsl:value-of select="concat($canonicalCda,'/StructureDefinition/II')"/></xsl:attribute>
                 </fhir:profile>
+
               </fhir:type>
             </fhir:element>
           </xsl:if>
         </xsl:if>
 
-        <xsl:apply-templates select="$head/element | $head/choice/element" mode="its">
-          <xsl:with-param name="parentid" select="$Differentialchildelement"/>
-          <xsl:with-param name="parentpath" select="$Differentialchildelement"/>
+<!--  for base model we do not have to slice -->
+<!--         <xsl:apply-templates select="$head/element | $head/choice/element" mode="its">  -->
+        
+        <xsl:apply-templates select="$head" mode="its">
+          <xsl:with-param name="parentid" select="if ($isHeader) then ($Differentialchildelement) else ('')"/>
+          <xsl:with-param name="parentpath" select="if ($isHeader) then ($Differentialchildelement) else ('')"/>
           <xsl:with-param name="isSlice" select="false()"/>
           <xsl:with-param name="slicename" select="''"/>
+          <xsl:with-param name="isHeader" select="$isHeader"/>
+          <xsl:with-param name="force" select="false()"/>
         </xsl:apply-templates>
 
       </fhir:differential>
@@ -1042,6 +1083,8 @@ Open Issues
           <xsl:with-param name="parentpath" select="''"/>
           <xsl:with-param name="isSlice" select="false()"/>
           <xsl:with-param name="slicename" select="''"/>
+          <xsl:with-param name="isHeader" select="false()"/>
+          <xsl:with-param name="force" select="false()"/>
         </xsl:apply-templates>
 
 
