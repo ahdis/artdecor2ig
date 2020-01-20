@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <project name="art-decor" basedir="." default="default">
 
-	<import file="../xslt/build.xml" />
 
 	<target name="init">
 		<mkdir dir="artdecor" />
@@ -287,13 +286,18 @@
 			<param name="title" value="HCProfessional.hcSpecialisation" />
 		</antcall>
 	</target>
+	
+	
+	
+	<target name="dist" depends="init">
+	    <copy todir="../../${ig}/resources">
+	      <fileset dir="resources">
+	        <include name="**/*.xml" />
+	      </fileset>
+	    </copy>
+	  </target>
 
 	<target name="default" depends="init">
-		<antcall target="getProjectIndex">
-			<param name="prefix" value="${prefix}" />
-		</antcall>
-
-
 		<antcall target="ch-ehealth-codesystem-role" />
 		<antcall target="3_2.1_ValueSet_DocumentEntry.authorRole" />
 		<antcall target="ch-ehealth-codesystem-medreg" />

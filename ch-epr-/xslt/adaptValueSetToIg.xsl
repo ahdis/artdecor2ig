@@ -1,7 +1,7 @@
 <xsl:stylesheet version="2.0"
  xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
  xmlns="http://hl7.org/fhir" 
- xmlns:fhir="http://hl7.org/fhir">
+ xmlns:fhir="http://hl7.org/fhir" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
     <xsl:output method="xml" indent="yes" />
     
@@ -10,6 +10,20 @@
     <xsl:param name="title" required="yes" />
 
     <xsl:variable name="url" select="//fhir:ValueSet/fhir:url/@value" />
+
+   <xsl:function name="fhir:firstLetterUpperCase" as="xs:string*">
+    <xsl:param name="input" as="xs:string*"/>
+    <xsl:sequence>
+      <xsl:for-each select="$input">
+        <xsl:value-of select="concat(upper-case(substring(.,1,1)),substring(.,2))"/>
+      </xsl:for-each>
+    </xsl:sequence>
+  </xsl:function>
+
+  <xsl:function name="fhir:camelCasePoints" as="xs:string">
+    <xsl:param name="input" as="xs:string"/>
+    <xsl:sequence select="string-join(fhir:firstLetterUpperCase(tokenize($input, '\.')), '')"/>
+  </xsl:function>
 
     <xsl:template match="fhir:ValueSet/fhir:id">
       <fhir:id>
@@ -37,8 +51,15 @@
 
     <xsl:template match="fhir:ValueSet/fhir:name/@value">
       <xsl:attribute name="value" namespace="{namespace-uri()}">
-        <xsl:value-of select="replace(concat(upper-case(substring(.,1,1)),substring(.,2)),'-','')"/>
-      </xsl:attribute>
+        <xsl:choose>
+          <xsl:when test="contains(.,'.')">
+            <xsl:value-of select="fhir:camelCasePoints(.)"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="replace(concat(upper-case(substring(.,1,1)),substring(.,2)),'-','')"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:attribute>    
     </xsl:template>
 
     <xsl:template match="fhir:ValueSet/fhir:title">
