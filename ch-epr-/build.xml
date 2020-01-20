@@ -45,6 +45,8 @@
 		<replace file="output/${resourceId}.xml" token="fhir:" value="" />
 		<!-- xmlns:fhir="http://hl7.org/fhir" -->
 		<replace file="output/${resourceId}.xml" token=" xmlns:fhir=&quot;http://hl7.org/fhir&quot;" value="" />
+		<!-- xmlns:xs="http://www.w3.org/2001/XMLSchema" -->
+		<replace file="output/${resourceId}.xml" token=" xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot;" value="" />
 	</target>
 	<target name="getValueSet" depends="init">
 		<get src="http://art-decor.org/fhir/4.0/ch-epr-/ValueSet/${templateId}" dest="artdecor/${templateId}.xml" skipexisting="true" />

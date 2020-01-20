@@ -10,6 +10,15 @@
 		<property name="ig" value="cda-ch-v2" />
 		<property name="canonicalBase" value="http://fhir.ch/ig/${ig}" />
 		<property name="prefix" value="hl7chcda-" />
+
+		<property name="projectUri" value="../${prefix}/artdecor/project.xml" />
+		<property name="projectUriSkip" value="../${prefix}/projectskip.xml" />
+		<property name="decorservice" value="http://art-decor.org/decor/services" />
+		<property name="canonicalCda" value="http://fhir.ch/ig/cda-r2" />
+
+		<property name="in" value="artdecor/project.xml" />
+		<property name="out" value="project.log" />
+		<property name="removePrefix" value="CDA" />
 	</target>
 
 	<target name="clean">
@@ -18,27 +27,8 @@
 		<delete dir="output" />
 	</target>
 
-	<target name="download" depends="init">
-		<antcall target="artDecorProjectDownload">
-			<param name="prefix" value="${prefix}" />
-		</antcall>
+	<target name="default" depends="init,download,artDecorToIg">
 	</target>
 
-
-	<target name="default" depends="init">
-
-		<antcall target="artDecorToIg">
-			<param name="ig" value="${ig}" />
-			<param name="projectUri" value="../hl7chcda-/artdecor/project.xml" />
-			<param name="projectUriChEpr" value="../ch-epr-/artdecor/project.xml" />
-			<param name="projectUriSkip" value="../hl7chcda-/projectskip.xml" />
-			<param name="prefix" value="hl7chcda-" />
-			<param name="canonicalBase" value="http://fhir.ch/ig/${ig}" />
-			<param name="in" value="artdecor/project.xml" />
-			<param name="out" value="project.log" />
-		</antcall>
-
-
-	</target>
 
 </project>

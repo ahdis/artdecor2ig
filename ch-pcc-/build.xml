@@ -11,10 +11,14 @@
 		<property name="canonicalBase" value="http://fhir.ch/ig/${ig}" />
 		<property name="prefix" value="ch-pcc-" />
 
-		<property name="projectUriChEpr" value="../ch-epr-/artdecor/project.xml" />
-    <property name="in" value="artdecor/project.xml" />
-    <property name="out" value="project.log" />
+		<property name="projectUri" value="../${prefix}/artdecor/project.xml" />
+		<property name="projectUriSkip" value="../${prefix}/projectskip.xml" />
 		<property name="decorservice" value="http://art-decor.org/decor/services" />
+		<property name="canonicalCda" value="http://hl7.org/fhir/cda" />
+
+		<property name="in" value="artdecor/project.xml" />
+		<property name="out" value="project.log" />
+		<property name="removePrefix" value="CDA" />
 
 	</target>
 

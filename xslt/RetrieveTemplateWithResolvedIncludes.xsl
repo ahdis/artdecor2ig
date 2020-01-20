@@ -66,7 +66,7 @@
       <xsl:if test="@contains">
         <xsl:attribute name="contains"><xsl:value-of select="@contains"/></xsl:attribute>
       </xsl:if>
-      <xsl:if test="not(starts-with(@name,'hl7:templateId') and $removePrefix='CDA') and not($removePrefix='CDA' and @name='hl7:assignedEntity' and count(include)=1)">
+      <xsl:if test="not(starts-with(@name,'hl7:templateId') and $prefix='ad1bbr-') and not($prefix='ad1bbr-' and @name='hl7:assignedEntity' and count(include)=1)">
         <xsl:apply-templates mode="include">
           <xsl:with-param name="ref" select="''"/>
           <xsl:with-param name="inContains" select="$inContains"/>
