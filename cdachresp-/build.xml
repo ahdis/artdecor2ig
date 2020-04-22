@@ -1,12 +1,17 @@
 <?xml version="1.0"?>
 <project name="art-decor" basedir="." default="default">
 
+
+	<import file="../xslt/build.xml" />
+
 	<target name="init">
 		<mkdir dir="artdecor" />
 		<mkdir dir="resources" />
-		<property name="ig" value="ch-resp" />
+		<property name="ig" value="ch-ems" />
 		<property name="canonicalBase" value="http://fhir.ch/ig/${ig}" />
 		<property name="prefix" value="cdachresp-" />
+		<property name="decorservice" value="http://art-decor.org/decor/services" />
+
 	</target>
 
 	<target name="clean">
@@ -63,35 +68,75 @@
 		<copy file="output/${resourceId}.xml" tofile="resources/valueset/${resourceId}.xml" />
 	</target>
 
-	<target name="IVR-VS-preTreatmentType" depends="init">
+
+	<target name="IVR-VS-eyeForm" depends="init">
 		<antcall target="transformValueSet">
-			<param name="resourceId" value="IVR-VS-preTreatmentType" />
-			<param name="templateId" value="2.16.756.5.30.1.1.11.13" />
-			<param name="title" value="IVR valueset pre-treatment type (.143.11.13)" />
+			<param name="resourceId" value="IVR-VS-eyeForm" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.58" />
+			<param name="title" value="IVR valueset eye Form (.143.11.43)" />
 		</antcall>
 	</target>
-
-	<target name="IVR-VS-roleTeam" depends="init">
+	<target name="IVR-VS-locationType" depends="init">
 		<antcall target="transformValueSet">
-			<param name="resourceId" value="IVR-VS-roleTeam" />
-			<param name="templateId" value="2.16.756.5.30.1.1.11.20" />
-			<param name="title" value="IVR valueset role team (.143.11.8)" />
+			<param name="resourceId" value="IVR-VS-locationType" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.46" />
+			<param name="title" value="IVR valueset location Type (.143.11.42)" />
 		</antcall>
 	</target>
-
-	<target name="IVR-VS-roleMissionTime" depends="init">
+	<target name="IVR-VS-deathManner" depends="init">
 		<antcall target="transformValueSet">
-			<param name="resourceId" value="IVR-VS-roleMissionTime" />
-			<param name="templateId" value="2.16.756.5.30.1.1.11.22" />
-			<param name="title" value="IVR valueset role mission time (.143.11.10)" />
+			<param name="resourceId" value="IVR-VS-deathManner" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.45" />
+			<param name="title" value="IVR valueset manner of death (.143.11.41)" />
 		</antcall>
 	</target>
-
-	<target name="IVR-VS-event" depends="init">
+	<target name="IVR-VS-result" depends="init">
 		<antcall target="transformValueSet">
-			<param name="resourceId" value="IVR-VS-event" />
-			<param name="templateId" value="2.16.756.5.30.1.1.11.23" />
-			<param name="title" value="IVR valueset event (.143.11.15)" />
+			<param name="resourceId" value="IVR-VS-result" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.59" />
+			<param name="title" value="IVR valueset result (.143.11.44)" />
+		</antcall>
+	</target>
+	<target name="IVR-VS-airway" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-airway" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.18" />
+			<param name="title" value="IVR valueset airway (143.11.2)" />
+		</antcall>
+	</target>
+	<target name="IVR-VS-allergy" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-allergy" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.19" />
+			<param name="title" value="IVR valueset allergy (.143.11.7)" />
+		</antcall>
+	</target>
+	<target name="IVR-VS-ambulanceType" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-ambulanceType" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.33" />
+			<param name="title" value="IVR Valueset ambulance type (143.11.28)" />
+		</antcall>
+	</target>
+	<target name="IVR-VS-pressureMethod" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-pressureMethod" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.62" />
+			<param name="title" value="IVR valueset blood pressure method (.143.11.47)" />
+		</antcall>
+	</target>
+	<target name="IVR-VS-coldExposure" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-coldExposure" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.65" />
+			<param name="title" value="IVR valueset cold exposure (.143.11.50)" />
+		</antcall>
+	</target>
+	<target name="IVR-VS-diagnosis" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-diagnosis" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.25" />
+			<param name="title" value="IVR Valueset diagnosis (..143.11.20)" />
 		</antcall>
 	</target>
 	<target name="IVR-VS-diagType" depends="init">
@@ -101,7 +146,13 @@
 			<param name="title" value="IVR valueset diagnosis type (.143.11.16)" />
 		</antcall>
 	</target>
-
+	<target name="IVR-VS-event" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-event" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.23" />
+			<param name="title" value="IVR valueset event (.143.11.15)" />
+		</antcall>
+	</target>
 	<target name="IVR-VS-findingsAirway" depends="init">
 		<antcall target="transformValueSet">
 			<param name="resourceId" value="IVR-VS-findingsAirway" />
@@ -109,23 +160,132 @@
 			<param name="title" value="IVR valueset findings airway (.143.11.39)" />
 		</antcall>
 	</target>
-
-	<target name="IVR-VS-naca" depends="init">
+	<target name="IVR-VS-violenceForm" depends="init">
 		<antcall target="transformValueSet">
-			<param name="resourceId" value="IVR-VS-naca" />
+			<param name="resourceId" value="IVR-VS-violenceForm" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.30" />
+			<param name="title" value="IVR valueset form of violence (143.11.25)" />
+		</antcall>
+	</target>
+	<target name="IVR-VS-formation" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-formation" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.21" />
+			<param name="title" value="IVR valueset formation (.143.11.9)" />
+		</antcall>
+	</target>
+	<target name="IVR-VS-gcs-augenoeffnung" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-gcs-augenoeffnung" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.14" />
+			<param name="title" value="IVR valueset GCS Augenoeffnung (143.11.34)" />
+		</antcall>
+	</target>
+	<target name="IVR-VS-gcsMotoric" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-gcsMotoric" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.16" />
+			<param name="title" value="IVR valueset GCS motorische Reaktion (.143.11.35)" />
+		</antcall>
+	</target>
+	<target name="IVR-VS-gcsVerbal" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-gcsVerbal" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.15" />
+			<param name="title" value="IVR valueset GCS Verbale Kommunikation(.143.11.36)" />
+		</antcall>
+	</target>
+	<target name="IVR-VS-heatExposure" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-heatExposure" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.66" />
+			<param name="title" value="IVR valueset heat exposure (.143.11.51)" />
+		</antcall>
+	</target>
+	<target name="IVR-VS-idMedium" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-idMedium" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.35" />
+			<param name="title" value="IVR valueset identification medium (.143.11.30)" />
+		</antcall>
+	</target>
+	<target name="IVR-VS-idSource" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-idSource" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.34" />
+			<param name="title" value="IVR valueset identification source (143.11.29)" />
+		</antcall>
+	</target>
+	<target name="IVR-VS-InfectPersPrecaution" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-InfectPersPrecaution" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.53" />
+			<param name="title" value="IVR valueset infectiontransport precaution personnel" />
+		</antcall>
+	</target>
+	<target name="IVR-VS-intensity" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-intensity" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.32" />
+			<param name="title" value="IVR valueset intensity (.143.11.27)" />
+		</antcall>
+	</target>
+	<target name="IVR-VS-location" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-location" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.28" />
+			<param name="title" value="IVR valueset location (.143.11.23)" />
+		</antcall>
+	</target>
+	<target name="IVR-VS-emergDoctSystem" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-emergDoctSystem" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.52" />
+			<param name="title" value="IVR valueset mission Emergency doctor system (.143.11.12)" />
+		</antcall>
+	</target>
+	<target name="IVR-VS-missionType" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-missionType" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.48" />
+			<param name="title" value="IVR valueset mission type (.143.11.11)" />
+		</antcall>
+	</target>
+	<target name="IVR-VS-NACA" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-NACA" />
 			<param name="templateId" value="2.16.756.5.30.1.1.11.50" />
 			<param name="title" value="IVR valueset NACA" />
 		</antcall>
 	</target>
-
-	<target name="IVR-VS-priorityHospital" depends="init">
+	<target name="IVR-VS-respirationObservation" depends="init">
 		<antcall target="transformValueSet">
-			<param name="resourceId" value="IVR-VS-priorityHospital" />
-			<param name="templateId" value="2.16.756.5.30.1.1.11.55" />
-			<param name="title" value="IVR valueset priority hospital" />
+			<param name="resourceId" value="IVR-VS-respirationObservation" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.27" />
+			<param name="title" value="IVR valueset Observation Respiration (.143.11.22)" />
 		</antcall>
 	</target>
-
+	<target name="IVR-VS-offender" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-offender" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.29" />
+			<param name="title" value="IVR valueset offender (143.11.24)" />
+		</antcall>
+	</target>
+	<target name="IVR-VS-actRespiOwner" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-actRespiOwner" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.10" />
+			<param name="title" value="IVR valueset owner (.143.11.6)" />
+		</antcall>
+	</target>
+	<target name="IVR-VS-patient" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-patient" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.67" />
+			<param name="title" value="IVR valueset patient" />
+		</antcall>
+	</target>
 	<target name="IVR-VS-preTreatment" depends="init">
 		<antcall target="transformValueSet">
 			<param name="resourceId" value="IVR-VS-preTreatment" />
@@ -133,220 +293,167 @@
 			<param name="title" value="IVR valueset pre-treatment (.143.11.14)" />
 		</antcall>
 	</target>
-
-	<target name="IVR-VS-result" depends="init">
+	<target name="IVR-VS-preTreatType" depends="init">
 		<antcall target="transformValueSet">
-			<param name="resourceId" value="IVR-VS-result" />
-			<param name="templateId" value="2.16.756.5.30.1.1.11.59" />
-			<param name="title" value="IVR valueset result (.143.11.44)" />
+			<param name="resourceId" value="IVR-VS-preTreatType" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.13" />
+			<param name="title" value="IVR valueset pre-treatment type (.143.11.13)" />
 		</antcall>
 	</target>
-
-
-	<!--	
-	<target name="transformValueSetEventCodeList" depends="init">
-		<antcall target="getValueSet">
-			<param name="templateId" value="${templateId}" />
-		</antcall>
-		<antcall target="transform">
-			<param name="xsl" value="adaptValueSetToIgEventCodeList.xsl" />
-			<param name="templateId" value="${templateId}" />
-			<param name="resourceId" value="${resourceId}" />
-			<param name="title" value="${title}" />
-		</antcall>
-		<copy file="output/${resourceId}.xml" tofile="resources/valueset/${resourceId}.xml" />
-	</target>
-	<target name="transformValueSetToCodeSystem" depends="init">
-		<antcall target="getValueSet">
-			<param name="templateId" value="${templateId}" />
-		</antcall>
-		<antcall target="transform">
-			<param name="xsl" value="convertValueSetToCodeSystem.xsl" />
-			<param name="templateId" value="${templateId}" />
-			<param name="resourceId" value="${resourceId}" />
-			<param name="codeSystem" value="${codeSystem}" />
-			<param name="name" value="${name}" />
-			<param name="title" value="${title}" />
-		</antcall>
-		<copy file="output/${resourceId}.xml" tofile="resources/codesystem/${resourceId}.xml" />
-	</target>
-	<target name="3_2.1_ValueSet_DocumentEntry.authorRole" depends="init">
+	<target name="IVR-VS-hospitalPriority" depends="init">
 		<antcall target="transformValueSet">
-			<param name="resourceId" value="DocumentEntry.authorRole" />
-			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.1.3" />
-			<param name="title" value="DocumentEntry.authorRole" />
+			<param name="resourceId" value="IVR-VS-hospitalPriority" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.55" />
+			<param name="title" value="IVR valueset priority hospital" />
 		</antcall>
 	</target>
-	<target name="ch-ehealth-codesystem-medreg" depends="init">
-		<antcall target="transformValueSetToCodeSystem">
-			<param name="resourceId" value="2.16.756.5.30.1.127.3.5" />
-			<param name="templateId" value="2.16.756.5.30.1.127.3.10.8.2" />
-			<param name="codeSystem" value="2.16.756.5.30.1.127.3.5" />
-			<param name="name" value="ChEhealthCodesystemMedreg" />
-			<param name="title" value="ch-ehealth-codesystem-medreg" />
-		</antcall>
-	</target>
-	<target name="ch-ehealth-codesystem-nareg" depends="init">
-		<antcall target="transformValueSetToCodeSystem">
-			<param name="resourceId" value="2.16.756.5.30.1.127.3.6" />
-			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.1.4" />
-			<param name="codeSystem" value="2.16.756.5.30.1.127.3.6" />
-			<param name="name" value="ChEhealthCodesystemNareg" />
-			<param name="title" value="ch-ehealth-codesystem-nareg" />
-		</antcall>
-	</target>
-	<target name="3_2.2_ValueSet_DocumentEntry.authorSpeciality" depends="init">
+	<target name="IVR-VS-procAirType" depends="init">
 		<antcall target="transformValueSet">
-			<param name="resourceId" value="DocumentEntry.authorSpeciality" />
-			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.1.4" />
-			<param name="title" value="DocumentEntry.authorSpeciality" />
+			<param name="resourceId" value="IVR-VS-procAirType" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.43" />
+			<param name="title" value="IVR valueset procedure airway type (.143.11.40)" />
 		</antcall>
 	</target>
-	<target name="3_2.3_ValueSet_DocumentEntry.healthcareFacilityTypeCode" depends="init">
+	<target name="IVR-VS-pulseMethod" depends="init">
 		<antcall target="transformValueSet">
-			<param name="resourceId" value="DocumentEntry.healthcareFacilityTypeCode" />
-			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.11" />
-			<param name="title" value="DocumentEntry.healthcareFacilityTypeCode" />
+			<param name="resourceId" value="IVR-VS-pulseMethod" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.63" />
+			<param name="title" value="IVR valueset pulse method (.143.11.48)" />
 		</antcall>
 	</target>
-	<target name="3_2.4_ValueSet_DocumentEntry.practiceSettingCode" depends="init">
+	<target name="IVR-VS-pulesResult" depends="init">
 		<antcall target="transformValueSet">
-			<param name="resourceId" value="DocumentEntry.practiceSettingCode" />
-			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.18" />
-			<param name="title" value="DocumentEntry.practiceSettingCode" />
+			<param name="resourceId" value="IVR-VS-pulesResult" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.64" />
+			<param name="title" value="IVR valueset pulse result (.143.11.49)" />
 		</antcall>
 	</target>
-	<target name="3_2.5_ValueSet_DocumentEntry.classCode" depends="init">
+	<target name="IVR-VS-actRecovAid" depends="init">
 		<antcall target="transformValueSet">
-			<param name="resourceId" value="DocumentEntry.classCode" />
-			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.3" />
-			<param name="title" value="DocumentEntry.classCode" />
+			<param name="resourceId" value="IVR-VS-actRecovAid" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.11" />
+			<param name="title" value="IVR valueset Recovery Aid (.143.11.3)" />
 		</antcall>
 	</target>
-	<target name="3_2.6_ValueSet_DocumentEntry.typeCode" depends="init">
+	<target name="IVR-VS-violenceResult" depends="init">
 		<antcall target="transformValueSet">
-			<param name="resourceId" value="DocumentEntry.typeCode" />
-			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.27" />
-			<param name="title" value="DocumentEntry.typeCode" />
+			<param name="resourceId" value="IVR-VS-violenceResult" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.31" />
+			<param name="title" value="IVR valueset result of violence (.143.11.26)" />
 		</antcall>
 	</target>
-	<target name="SNOMED CT Swiss Extension" depends="init">
-		<antcall target="getValueSet">
-			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.27" />
-		</antcall>
-		<antcall target="getValueSet">
-			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.5" />
-		</antcall>
-		<antcall target="transformValueSetsToCodeSystemFor2.16.756.5.30.1.127.3.4">
-			<param name="resourceId" value="2.16.756.5.30.1.127.3.4" />
-			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.3" />
-			<param name="codeSystem" value="2.16.756.5.30.1.127.3.4" />
-			<param name="name" value="SNOMEDCTSwissExtension" />
-			<param name="title" value="SNOMED CT Swiss Extension" />
-		</antcall>
-	</target>
-	<target name="3_2.8_ValueSet_DocumentEntry.eventCodeList" depends="init">
-		<antcall target="getValueSet">
-			<param name="templateId" value="1.2.840.10008.6.1.19" />
-		</antcall>
-		<antcall target="transformValueSetEventCodeList">
-			<param name="resourceId" value="DocumentEntry.eventCodeList" />
-			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.8" />
-			<param name="title" value="DocumentEntry.eventCodeList" />
-		</antcall>
-	</target>
-	<target name="3_2.9_ValueSet_DocumentEntry.languageCode" depends="init">
+	<target name="IVR-VS-personRole" depends="init">
 		<antcall target="transformValueSet">
-			<param name="resourceId" value="DocumentEntry.languageCode" />
-			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.13" />
-			<param name="title" value="DocumentEntry.languageCode" />
+			<param name="resourceId" value="IVR-VS-personRole" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.26" />
+			<param name="title" value="IVR valueset role (.143.11.21)" />
 		</antcall>
 	</target>
-	<target name="3_2.10_ValueSet_DocumentEntry.sourcePatientInfo.PID-8" depends="init">
+	<target name="IVR-VS-missionTimeRole" depends="init">
 		<antcall target="transformValueSet">
-			<param name="resourceId" value="DocumentEntry.sourcePatientInfo.PID-8" />
-			<param name="templateId" value="2.16.840.1.113883.4.642.3.1" />
-			<param name="title" value="DocumentEntry.sourcePatientInfo.PID-8" />
+			<param name="resourceId" value="IVR-VS-missionTimeRole" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.22" />
+			<param name="title" value="IVR valueset role mission time (.143.11.10)" />
 		</antcall>
 	</target>
-	<target name="3_2.11_ValueSet_DocumentEntry.confidentialityCode" depends="init">
+	<target name="IVR-VS-teamRole" depends="init">
 		<antcall target="transformValueSet">
-			<param name="resourceId" value="DocumentEntry.confidentialityCode" />
-			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.5" />
-			<param name="title" value="DocumentEntry.confidentialityCode" />
+			<param name="resourceId" value="IVR-VS-teamRole" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.20" />
+			<param name="title" value="IVR valueset role team (.143.11.8)" />
 		</antcall>
 	</target>
-	<target name="3_2.12_ValueSet_DocumentEntry.formatCode" depends="init">
+	<target name="IVR-VS-sections" depends="init">
 		<antcall target="transformValueSet">
-			<param name="resourceId" value="DocumentEntry.formatCode" />
-			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.9" />
-			<param name="title" value="DocumentEntry.formatCode" />
+			<param name="resourceId" value="IVR-VS-sections" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.47" />
+			<param name="title" value="IVR valueset sections" />
 		</antcall>
 	</target>
-	<target name="ch-ehealth-codesystem-format" depends="init">
-		<antcall target="transformValueSetToCodeSystem">
-			<param name="resourceId" value="2.16.756.5.30.1.127.3.10.10" />
-			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.9" />
-			<param name="codeSystem" value="2.16.756.5.30.1.127.3.10.10" />
-			<param name="name" value="ChEhealthCodesystemFormat" />
-			<param name="title" value="ch-ehealth-codesystem-format" />
-		</antcall>
-	</target>
-	<target name="ch-ehealth-codesystem-language" depends="init">
-		<antcall target="transformValueSetToCodeSystem">
-			<param name="resourceId" value="2.16.756.5.30.1.127.3.10.12" />
-			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.13" />
-			<param name="codeSystem" value="2.16.756.5.30.1.127.3.10.12" />
-			<param name="name" value="ChEhealthCodesystemLanguage" />
-			<param name="title" value="ch-ehealth-codesystem-language" />
-		</antcall>
-	</target>
-	<target name="ch-ehealth-codesystem-hpd" depends="init">
-		<antcall target="transformValueSetToCodeSystem">
-			<param name="resourceId" value="2.16.756.5.30.1.127.3.10.9" />
-			<param name="templateId" value="2.16.756.5.30.1.127.3.10.8.1" />
-			<param name="codeSystem" value="2.16.756.5.30.1.127.3.10.9" />
-			<param name="name" value="ChEhealthCodesystemHpd" />
-			<param name="title" value="ch-ehealth-codesystem-hpd" />
-		</antcall>
-	</target>
-	<target name="3_2.13_ValueSet_DocumentEntry.mimeType" depends="init">
+	<target name="IVR-VS-sex" depends="init">
 		<antcall target="transformValueSet">
-			<param name="resourceId" value="DocumentEntry.mimeType" />
-			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.16" />
-			<param name="title" value="DocumentEntry.mimeType" />
+			<param name="resourceId" value="IVR-VS-sex" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.36" />
+			<param name="title" value="IVR Valueset sex (.143.11.31)" />
 		</antcall>
 	</target>
-	<target name="3_2.14_ValueSet_SubmissionSet.contentTypeCode" depends="init">
+	<target name="IVR-VS-size" depends="init">
 		<antcall target="transformValueSet">
-			<param name="resourceId" value="SubmissionSet.contentTypeCode" />
-			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.40" />
-			<param name="title" value="SubmissionSet.contentTypeCode" />
+			<param name="resourceId" value="IVR-VS-size" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.56" />
+			<param name="title" value="IVR Valueset size" />
 		</antcall>
 	</target>
-	<target name="3_2.15_ValueSet_SubmissionSet.Author.AuthorRole" depends="init">
+	<target name="IVR-VS-ZUB" depends="init">
 		<antcall target="transformValueSet">
-			<param name="resourceId" value="SubmissionSet.Author.AuthorRole" />
-			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.41" />
-			<param name="title" value="SubmissionSet.Author.AuthorRole" />
+			<param name="resourceId" value="IVR-VS-ZUB" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.49" />
+			<param name="title" value="IVR valueset status change" />
 		</antcall>
 	</target>
-	<target name="9_2.1_ValueSet_HCProfessional.hcProfession" depends="init">
+	<target name="IVR-VS-symptom" depends="init">
 		<antcall target="transformValueSet">
-			<param name="resourceId" value="HCProfessional.hcProfession" />
-			<param name="templateId" value="2.16.756.5.30.1.127.3.10.8.1" />
-			<param name="title" value="HCProfessional.hcProfession" />
+			<param name="resourceId" value="IVR-VS-symptom" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.41" />
+			<param name="title" value="IVR valueset symptom (.143.11.38)" />
 		</antcall>
 	</target>
-	<target name="9_2.2_ValueSet_HCProfessional.hcSpecialisation" depends="init">
+	<target name="IVR-VS-bedding" depends="init">
 		<antcall target="transformValueSet">
-			<param name="resourceId" value="HCProfessional.hcSpecialisation" />
-			<param name="templateId" value="2.16.756.5.30.1.127.3.10.8.2" />
-			<param name="title" value="HCProfessional.hcSpecialisation" />
+			<param name="resourceId" value="IVR-VS-bedding" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.17" />
+			<param name="title" value="IVR valueset transport bedding (.143.11.17)" />
 		</antcall>
 	</target>
-	-->
-
+	<target name="IVR-VS-transReason" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-transReason" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.38" />
+			<param name="title" value="IVR valueset transport reason (.143.11.32)" />
+		</antcall>
+	</target>
+	<target name="IVR-VS-transDesinfection" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-transDesinfection" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.54" />
+			<param name="title" value="IVR valueset unit desinfection" />
+		</antcall>
+	</target>
+	<target name="IVR-VS-urgency" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-urgency" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.51" />
+			<param name="title" value="IVR valueset urgency" />
+		</antcall>
+	</target>
+	<target name="IVR-VS-urgency-adequate" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-urgency-adequate" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.40" />
+			<param name="title" value="IVR valueset urgency adequate (143.11.37)" />
+		</antcall>
+	</target>
+	<target name="IVR-VS-valTxpe" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-valTxpe" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.37" />
+			<param name="title" value="IVR valueset valuables type (.143.11.33)" />
+		</antcall>
+	</target>
+	<target name="IVR-VS-ventilation" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-ventilation" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.61" />
+			<param name="title" value="IVR valueset ventilation (.143.11.46)" />
+		</antcall>
+	</target>
+	<target name="IVR-VS-woundTreat" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-woundTreat" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.60" />
+			<param name="title" value="IVR valueset wound treatment (.143.11.45)" />
+		</antcall>
+	</target>
 
 	<target name="dist" depends="init">
 		<copy todir="../../${ig}/input/resources">
@@ -356,17 +463,89 @@
 		</copy>
 	</target>
 
-	<target name="default" depends="init">
-		<antcall target="IVR-VS-preTreatmentType" />
-		<antcall target="IVR-VS-roleTeam" />
-		<antcall target="IVR-VS-roleMissionTime" />
-		<antcall target="IVR-VS-event" />
-		<antcall target="IVR-VS-diagType" />
-		<antcall target="IVR-VS-findingsAirway" />
-		<antcall target="IVR-VS-naca" />
-		<antcall target="IVR-VS-priorityHospital" />
-		<antcall target="IVR-VS-preTreatment" />
-		<antcall target="IVR-VS-result" />
+	<target name="ArtDecorValueSetToIg" depends="init">
+		<delete file="${out}" failonerror="false" />
+		<delete dir="resources" />
+		<mkdir dir="resources" />
+		<xslt style="../xslt/ArtDecorValueSetToIg.xsl" in="${in}" out="${out}" basedir="${basedir}">
+			<classpath>
+				<pathelement location="../saxon9he.jar" />
+			</classpath>
+			<param name="ig" expression="${ig}" type="STRING" />
+			<param name="prefix" expression="${prefix}" type="STRING" />
+			<param name="projectUri" expression="${projectUri}" type="STRING" />
+			<param name="projectUriSkip" expression="${projectUriSkip}" type="STRING" />
+			<param name="canonicalBase" expression="${canonicalBase}" type="STRING" />
+			<param name="language" expression="${canonicalBase}" type="STRING" />
+			<param name="decorservice" expression="${decorservice}" type="STRING" />
+			<param name="canonicalCda" expression="${canonicalCda}" type="STRING" />
+			<param name="removePrefix" expression="${removePrefix}" type="STRING" />
+		</xslt>
+		<!-- stupid  nfhir: prefix due to xslt -->
+		<replace dir="resources" token="fhir:" value="">
+			<include name="**/*.xml" />
+		</replace>
+		<!-- xmlns:fhir="http://hl7.org/fhir" -->
+		<replace dir="resources" token=" xmlns:fhir=&quot;http://hl7.org/fhir&quot;" value="">
+			<include name="**/*.xml" />
+		</replace>
+	</target>
 
+	<target name="default" depends="init">
+		<antcall target="IVR-VS-eyeForm" />
+		<antcall target="IVR-VS-locationType" />
+		<antcall target="IVR-VS-deathManner" />
+		<antcall target="IVR-VS-result" />
+		<antcall target="IVR-VS-airway" />
+		<antcall target="IVR-VS-allergy" />
+		<antcall target="IVR-VS-ambulanceType" />
+		<antcall target="IVR-VS-pressureMethod" />
+		<antcall target="IVR-VS-coldExposure" />
+		<antcall target="IVR-VS-diagnosis" />
+		<antcall target="IVR-VS-diagType" />
+		<antcall target="IVR-VS-event" />
+		<antcall target="IVR-VS-findingsAirway" />
+		<antcall target="IVR-VS-violenceForm" />
+		<antcall target="IVR-VS-formation" />
+		<antcall target="IVR-VS-gcs-augenoeffnung" />
+		<antcall target="IVR-VS-gcsMotoric" />
+		<antcall target="IVR-VS-gcsVerbal" />
+		<antcall target="IVR-VS-heatExposure" />
+		<antcall target="IVR-VS-idMedium" />
+		<antcall target="IVR-VS-idSource" />
+		<antcall target="IVR-VS-InfectPersPrecaution" />
+		<antcall target="IVR-VS-intensity" />
+		<antcall target="IVR-VS-location" />
+		<antcall target="IVR-VS-emergDoctSystem" />
+		<antcall target="IVR-VS-missionType" />
+		<antcall target="IVR-VS-NACA" />
+		<antcall target="IVR-VS-respirationObservation" />
+		<antcall target="IVR-VS-offender" />
+		<antcall target="IVR-VS-actRespiOwner" />
+		<antcall target="IVR-VS-patient" />
+		<antcall target="IVR-VS-preTreatment" />
+		<antcall target="IVR-VS-preTreatType" />
+		<antcall target="IVR-VS-hospitalPriority" />
+		<antcall target="IVR-VS-procAirType" />
+		<antcall target="IVR-VS-pulseMethod" />
+		<antcall target="IVR-VS-pulesResult" />
+		<antcall target="IVR-VS-actRecovAid" />
+		<antcall target="IVR-VS-violenceResult" />
+		<antcall target="IVR-VS-personRole" />
+		<antcall target="IVR-VS-missionTimeRole" />
+		<antcall target="IVR-VS-teamRole" />
+		<antcall target="IVR-VS-sections" />
+		<antcall target="IVR-VS-sex" />
+		<antcall target="IVR-VS-size" />
+		<antcall target="IVR-VS-ZUB" />
+		<antcall target="IVR-VS-symptom" />
+		<antcall target="IVR-VS-bedding" />
+		<antcall target="IVR-VS-transReason" />
+		<antcall target="IVR-VS-transDesinfection" />
+		<antcall target="IVR-VS-urgency" />
+		<antcall target="IVR-VS-urg_adequate" />
+		<antcall target="IVR-VS-valTxpe" />
+		<antcall target="IVR-VS-ventilation" />
+		<antcall target="IVR-VS-woundTreat" />
 	</target>
 </project>
