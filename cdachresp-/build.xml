@@ -177,7 +177,7 @@
 	<target name="IVR-VS-gcs-augenoeffnung" depends="init">
 		<antcall target="transformValueSet">
 			<param name="resourceId" value="IVR-VS-gcs-augenoeffnung" />
-			<param name="templateId" value="2.16.756.5.30.1.1.11.14" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.68" />
 			<param name="title" value="IVR valueset GCS Augenoeffnung (143.11.34)" />
 		</antcall>
 	</target>
@@ -303,7 +303,7 @@
 	<target name="IVR-VS-hospitalPriority" depends="init">
 		<antcall target="transformValueSet">
 			<param name="resourceId" value="IVR-VS-hospitalPriority" />
-			<param name="templateId" value="2.16.756.5.30.1.1.11.55" />
+			<param name="templateId" value="2.16.756.5.30.1.1.11.69" />
 			<param name="title" value="IVR valueset priority hospital" />
 		</antcall>
 	</target>
@@ -454,7 +454,13 @@
 			<param name="title" value="IVR valueset wound treatment (.143.11.45)" />
 		</antcall>
 	</target>
-
+	<target name="IVR-VS-vigilanzAvpu" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="IVR-VS-vigilanzAvpu" />
+			<param name="templateId" value="2.16.756.5.30.1.143.11.1" />
+			<param name="title" value="IVR vigilanz (AVPU)" />
+		</antcall>
+	</target>
 	<target name="dist" depends="init">
 		<copy todir="../../${ig}/input/resources">
 			<fileset dir="resources">
@@ -543,9 +549,10 @@
 		<antcall target="IVR-VS-transReason" />
 		<antcall target="IVR-VS-transDesinfection" />
 		<antcall target="IVR-VS-urgency" />
-		<antcall target="IVR-VS-urg_adequate" />
+		<antcall target="IVR-VS-urgency-adequate" />
 		<antcall target="IVR-VS-valTxpe" />
 		<antcall target="IVR-VS-ventilation" />
 		<antcall target="IVR-VS-woundTreat" />
+		<antcall target="IVR-VS-vigilanzAvpu" />
 	</target>
 </project>

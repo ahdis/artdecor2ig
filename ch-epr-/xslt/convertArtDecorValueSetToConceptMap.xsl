@@ -54,7 +54,7 @@
       <fhir:title>
         <xsl:attribute name="value"><xsl:value-of select="$title"/></xsl:attribute>
       </fhir:title>
-      <fhir:status value="draft"/>
+      <fhir:status value="active"/>
 
       <!-- <fhir:date value="2012-06-13"/> -->
       <fhir:publisher value="HL7 Switzerland"/>
