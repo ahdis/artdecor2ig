@@ -74,6 +74,9 @@
           <xsl:when test=".='urn:oid:2.16.840.1.113883.5.79'">
             <xsl:value-of select="'http://terminology.hl7.org/CodeSystem/v3-mediaType'" />
           </xsl:when>
+          <xsl:when test=".='http://ihe.net/fhir/ValueSet/IHE.FormatCode.codesystem'">
+            <xsl:value-of select="'http://ihe.net/fhir/ihe.formatcode.fhir/CodeSystem/formatcode'" />
+          </xsl:when>
           <xsl:otherwise>
             <xsl:value-of select="." />
           </xsl:otherwise>

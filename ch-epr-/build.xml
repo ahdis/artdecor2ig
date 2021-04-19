@@ -8,7 +8,7 @@
     <property name="ig" value="ch-epr-term" />
 		<property name="canonicalBase" value="http://fhir.ch/ig/${ig}" />
 		<property name="prefix" value="ch-epr-" />
-		<property name="version" value="20200622124207" />
+		<property name="version" value="20210416020411" />
 	</target>
 
 	<target name="clean">
@@ -325,6 +325,13 @@
 			<param name="title" value="SubmissionSet.Author.AuthorRole" />
 		</antcall>
 	</target>
+	<target name="3_2.16_ValueSet_DocumentEntry.originalProviderRole" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="DocumentEntry.originalProviderRole" />
+			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.42" />
+			<param name="title" value="DocumentEntry.originalProviderRole" />
+		</antcall>
+	</target>
 	<target name="5_1_ValueSet_EprPurposeOfUse" depends="init">
 		<antcall target="transformValueSet">
 			<param name="resourceId" value="EprPurposeOfUse" />
@@ -419,7 +426,8 @@
 		<antcall target="3_2.13_ValueSet_DocumentEntry.mimeType" />
 		<antcall target="3_2.14_ValueSet_SubmissionSet.contentTypeCode" />
 		<antcall target="3_2.15_ValueSet_SubmissionSet.Author.AuthorRole" />
-		
+		<antcall target="3_2.16_ValueSet_DocumentEntry.originalProviderRole" />
+
 		<antcall target="ch-ehealth-codesystem-purposeOfUse" />
 		<antcall target="5_1_ValueSet_EprPurposeOfUse" />
 		<antcall target="ch-ehealth-codesystem-agentRole" />
