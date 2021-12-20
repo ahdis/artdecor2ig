@@ -8,6 +8,7 @@
     <xsl:param name="canonicalBase" required="yes" />
     <xsl:param name="resourceId" required="yes" />
     <xsl:param name="title" required="yes" />
+    <xsl:param name="name" required="yes" />
 
     <xsl:variable name="url" select="//fhir:ValueSet/fhir:url/@value" />
 
@@ -42,11 +43,12 @@
       </fhir:url>   
     </xsl:template>
 
-    <xsl:template match="fhir:ValueSet/fhir:name/@value">
-      <xsl:attribute name="value" namespace="{namespace-uri()}">
-        <xsl:value-of select="replace(concat(upper-case(substring(.,1,1)),substring(.,2)),'-','')"/>
-      </xsl:attribute>
+    <xsl:template match="fhir:ValueSet/fhir:name">
+      <fhir:name>
+   			<xsl:attribute name="value"><xsl:value-of select="$name" /></xsl:attribute>
+      </fhir:name>   
     </xsl:template>
+
 
     <xsl:template match="fhir:ValueSet/fhir:title">
       <fhir:title>

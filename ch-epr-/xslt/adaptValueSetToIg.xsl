@@ -8,6 +8,7 @@
     <xsl:param name="canonicalBase" required="yes" />
     <xsl:param name="resourceId" required="yes" />
     <xsl:param name="title" required="yes" />
+    <xsl:param name="name" required="yes" />
 
     <xsl:variable name="url" select="//fhir:ValueSet/fhir:url/@value" />
 
@@ -20,10 +21,6 @@
     </xsl:sequence>
   </xsl:function>
 
-  <xsl:function name="fhir:camelCasePoints" as="xs:string">
-    <xsl:param name="input" as="xs:string"/>
-    <xsl:sequence select="string-join(fhir:firstLetterUpperCase(tokenize($input, '\.')), '')"/>
-  </xsl:function>
 
     <xsl:template match="fhir:ValueSet/fhir:id">
       <fhir:id>
@@ -49,17 +46,10 @@
       </fhir:url>   
     </xsl:template>
 
-    <xsl:template match="fhir:ValueSet/fhir:name/@value">
-      <xsl:attribute name="value" namespace="{namespace-uri()}">
-        <xsl:choose>
-          <xsl:when test="contains(.,'.')">
-            <xsl:value-of select="fhir:camelCasePoints(.)"/>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:value-of select="replace(concat(upper-case(substring(.,1,1)),substring(.,2)),'-','')"/>
-          </xsl:otherwise>
-        </xsl:choose>
-      </xsl:attribute>    
+    <xsl:template match="fhir:ValueSet/fhir:name">
+      <fhir:name>
+   			<xsl:attribute name="value"><xsl:value-of select="$name" /></xsl:attribute>
+      </fhir:name>   
     </xsl:template>
 
     <xsl:template match="fhir:ValueSet/fhir:title">
@@ -71,6 +61,9 @@
     <xsl:template match="fhir:ValueSet/fhir:compose/fhir:include/fhir:system/@value">
       <xsl:attribute name="value" namespace="{namespace-uri()}">
         <xsl:choose>
+          <xsl:when test=".='urn:oid:2.16.840.1.113883.6.316'">
+            <xsl:value-of select="'urn:ietf:bcp:47'" />
+          </xsl:when>
           <xsl:when test=".='urn:oid:2.16.840.1.113883.5.79'">
             <xsl:value-of select="'http://terminology.hl7.org/CodeSystem/v3-mediaType'" />
           </xsl:when>
