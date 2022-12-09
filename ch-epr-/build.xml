@@ -8,7 +8,7 @@
     <property name="ig" value="ch-epr-term" />
 		<property name="canonicalBase" value="http://fhir.ch/ig/${ig}" />
 		<property name="prefix" value="ch-epr-" />
-		<property name="version" value="20210416020411" />
+		<property name="version" value="20221201141037" />
 	</target>
 
 	<target name="clean">
