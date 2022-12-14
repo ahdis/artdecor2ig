@@ -40,7 +40,7 @@
       </fhir:id> 
 
       <fhir:url>
-        <xsl:attribute name="value"><xsl:value-of select="$canonicalBase"/>/<xsl:value-of select="$resourceId"/></xsl:attribute>
+        <xsl:attribute name="value"><xsl:value-of select="$canonicalBase"/>/ConceptMap/<xsl:value-of select="$resourceId"/></xsl:attribute>
       </fhir:url>
 
       <fhir:version>
