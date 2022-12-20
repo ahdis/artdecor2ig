@@ -53,6 +53,9 @@
       </fhir:meta>      
     </xsl:template>
 
+    <xsl:template match="fhir:ValueSet/fhir:identifier">
+    </xsl:template>
+
     <xsl:template match="fhir:ValueSet/fhir:url">
       <fhir:url>
 			<xsl:attribute name="value">urn:oid:<xsl:value-of select="$codeSystem" /></xsl:attribute>
@@ -71,10 +74,29 @@
       </fhir:title>   
     </xsl:template>
 
-    <xsl:template match="fhir:ValueSet/fhir:immutable">
-       <fhir:content value="complete"/>
+    <xsl:template match="fhir:ValueSet/fhir:experimental">
+      <fhir:experimental>
+   			<xsl:attribute name="value"><xsl:value-of select="@value" /></xsl:attribute>
+      </fhir:experimental>   
     </xsl:template>
 
+    <xsl:template match="fhir:ValueSet/fhir:description">
+      <fhir:description>
+   			<xsl:attribute name="value"><xsl:value-of select="@value" /></xsl:attribute>
+      </fhir:description>   
+    </xsl:template>
+
+     <xsl:template match="fhir:ValueSet/fhir:copyright">
+      <fhir:copyright>
+   			<xsl:attribute name="value"><xsl:value-of select="@value" /></xsl:attribute>
+      </fhir:copyright>   
+    </xsl:template>
+
+
+    <xsl:template match="fhir:ValueSet/fhir:immutable">
+       <fhir:caseSensitive value="true"/>
+       <fhir:content value="complete"/>
+    </xsl:template>
     <xsl:template match="fhir:ValueSet/fhir:compose">
       <xsl:apply-templates select="$codes" /> 
        <xsl:apply-templates select="$codes2" /> 

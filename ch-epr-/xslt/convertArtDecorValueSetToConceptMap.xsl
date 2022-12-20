@@ -66,7 +66,7 @@
       </fhir:contact>
 
       <fhir:description>
-        <xsl:attribute name="value"><xsl:value-of select="desc"/></xsl:attribute>
+        <xsl:attribute name="value">Mapping <xsl:value-of select="$title"/></xsl:attribute>
       </fhir:description>
       <fhir:copyright>
         <xsl:attribute name="value"><xsl:value-of select="copyright"/></xsl:attribute>
