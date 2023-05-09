@@ -15,3 +15,6 @@ This projects goal is to reuse the Templates and ValueSets defined in ART-DECOR 
 
 http://art-decor.org/decor/services/ProjectIndex?format=xml&prefix=hl7chcda-
 requires saxon9he.jar to be installed for xslt 2.0 support
+
+
+ ant -lib ../saxon9he.jar

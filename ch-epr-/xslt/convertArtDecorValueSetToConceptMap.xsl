@@ -20,7 +20,7 @@
     <xsl:param name="input" as="xs:string"/>
     <xsl:sequence>
       <xsl:choose>
-        <xsl:when test="$input='2.16.840.1.113883.6.96'">
+        <xsl:when test="$input='2.16.840.1.113883.6.96' or $input='2.16.756.5.30.1.127.3.4'">
           <xsl:value-of select="'http://snomed.info/sct'"/>
         </xsl:when>
         <xsl:otherwise>
