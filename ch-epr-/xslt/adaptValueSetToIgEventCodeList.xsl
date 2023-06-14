@@ -74,6 +74,8 @@
     <xsl:template match="fhir:concept/fhir:designation/fhir:use" />
 
 
+   <xsl:template match="fhir:concept/fhir:extension[@url='http://hl7.org/fhir/StructureDefinition/valueset-concept-comments']" />
+
     <!--ValueSet.compose.include.concept[1].extension.valueString	warning	value should not start or finish with whitespace -->
     <xsl:template match="fhir:valueString/@value">
       <xsl:attribute name="value" namespace="{namespace-uri()}">
@@ -88,7 +90,7 @@
       </xsl:attribute>
     </xsl:template>
 
-    <xsl:template match="fhir:compose/fhir:include[@canonicalUri='urn:oid:1.2.840.10008.6.1.19']">
+    <xsl:template match="fhir:compose/fhir:include[fhir:valueSet[@value='urn:oid:1.2.840.10008.6.1.19']]">
       <xsl:apply-templates select="$codes2" /> 
     </xsl:template>
 

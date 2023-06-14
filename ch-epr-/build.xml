@@ -3,13 +3,14 @@
 
 <!-- 			<param name="effectiveDate" expression="${effectiveDate}" type="STRING" />  dynamic or like 2022-07-20T19:36:38 -->
 <!-- effectiveDatej for ValueSet 20220720193638-->
+<!-- 202306.1-stable            20230608154548 -->
 	<target name="init">
 		<mkdir dir="artdecor" />
 		<mkdir dir="resources" />
     <property name="ig" value="ch-epr-term" />
 		<property name="canonicalBase" value="http://fhir.ch/ig/${ig}" />
 		<property name="prefix" value="ch-epr-" />
-		<property name="version" value="20221201141037" />
+		<property name="version" value="20230608154548" />
 	</target>
 
 	<target name="clean">
@@ -91,8 +92,9 @@
 		<copy file="output/${resourceId}.xml" tofile="resources/valueset/${resourceId}.xml" />
 	</target>
 	<target name="transformValueSetEventCodeList" depends="init">
-		<antcall target="getValueSet">
+		<antcall target="getValueSetEffectiveDate">
 			<param name="templateId" value="${templateId}" />
+			<param name="effectiveDate" value="${effectiveDate}" />
 		</antcall>
 		<antcall target="transform">
 			<param name="xsl" value="adaptValueSetToIgEventCodeList.xsl" />
@@ -118,7 +120,7 @@
 		<copy file="output/${resourceId}.xml" tofile="resources/codesystem/${resourceId}.xml" />
 	</target>
 	<target name="transformValueSetToCodeSystemEffectiveDate" depends="init">
-		<antcall target="getValueSet">
+		<antcall target="getValueSetEffectiveDate">
 			<param name="templateId" value="${templateId}" />
 			<param name="effectiveDate" value="${effectiveDate}" />
 		</antcall>
@@ -133,8 +135,9 @@
 		<copy file="output/${resourceId}.xml" tofile="resources/codesystem/${resourceId}.xml" />
 	</target>
 	<target name="transformValueSetsToCodeSystemFor2.16.756.5.30.1.127.3.4" depends="init">
-		<antcall target="getValueSet">
+		<antcall target="getValueSetEffectiveDate">
 			<param name="templateId" value="${templateId}" />
+			<param name="effectiveDate" value="${effectiveDate}" />
 		</antcall>
 		<antcall target="transform">
 			<param name="xsl" value="convertValueSetsToCodeSystemFor2.16.756.5.30.1.127.3.4.xsl" />
@@ -146,6 +149,23 @@
 		</antcall>
 		<copy file="output/${resourceId}.xml" tofile="resources/codesystem/${resourceId}.xml" />
 	</target>
+	<target name="transformValueSetToConceptMapEffectiveDate" depends="init">
+			<antcall target="getArtDecorValueSet">
+				<param name="templateId" value="${templateId}" />
+				<param name="effectiveDate" value="${effectiveDate}" />
+			</antcall>
+			<antcall target="transform">
+				<param name="xsl" value="convertArtDecorValueSetToConceptMap.xsl" />
+				<param name="templateId" value="${templateId}" />
+				<param name="resourceId" value="${resourceId}" />
+				<param name="codeSystem" value="${codeSystem}" />
+				<param name="name" value="${name}" />
+				<param name="title" value="${title}" />
+				<param name="sourceUri" value="${sourceUri}" />
+				<param name="targetUri" value="${targetUri}" />
+			</antcall>
+			<copy file="output/${resourceId}.xml" tofile="resources/conceptmap/${resourceId}.xml" />
+	</target>		
 	<target name="transformValueSetToConceptMap" depends="init">
 			<antcall target="getArtDecorValueSet">
 				<param name="templateId" value="${templateId}" />
@@ -173,9 +193,10 @@
 		</antcall>
 	</target>
 	<target name="3_2.1_ValueSet_DocumentEntry.authorRole" depends="init">
-		<antcall target="transformValueSet">
+		<antcall target="transformValueSetEffectiveDate">
 			<param name="resourceId" value="DocumentEntry.authorRole" />
 			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.1.3" />
+			<param name="effectiveDate" value="20220624104420" /> <!-- 202306.0-stable -->
 			<param name="title" value="DocumentEntry.authorRole" />
 			<param name="name" value="DocumentEntryAuthorRole" />
 		</antcall>
@@ -183,7 +204,6 @@
 	<target name="ch-ehealth-codesystem-medreg" depends="init">
 		<antcall target="transformValueSetToCodeSystem">
 			<param name="resourceId" value="2.16.756.5.30.1.127.3.5" />
-			<!--			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.1.4" /> code 1001, 1005 is missing here-->
 			<param name="templateId" value="2.16.756.5.30.1.127.3.10.8.2" />
 			<param name="codeSystem" value="2.16.756.5.30.1.127.3.5" />
 			<param name="name" value="ChEhealthCodesystemMedreg" />
@@ -191,9 +211,10 @@
 		</antcall>
 	</target>
 	<target name="ch-ehealth-codesystem-nareg" depends="init">
-		<antcall target="transformValueSetToCodeSystem">
+		<antcall target="transformValueSetToCodeSystemEffectiveDate">
 			<param name="resourceId" value="2.16.756.5.30.1.127.3.6" />
 			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.1.4" />
+			<param name="effectiveDate" value="20220624110129" /> <!-- 202306.0-stable -->
 			<param name="codeSystem" value="2.16.756.5.30.1.127.3.6" />
 			<param name="name" value="ChEhealthCodesystemNareg" />
 			<param name="title" value="ch-ehealth-codesystem-nareg" />
@@ -227,9 +248,10 @@
 		</antcall>
 	</target>
 	<target name="3_2.2_ValueSet_DocumentEntry.authorSpeciality" depends="init">
-		<antcall target="transformValueSet">
+		<antcall target="transformValueSetEffectiveDate">
 			<param name="resourceId" value="DocumentEntry.authorSpeciality" />
 			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.1.4" />
+			<param name="effectiveDate" value="20220624110129" /> <!-- 202306.0-stable -->
 			<param name="title" value="DocumentEntry.authorSpeciality" />
 			<param name="name" value="DocumentEntryAuthorSpeciality" />
 		</antcall>
@@ -243,17 +265,19 @@
 		</antcall>
 	</target>
 	<target name="3_2.4_ValueSet_DocumentEntry.practiceSettingCode" depends="init">
-		<antcall target="transformValueSet">
+		<antcall target="transformValueSetEffectiveDate">
 			<param name="resourceId" value="DocumentEntry.practiceSettingCode" />
 			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.18" />
+			<param name="effectiveDate" value="20220626144519" /> <!-- 202306.0-stable -->
 			<param name="title" value="DocumentEntry.practiceSettingCode" />
 			<param name="name" value="DocumentEntryPracticeSettingCode" />
 		</antcall>
 	</target>
 	<target name="3_2.5_ValueSet_DocumentEntry.classCode" depends="init">
-		<antcall target="transformValueSet">
+		<antcall target="transformValueSetEffectiveDate">
 			<param name="resourceId" value="DocumentEntry.classCode" />
 			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.3" />
+			<param name="effectiveDate" value="20220625190312" /> <!-- 202306.0-stable -->
 			<param name="title" value="DocumentEntry.classCode" />
 			<param name="name" value="DocumentEntryClassCode" />
 		</antcall>
@@ -270,13 +294,15 @@
 		<antcall target="getValueSet">
 			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.27" />
 		</antcall>
-		<antcall target="getValueSet">
+		<antcall target="getValueSetEffectiveDate">
 			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.5" />
+			<param name="effectiveDate" value="20220626133515" /> <!-- 202306.0-stable -->
 		</antcall>
 		<antcall target="transformValueSetsToCodeSystemFor2.16.756.5.30.1.127.3.4">
 			<param name="resourceId" value="2.16.756.5.30.1.127.3.4" />
 			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.3" />
 			<param name="codeSystem" value="2.16.756.5.30.1.127.3.4" />
+			<param name="effectiveDate" value="20220625190312" /> <!-- 202306.0-stable -->
 			<param name="name" value="SNOMEDCTSwissExtension" />
 			<param name="title" value="SNOMED CT Swiss Extension" />
 		</antcall>
@@ -288,6 +314,7 @@
 		<antcall target="transformValueSetEventCodeList">
 			<param name="resourceId" value="DocumentEntry.eventCodeList" />
 			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.8" />
+			<param name="effectiveDate" value="20220626134421" /> <!-- 202306.0-stable -->
 			<param name="title" value="DocumentEntry.eventCodeList" />
 			<param name="name" value="DocumentEntryEventCodeList" />
 		</antcall>
@@ -309,9 +336,10 @@
 		</antcall>
 	</target>
 	<target name="3_2.11_ValueSet_DocumentEntry.confidentialityCode" depends="init">
-		<antcall target="transformValueSet">
+		<antcall target="transformValueSetEffectiveDate">
 			<param name="resourceId" value="DocumentEntry.confidentialityCode" />
 			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.5" />
+			<param name="effectiveDate" value="20220626133515" /> <!-- 202306.0-stable -->
 			<param name="title" value="DocumentEntry.confidentialityCode" />
 			<param name="name" value="DocumentEntryConfidentialityCode" />
 		</antcall>
@@ -320,7 +348,7 @@
 		<antcall target="transformValueSetEffectiveDate">
 			<param name="resourceId" value="DocumentEntry.formatCode" />
 			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.9" />
-			<param name="effectiveDate" value="20220720193638" />
+			<param name="effectiveDate" value="20220626164017" /> <!-- 202306.0-stable -->
 			<param name="title" value="DocumentEntry.formatCode" />
 			<param name="name" value="DocumentEntryFormatCode" />
 		</antcall>
@@ -329,7 +357,7 @@
 		<antcall target="transformValueSetToCodeSystem">
 			<param name="resourceId" value="2.16.756.5.30.1.127.3.10.10" />
 			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.9" />
-			<param name="effectiveDate" value="20220720193638" />
+			<param name="effectiveDate" value="20220626164017" />
 			<param name="codeSystem" value="2.16.756.5.30.1.127.3.10.10" />
 			<param name="name" value="ChEhealthCodesystemFormat" />
 			<param name="title" value="ch-ehealth-codesystem-format" />
@@ -435,11 +463,12 @@
 	</target>
 	
 	<target name="DocumentEntryClassCodeToDocumentEntryTypeCode" depends="init">
-		<antcall target="transformValueSetToConceptMap">
+		<antcall target="transformValueSetToConceptMapEffectiveDate">
 			<param name="resourceId" value="DocumentEntryClassCodeToDocumentEntryTypeCode" />
 			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.30" />
 			<param name="title" value="DocumentEntryClassCodeToDocumentEntryTypeCode" />
 			<param name="name" value="DocumentEntryClassCodeToDocumentEntryTypeCode" />
+			<param name="effectiveDate" value="2022-06-26T16:13:56" /> <!-- 202306.0-stable -->
 			<param name="sourceUri" value="http://fhir.ch/ig/ch-epr-term/ValueSet/DocumentEntry.classCode" />
 			<param name="targetUri" value="http://fhir.ch/ig/ch-epr-term/ValueSet/DocumentEntry.typeCode" />
 		</antcall>

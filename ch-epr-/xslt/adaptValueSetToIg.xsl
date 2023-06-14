@@ -91,6 +91,7 @@
     <!-- remove it -->
     <xsl:template match="fhir:concept/fhir:designation/fhir:use" />
 
+    <xsl:template match="fhir:concept/fhir:extension[@url='http://hl7.org/fhir/StructureDefinition/valueset-concept-comments']" />
 
     <!--ValueSet.compose.include.concept[1].extension.valueString	warning	value should not start or finish with whitespace -->
     <xsl:template match="fhir:valueString/@value">
