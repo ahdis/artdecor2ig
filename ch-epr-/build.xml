@@ -247,6 +247,15 @@
 			<param name="title" value="ch-ehealth-codesystem-atc" />
 		</antcall>
 	</target>
+	<target name="ch-ehealth-codesystem-eprdeletionstatus" depends="init">
+		<antcall target="transformValueSetToCodeSystem">
+			<param name="resourceId" value="2.16.756.5.30.1.127.3.10.18" />
+			<param name="templateId" value="2.16.756.5.30.1.127.3.10.15.3" />
+			<param name="codeSystem" value="2.16.756.5.30.1.127.3.10.18" />
+			<param name="name" value="ChEhealthCodesystemEprDeletionStatus" />
+			<param name="title" value="ch-ehealth-codesystem-eprdeletionstatus" />
+		</antcall>
+	</target>
 	<target name="3_2.2_ValueSet_DocumentEntry.authorSpeciality" depends="init">
 		<antcall target="transformValueSetEffectiveDate">
 			<param name="resourceId" value="DocumentEntry.authorSpeciality" />
@@ -413,6 +422,14 @@
 			<param name="name" value="DocumentEntryOriginalProviderRole" />
 		</antcall>
 	</target>
+	<target name="3_2.17_ValueSet_DocumentEntry.Ext.EprDeletionStatus" depends="init">
+		<antcall target="transformValueSet">
+			<param name="resourceId" value="DocumentEntry.Ext.EprDeletionStatus" />
+			<param name="templateId" value="2.16.756.5.30.1.127.3.10.15.3" />
+			<param name="title" value="DocumentEntry.Ext.EprDeletionStatus" />
+			<param name="name" value="DocumentEntryExtEprDeletionStauts" />
+		</antcall>
+	</target>
 	<target name="5_1_ValueSet_EprPurposeOfUse" depends="init">
 		<antcall target="transformValueSet">
 			<param name="resourceId" value="EprPurposeOfUse" />
@@ -515,6 +532,8 @@
 		<antcall target="3_2.14_ValueSet_SubmissionSet.contentTypeCode" />
 		<antcall target="3_2.15_ValueSet_SubmissionSet.Author.AuthorRole" />
 		<antcall target="3_2.16_ValueSet_DocumentEntry.originalProviderRole" />
+		<antcall target="ch-ehealth-codesystem-eprdeletionstatus" />
+		<antcall target="3_2.17_ValueSet_DocumentEntry.Ext.EprDeletionStatus" />
 
 		<antcall target="ch-ehealth-codesystem-purposeOfUse" />
 		<antcall target="5_1_ValueSet_EprPurposeOfUse" />

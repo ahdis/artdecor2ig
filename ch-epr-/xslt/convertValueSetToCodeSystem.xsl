@@ -119,6 +119,13 @@
       </xsl:attribute>
     </xsl:template>
 
+    <xsl:template match="fhir:description/@value">
+      <xsl:attribute name="value" namespace="{namespace-uri()}">
+        <xsl:value-of select="replace(., '^\s+|\s+$', '')"/>
+      </xsl:attribute>
+    </xsl:template>
+
+
     <xsl:template match="node()|@*">
       <xsl:copy>
          <xsl:apply-templates select="node()|@*"/>

@@ -75,7 +75,7 @@
             <xsl:value-of select="'urn:ietf:bcp:47'" />
           </xsl:when>
           <xsl:when test=".='urn:oid:2.16.840.1.113883.5.79'">
-            <xsl:value-of select="'http://terminology.hl7.org/CodeSystem/v3-mediaType'" />
+            <xsl:value-of select="'urn:ietf:bcp:13'" />
           </xsl:when>
           <xsl:when test=".='http://ihe.net/fhir/ValueSet/IHE.FormatCode.codesystem'">
             <xsl:value-of select="'http://ihe.net/fhir/ihe.formatcode.fhir/CodeSystem/formatcode'" />
@@ -102,6 +102,12 @@
 
     <!-- ValueSet/DocumentEntry.languageCode: ValueSet.compose.include[3].concept[22].designation[2].value 	value should not start or finish with whitespace -->
     <xsl:template match="fhir:value/@value">
+      <xsl:attribute name="value" namespace="{namespace-uri()}">
+        <xsl:value-of select="replace(., '^\s+|\s+$', '')"/>
+      </xsl:attribute>
+    </xsl:template>
+
+    <xsl:template match="fhir:description/@value">
       <xsl:attribute name="value" namespace="{namespace-uri()}">
         <xsl:value-of select="replace(., '^\s+|\s+$', '')"/>
       </xsl:attribute>

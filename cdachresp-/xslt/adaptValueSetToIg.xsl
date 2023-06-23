@@ -72,7 +72,7 @@
       <xsl:attribute name="value" namespace="{namespace-uri()}">
         <xsl:choose>
           <xsl:when test=".='urn:oid:2.16.840.1.113883.5.79'">
-            <xsl:value-of select="'http://terminology.hl7.org/CodeSystem/v3-mediaType'" />
+            <xsl:value-of select="'urn:ietf:bcp:13'" />
           </xsl:when>
           <xsl:otherwise>
             <xsl:value-of select="." />
