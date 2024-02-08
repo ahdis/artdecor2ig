@@ -5,11 +5,7 @@ ART-DECOR to FHIR
 
 [FHIR®](http://www.hl7.org/fhir/) – Fast Healthcare Interoperability Resources (hl7.org/fhir) – is a next generation standards framework created by HL7. 
 
-This projects goal is to reuse the Templates and ValueSets defined in ART-DECOR within a FHIR based architecture.
-1. Transform ART-DECOR defined ValueSets in FHIR ValueSet/CodeSystem Resources
-2. Transform ART-DECOR Template definitions to FHIR StructureDefinition Resources
-3. Transform ART-DECOR Datasets definitions to FHIR StructureDefinition
-
+This projects goal is to reuse the CodeSystem/ValueSets defined in ART-DECOR within a FHIR based architecture.
 
 # ART-DECOR API
 

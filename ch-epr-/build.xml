@@ -134,21 +134,6 @@
 		</antcall>
 		<copy file="output/${resourceId}.xml" tofile="resources/codesystem/${resourceId}.xml" />
 	</target>
-	<target name="transformValueSetsToCodeSystemFor2.16.756.5.30.1.127.3.4" depends="init">
-		<antcall target="getValueSetEffectiveDate">
-			<param name="templateId" value="${templateId}" />
-			<param name="effectiveDate" value="${effectiveDate}" />
-		</antcall>
-		<antcall target="transform">
-			<param name="xsl" value="convertValueSetsToCodeSystemFor2.16.756.5.30.1.127.3.4.xsl" />
-			<param name="templateId" value="${templateId}" />
-			<param name="resourceId" value="${resourceId}" />
-			<param name="codeSystem" value="${codeSystem}" />
-			<param name="name" value="${name}" />
-			<param name="title" value="${title}" />
-		</antcall>
-		<copy file="output/${resourceId}.xml" tofile="resources/codesystem/${resourceId}.xml" />
-	</target>
 	<target name="transformValueSetToConceptMapEffectiveDate" depends="init">
 			<antcall target="getArtDecorValueSet">
 				<param name="templateId" value="${templateId}" />
@@ -297,23 +282,6 @@
 			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.27" />
 			<param name="title" value="DocumentEntry.typeCode" />
 			<param name="name" value="DocumentEntryTypeCode" />
-		</antcall>
-	</target>
-	<target name="SNOMED CT Swiss Extension" depends="init">
-		<antcall target="getValueSet">
-			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.27" />
-		</antcall>
-		<antcall target="getValueSetEffectiveDate">
-			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.5" />
-			<param name="effectiveDate" value="20220626133515" /> <!-- 202306.0-stable -->
-		</antcall>
-		<antcall target="transformValueSetsToCodeSystemFor2.16.756.5.30.1.127.3.4">
-			<param name="resourceId" value="2.16.756.5.30.1.127.3.4" />
-			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.3" />
-			<param name="codeSystem" value="2.16.756.5.30.1.127.3.4" />
-			<param name="effectiveDate" value="20220625190312" /> <!-- 202306.0-stable -->
-			<param name="name" value="SNOMEDCTSwissExtension" />
-			<param name="title" value="SNOMED CT Swiss Extension" />
 		</antcall>
 	</target>
 	<target name="3_2.8_ValueSet_DocumentEntry.eventCodeList" depends="init">
@@ -520,7 +488,6 @@
 		<antcall target="3_2.4_ValueSet_DocumentEntry.practiceSettingCode" />
 		<antcall target="3_2.5_ValueSet_DocumentEntry.classCode" />
 		<antcall target="3_2.6_ValueSet_DocumentEntry.typeCode" />
-		<antcall target="SNOMED CT Swiss Extension" />
 		<antcall target="3_2.8_ValueSet_DocumentEntry.eventCodeList" />
 		<antcall target="ch-ehealth-codesystem-language" />
 		<antcall target="3_2.9_ValueSet_DocumentEntry.languageCode" />
