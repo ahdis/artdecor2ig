@@ -67,12 +67,12 @@
    
    <!-- <description value="Valueset RouteOuPharmaceutical Dose Form from EDQM, PDF, export 24.4.2018, see https://standardterms.edqm.eu/#"/> -->
     <xsl:template match="fhir:ValueSet/fhir:description">
-      <fhir:description value="EDQM - Standard Terms used in Switzerland (aggregations of codes of ValueSets RouteOfAdministration, Dose Form, see original codes system defined in https://standardterms.edqm.eu/#)" />
+      <fhir:description value="EDQM - Standard Terms used in Switzerland (aggregations of codes of ValueSets Route of Administration, Dose Form and Administration Method, see original codes system defined in https://standardterms.edqm.eu/#)" />
     </xsl:template>
 
     <xsl:template match="fhir:ValueSet/fhir:immutable">
        <fhir:caseSensitive value="false"/>
-       <fhir:content value="complete"/>
+       <fhir:content value="fragment"/>
     </xsl:template>
 
     <xsl:template match="fhir:ValueSet/fhir:compose">
