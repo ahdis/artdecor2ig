@@ -262,7 +262,7 @@
 		<antcall target="transformValueSetEffectiveDate">
 			<param name="resourceId" value="DocumentEntry.practiceSettingCode" />
 			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.18" />
-			<param name="effectiveDate" value="20220626144519" /> <!-- 202306.0-stable -->
+			<param name="effectiveDate" value="20240531154939" /> <!-- 202306.1-stable  -->
 			<param name="title" value="DocumentEntry.practiceSettingCode" />
 			<param name="name" value="DocumentEntryPracticeSettingCode" />
 		</antcall>
@@ -277,9 +277,10 @@
 		</antcall>
 	</target>
 	<target name="3_2.6_ValueSet_DocumentEntry.typeCode" depends="init">
-		<antcall target="transformValueSet">
+		<antcall target="transformValueSetEffectiveDate">
 			<param name="resourceId" value="DocumentEntry.typeCode" />
 			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.27" />
+			<param name="effectiveDate" value="20230501143556" /> <!-- 202406.2-stable -->
 			<param name="title" value="DocumentEntry.typeCode" />
 			<param name="name" value="DocumentEntryTypeCode" />
 		</antcall>
@@ -325,7 +326,7 @@
 		<antcall target="transformValueSetEffectiveDate">
 			<param name="resourceId" value="DocumentEntry.formatCode" />
 			<param name="templateId" value="2.16.756.5.30.1.127.3.10.1.9" />
-			<param name="effectiveDate" value="20220626164017" /> <!-- 202306.0-stable -->
+			<param name="effectiveDate" value="20241119162640" /> <!-- 202406.2-stable -->
 			<param name="title" value="DocumentEntry.formatCode" />
 			<param name="name" value="DocumentEntryFormatCode" />
 		</antcall>
