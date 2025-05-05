@@ -1,0 +1,17 @@
+{
+    "factories-version" : 1,
+    "factories" : [
+        {
+        "name": "CountryCodes2",
+        "details" : "Generating the ValueSet from the published Excel File",
+        "mode": "liquid",
+        "liquid": "data/bfs-country-codes.liquid",
+        "data": "vs.csv",
+        "format": "json",
+        "filename": "data/bfs-country-codes.json",
+        "bundle": false,
+        "tables": {
+            "codes": "data/be-b-00.04-sg-01.xlsx;Stat_Geb!A1:X296"
+        }
+    }]
+  }

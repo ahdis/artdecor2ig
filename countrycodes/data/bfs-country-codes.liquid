@@ -1,0 +1,128 @@
+{
+  "resourceType" : "ValueSet",
+  "id" : "bfs-country-codes",
+  "url" : "http://fhir.ch/ig/ch-term/ValueSet/bfs-country-codes",
+  "version" : "20240522",
+  "name" : "BfsCountryCodes",
+  "title" : "BFS Verzeichnis der Staaten und Gebiete",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2024-05-22T00:00:00+00:00",
+  "publisher" : "BFS",
+  "contact" : [
+    {
+      "name" : "BFS",      
+      "telecom" : [
+        {
+          "system" : "url",
+          "value" : "https://www.bfs.admin.ch/bfs/de/home/grundlagen/stgb.assetdetail.32028071.html"
+        }
+      ]
+    },
+    {
+      "name" : "HL7 Switzerland",
+      "telecom" : [{
+        "system" : "url",
+        "value" : "https://www.hl7.ch/",
+        "use" : "work"
+      }]
+    }
+  ],
+  "description" : "BFS defines the valid country codes in Switzerland",
+  "jurisdiction" : [
+    {
+      "coding" : [
+        {
+          "system" : "urn:iso:std:iso:3166",
+          "code" : "CH"
+        }
+      ]
+    }
+  ],
+
+ 
+
+  "copyright" : "CC0-1.0",
+  "compose" : {
+    "include" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "concept" : [
+      
+      {% assign i = 0 %}
+      {% for row in codes.rows %}  
+
+        {% assign i = i+ 1 %}
+        {% assign isCode2 = codes.cell(i, 3).length() = 2  %}
+        {% assign isCode3 = codes.cell(i, 4).length() = 3  %}
+        {% assign isRecognizedSwiss = codes.cell(i, 18) = 'J'  %}
+
+        {% if isRecognizedSwiss  %}
+
+          {% if i>1  %}
+            ,
+          {% endif %}
+
+          {% if isCode2  %}
+            {
+            "code" : "{{ codes.cell(i, 3) }}",
+            "display" : "{{ codes.cell(i, 8) }}",
+            "designation" : 
+              [
+                {
+                  "language" : "de-CH",
+                  "value" : "{{ codes.cell(i, 5) }}"
+                },
+                {
+                  "language" : "fr-CH",
+                  "value" : "{{ codes.cell(i, 6) }}"
+                },
+                {
+                  "language" : "it-CH",
+                  "value" : "{{ codes.cell(i, 7) }}"
+                  }
+                ]
+            }
+          {% endif %}
+
+          {% if isCode3  %}
+            {% if isCode2  %}
+              ,
+            {% endif %}
+  
+            {
+            "code" : "{{ codes.cell(i, 4) }}",
+            "display" : "{{ codes.cell(i, 8) }}",
+            "designation" : 
+              [
+                {
+                  "language" : "de-CH",
+                  "value" : "{{ codes.cell(i, 5) }}"
+                },
+                {
+                  "language" : "fr-CH",
+                  "value" : "{{ codes.cell(i, 6) }}"
+                },
+                {
+                  "language" : "it-CH",
+                  "value" : "{{ codes.cell(i, 7) }}"
+                  }
+                ]
+            }
+          {% endif %}
+
+
+          {% endif %}
+
+        {% endfor %}
+
+
+        ]
+
+      },
+
+
+
+
+    ]
+  }
+}
